@@ -1,0 +1,48 @@
+Searching for target hc = 1.986445857149e-25
+Results for target hc = 1.986445857149e-25
+Meter factor: 1.000000000000e+00
+Final c: 6.626070150000e-34 m/s
+Final h: 2.997924580000e+08 J·s
+1/c:     1.50919017964215e+33 s/m
+hc:      1.986445857149e-25 J·m
+Relative difference from target hc: 0.000000000000e+00
+
+Searching for target hc = 2.000000000000e-25
+ * Iteration 75: hc = 2.000000000000e-25, step_size = 4.440892e-16, meter_factor = 9.977358537019711537396915e-01
+Results for target hc = 2.000000000000e-25
+Meter factor: 9.977358537020e-01
+Final c: 3.004727723151e+08 m/s
+Final h: 6.656177145737e-34 J·s
+1/c:     3.32808857286854e-09 s/m
+hc:      2.000000000000e-25 J·m
+Relative difference from target hc: 3.443831105925e-16
+
+Searching for target hc = 1.000000000000e-25
+ * Iteration 71: hc = 1.000000000000e-25, step_size = 1.776357e-15, meter_factor = 1.257068404313944620653842e+00
+Results for target hc = 1.000000000000e-25
+Meter factor: 1.257068404314e+00
+Final c: 2.384853974304e+08 m/s
+Final h: 4.193128848872e-34 J·s
+1/c:     4.19312884887166e-09 s/m
+hc:      1.000000000000e-25 J·m
+Relative difference from target hc: 8.035605913824e-16
+
+Searching for target hc = 1.000000000000e-24
+ * Iteration 78: hc = 1.000000000000e-24, step_size = 8.881784e-16, meter_factor = 5.834794668551041008086600e-01
+Results for target hc = 1.000000000000e-24
+Meter factor: 5.834794668551e-01
+Final c: 5.138012132901e+08 m/s
+Final h: 1.946278004282e-33 J·s
+1/c:     1.94627800428223e-09 s/m
+hc:      1.000000000000e-24 J·m
+Relative difference from target hc: 1.836709923160e-16
+
+Searching for target hc = 1.000000000000e+00
+ * Iteration 135: hc = 1.000000000000e+00, step_size = 1.776357e-15, meter_factor = 5.834794668551041979432220e-09
+Results for target hc = 1.000000000000e+00
+Meter factor: 5.834794668551e-09
+Final c: 5.138012132901e+16 m/s
+Final h: 1.946278004282e-17 J·s
+1/c:     1.94627800428223e-17 s/m
+hc:      1.000000000000e+00 J·m
+Relative difference from target hc: 3.330669073875e-16

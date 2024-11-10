@@ -3,6 +3,10 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 
 [Reframing Fundamental Constants: A New Perspective on Energy, Wavelength, and Relativity Blog Post](https://mystry-geek.blogspot.com/2024/11/reframing-fundamental-constants-new.html)
 
+An even easier example where I just redefine the kilogram and speed of light stays the same and h = 1/c.  The old 1kg is now equal to 1.98644568 × 10^-25 Kg's in this thought experiment.  
+[https://mystry-geek.blogspot.com/2024/11/redefining-kilogram-and-plancks.html](Redefining the Kilogram and Planck's Constant, A second simpler example.)
+
+
 # Reframing Fundamental Constants: A New Perspective on Energy, Wavelength, and Relativity
 
 **Author**: James Rogers  

@@ -6,6 +6,7 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 An even easier example where I just redefine the kilogram and speed of light stays the same and h = 1/c.  The old 1kg is now equal to 1.98644568 × 10^-25 Kg's in this thought experiment.  
 [Redefining the Kilogram and Planck's Constant, A second simpler example.](https://mystry-geek.blogspot.com/2024/11/redefining-kilogram-and-plancks.html)
 
+Also remapping seconds now. That is all the units used in h, c, and hc. Every unit is accounted for and all can be remapped to 1 Jm with no problems. 
 
 # Reframing Fundamental Constants: A New Perspective on Energy, Wavelength, and Relativity
 

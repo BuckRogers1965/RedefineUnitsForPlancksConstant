@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np 
 
 # Initial constants
 initial_h = 6.62607015e-34  # Planck's constant in J·s

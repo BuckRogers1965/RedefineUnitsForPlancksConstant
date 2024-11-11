@@ -5,7 +5,7 @@ Final c: 6.626070150000e-34 m/s
 Final h: 2.997924580000e+08 J·s
 1/c:     1.50919017964215e+33 s/m
 hc:      1.986445857149e-25 J·m
-Relative difference from target hc: 0.000000000000e+00
+Relative difference from target hc: 0.000000000000e+00 
 
 Searching for target hc = 2.000000000000e-25
  * Iteration 75: hc = 2.000000000000e-25, step_size = 4.440892e-16, meter_factor = 9.977358537019711537396915e-01

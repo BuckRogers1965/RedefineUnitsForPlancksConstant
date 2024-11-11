@@ -1,4 +1,5 @@
 
+
 Redefining units of m to match specific values of hc
 
 
@@ -111,30 +112,30 @@ Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 2.000000000000e-25
 Results for target hc = 2.000000000000e-25
-  new s: 1.993211407327e-25 old s
-Final c: 1.504067540944e+33 m/s
-Final h: 3.324318798118e-09 J·s
-    1/c: 6.648637596236e-34 m/s
-     hc: 5.000000000000e+24 J·m
-Relative difference from target hc: 2.500000000000e+49
+  new s: 9.966057036634e-01 old s
+Final c: 3.008135081888e+08 m/s
+Final h: 6.648637596236e-34 J·s
+    1/c: 3.324318798118e-09 m/s
+     hc: 2.000000000000e-25 J·m
+Relative difference from target hc: 1.147943701975e-16
 
 Calculating for target hc = 1.000000000000e-25
 Results for target hc = 1.000000000000e-25
-  new s: 1.409413302459e-25 old s
-Final c: 2.127072715128e+33 m/s
-Final h: 4.701296729950e-09 J·s
-    1/c: 4.701296729950e-34 m/s
-     hc: 1.000000000000e+25 J·m
-Relative difference from target hc: 1.000000000000e+50
+  new s: 1.409413302459e+00 old s
+Final c: 2.127072715128e+08 m/s
+Final h: 4.701296729950e-34 J·s
+    1/c: 4.701296729950e-09 m/s
+     hc: 1.000000000000e-25 J·m
+Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 1.000000000000e-24
 Results for target hc = 1.000000000000e-24
-  new s: 4.456956200311e-25 old s
-Final c: 6.726394528604e+32 m/s
-Final h: 1.486680562294e-09 J·s
-    1/c: 1.486680562294e-33 m/s
-     hc: 1.000000000000e+24 J·m
-Relative difference from target hc: 1.000000000000e+48
+  new s: 4.456956200311e-01 old s
+Final c: 6.726394528604e+08 m/s
+Final h: 1.486680562294e-33 J·s
+    1/c: 1.486680562294e-09 m/s
+     hc: 1.000000000000e-24 J·m
+Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 1.000000000000e+00
 Results for target hc = 1.000000000000e+00
@@ -143,4 +144,4 @@ Final c: 6.726394528604e+20 m/s
 Final h: 1.486680562294e-21 J·s
     1/c: 1.486680562294e-21 m/s
      hc: 1.000000000000e+00 J·m
-Relative difference from target hc: 2.220446049250e-16
+Relative difference from target hc: 1.110223024625e-16

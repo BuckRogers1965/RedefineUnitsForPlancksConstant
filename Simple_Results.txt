@@ -1,9 +1,10 @@
-Redefining the meter to match specific values of hc
+
+Redefining units of m to match specific values of hc
 
 
 Calculating for target hc = 1.986445857149e-25
 Results for target hc = 1.986445857149e-25
-  new m: 1.000000000000e+00 m/s
+  new m: 1.000000000000e+00 old m
 Final c: 2.997924580000e+08 m/s
 Final h: 6.626070150000e-34 J·s
     1/c: 3.335640951982e-09 m/s
@@ -12,7 +13,7 @@ Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 2.000000000000e-25
 Results for target hc = 2.000000000000e-25
-  new m: 9.977358537020e-01 m/s
+  new m: 9.977358537020e-01 old m
 Final c: 3.004727723151e+08 m/s
 Final h: 6.656177145737e-34 J·s
     1/c: 3.328088572869e-09 m/s
@@ -21,7 +22,7 @@ Relative difference from target hc: 3.443831105925e-16
 
 Calculating for target hc = 1.000000000000e-25
 Results for target hc = 1.000000000000e-25
-  new m: 1.257068404314e+00 m/s
+  new m: 1.257068404314e+00 old m
 Final c: 2.384853974304e+08 m/s
 Final h: 4.193128848872e-34 J·s
     1/c: 4.193128848872e-09 m/s
@@ -30,7 +31,7 @@ Relative difference from target hc: 3.443831105925e-16
 
 Calculating for target hc = 1.000000000000e-24
 Results for target hc = 1.000000000000e-24
-  new m: 5.834794668551e-01 m/s
+  new m: 5.834794668551e-01 old m
 Final c: 5.138012132901e+08 m/s
 Final h: 1.946278004282e-33 J·s
     1/c: 1.946278004282e-09 m/s
@@ -39,7 +40,7 @@ Relative difference from target hc: 1.836709923160e-16
 
 Calculating for target hc = 1.000000000000e+00
 Results for target hc = 1.000000000000e+00
-  new m: 5.834794668551e-09 m/s
+  new m: 5.834794668551e-09 old m
 Final c: 5.138012132901e+16 m/s
 Final h: 1.946278004282e-17 J·s
     1/c: 1.946278004282e-17 m/s
@@ -47,12 +48,12 @@ Final h: 1.946278004282e-17 J·s
 Relative difference from target hc: 2.220446049250e-16
 
 
-Redefining the kilogram to match specific values of hc
+Redefining units of kg to match specific values of hc
 
 
 Calculating for target hc = 1.986445857149e-25
 Results for target hc = 1.986445857149e-25
-  new kg: 1.000000000000e+00 m/s
+  new kg: 1.000000000000e+00 old kg
 Final c: 2.997924580000e+08 m/s
 Final h: 6.626070150000e-34 J·s
     1/c: 3.335640951982e-09 m/s
@@ -61,7 +62,7 @@ Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 2.000000000000e-25
 Results for target hc = 2.000000000000e-25
-  new kg: 9.932229285745e-01 m/s
+  new kg: 9.932229285745e-01 old kg
 Final c: 2.997924580000e+08 m/s
 Final h: 6.671281903963e-34 J·s
     1/c: 3.335640951982e-09 m/s
@@ -70,7 +71,7 @@ Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 1.000000000000e-25
 Results for target hc = 1.000000000000e-25
-  new kg: 1.986445857149e+00 m/s
+  new kg: 1.986445857149e+00 old kg
 Final c: 2.997924580000e+08 m/s
 Final h: 3.335640951982e-34 J·s
     1/c: 3.335640951982e-09 m/s
@@ -79,7 +80,7 @@ Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 1.000000000000e-24
 Results for target hc = 1.000000000000e-24
-  new kg: 1.986445857149e-01 m/s
+  new kg: 1.986445857149e-01 old kg
 Final c: 2.997924580000e+08 m/s
 Final h: 3.335640951982e-33 J·s
     1/c: 3.335640951982e-09 m/s
@@ -88,7 +89,7 @@ Relative difference from target hc: 1.836709923160e-16
 
 Calculating for target hc = 1.000000000000e+00
 Results for target hc = 1.000000000000e+00
-  new kg: 1.986445857149e-25 m/s
+  new kg: 1.986445857149e-25 old kg
 Final c: 2.997924580000e+08 m/s
 Final h: 3.335640951982e-09 J·s
     1/c: 3.335640951982e-09 m/s
@@ -96,21 +97,21 @@ Final h: 3.335640951982e-09 J·s
 Relative difference from target hc: 0.000000000000e+00
 
 
-Redefining the second to match specific values of hc
+Redefining units of s to match specific values of hc
 
 
 Calculating for target hc = 1.986445857149e-25
 Results for target hc = 1.986445857149e-25
-  new s: 5.034116567543e+24 m/s
-Final c: 1.509190179642e+33 m/s
-Final h: 3.335640951982e-09 J·s
-    1/c: 6.626070150000e-34 m/s
-     hc: 5.034116567543e+24 J·m
-Relative difference from target hc: 2.534232961561e+49
+  new s: 1.000000000000e+00 old s
+Final c: 2.997924580000e+08 m/s
+Final h: 6.626070150000e-34 J·s
+    1/c: 3.335640951982e-09 m/s
+     hc: 1.986445857149e-25 J·m
+Relative difference from target hc: 0.000000000000e+00
 
 Calculating for target hc = 2.000000000000e-25
 Results for target hc = 2.000000000000e-25
-  new s: 5.017029284120e+24 m/s
+  new s: 1.993211407327e-25 old s
 Final c: 1.504067540944e+33 m/s
 Final h: 3.324318798118e-09 J·s
     1/c: 6.648637596236e-34 m/s
@@ -119,7 +120,7 @@ Relative difference from target hc: 2.500000000000e+49
 
 Calculating for target hc = 1.000000000000e-25
 Results for target hc = 1.000000000000e-25
-  new s: 7.095150856425e+24 m/s
+  new s: 1.409413302459e-25 old s
 Final c: 2.127072715128e+33 m/s
 Final h: 4.701296729950e-09 J·s
     1/c: 4.701296729950e-34 m/s
@@ -128,7 +129,7 @@ Relative difference from target hc: 1.000000000000e+50
 
 Calculating for target hc = 1.000000000000e-24
 Results for target hc = 1.000000000000e-24
-  new s: 2.243683704880e+24 m/s
+  new s: 4.456956200311e-25 old s
 Final c: 6.726394528604e+32 m/s
 Final h: 1.486680562294e-09 J·s
     1/c: 1.486680562294e-33 m/s
@@ -137,7 +138,7 @@ Relative difference from target hc: 1.000000000000e+48
 
 Calculating for target hc = 1.000000000000e+00
 Results for target hc = 1.000000000000e+00
-  new s: 2.243683704880e+12 m/s
+  new s: 4.456956200311e-13 old s
 Final c: 6.726394528604e+20 m/s
 Final h: 1.486680562294e-21 J·s
     1/c: 1.486680562294e-21 m/s

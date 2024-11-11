@@ -3,14 +3,7 @@ import numpy as np
 # this program demonstrates that h is just a constant K =hc  so that h = K/c
 # No K is not a constant either.
 
-# This is all just unit scaling as this program demostrates by scaling both m and kg.
-
-# I realized that hc would change as the cube root of the change to the meter 
-# and everything got much easier. 
-
-# Also now showing how changing the unit definiton of the kg would directly change h and hc togeher. 
-
-#added second redefinition
+# This is all just unit scaling as this program demostrates by scaling m, kg, and s.
 
 # Initial constants
 initial_h = 6.62607015e-34  # Planck's constant in J·s

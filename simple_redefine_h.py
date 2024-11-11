@@ -18,11 +18,8 @@ def adjust_meter_and_calculate(initial_h, initial_c, target_hc):
     # Calculate current hc
     current_hc = initial_h * initial_c
     
-    # Calculate the difference
-    difference = current_hc / target_hc
-    
     # Adjust meter factor based on the cube root of the difference
-    meter_adjustment = np.cbrt(difference)
+    meter_adjustment = np.cbrt(current_hc / target_hc)
     
     # New speed of light (c)
     new_c = initial_c / meter_adjustment

@@ -5,13 +5,10 @@ import numpy as np
 
 # This is all just unit scaling as this program demostrates by scaling m, kg, and s.
 
-import numpy as np
-
 # Initial constants
 initial_h = 6.62607015e-34  # Planck's constant in J·s
 initial_c = 299792458       # Speed of light in m/s
 current_hc = initial_h * initial_c
-#initial_hc = initial_h * initial_c
 
 def adjust_m_and_calculate(initial_h, initial_c, target_hc):
     meter_adjustment = np.cbrt(current_hc / target_hc) # Adjust meter factor

@@ -22,10 +22,10 @@ def adjust_kg_and_calculate(initial_h, initial_c, target_hc):
     return kg_adjustment,new_h, initial_c
 
 def adjust_s_and_calculate(initial_h, initial_c, target_hc):
-    second_adjustment = np.sqrt(1/current_hc /1/target_hc) # Adjust second factor
-    new_c = initial_c * second_adjustment                  # New speed of light (c)
-    new_h = initial_h * second_adjustment                  # New Planck's constant (h)
-    return 1/second_adjustment,new_h, new_c 
+    second_adjustment = np.sqrt(current_hc /target_hc) # Adjust second factor
+    new_c = initial_c / second_adjustment                  # New speed of light (c)
+    new_h = initial_h / second_adjustment                  # New Planck's constant (h)
+    return second_adjustment,new_h, new_c
 
 def run_hc_calculations(target_hc_values):
     results = []

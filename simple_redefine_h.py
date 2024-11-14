@@ -4,7 +4,7 @@ import numpy as np
 # No K is not a constant either.
 
 # This is all just unit scaling as this program demostrates by scaling m, kg, and s.
-
+ 
 # Initial constants
 initial_h = 6.62607015e-34  # Planck's constant in J·s
 initial_c = 299792458       # Speed of light in m/s
@@ -67,7 +67,8 @@ def run_hc_calculations(target_hc_values):
             print(f"Relative difference from target hc: {abs(final_hc - target_hc) / target_hc:.12e}")
 
 # List of target hc values to calculate
-target_hc_values = [current_hc, 2e-25, 1e-25, 1e-24, 1.0]  # Example target hc values
+#target_hc_values = [current_hc, 2e-25, 1e-25, 1e-24, 1.0]  # Example target hc values
+target_hc_values = [1.0]  # Example target hc values
 
 # Run the calculations for each target hc value
 run_hc_calculations(target_hc_values)

@@ -32,41 +32,57 @@ frequencies = []
 wavelengths = []
 f_over_c_values = []
 f_over_c_hc_values = []
+hf_energies = []
+diffs = []
 
+prev = 0
 # Generate the table data
 for i in range(num_steps):
     frequency = start_frequency + i * step
     f_over_c = frequency / c
     w = c/frequency
     f_over_c_hc = f_over_c * hc
+    hf_energy = h * frequency
+    diff = prev -f_over_c_hc
+    prev = f_over_c_hc
     
     frequencies.append(frequency)
     wavelengths.append(w)
     f_over_c_values.append(f_over_c)
     f_over_c_hc_values.append(f_over_c_hc)
+    hf_energies.append(hf_energy)
+    diffs.append(diff)
+
+# Set display precision globally for the DataFrame
+pd.options.display.float_format = '{:.8e}'.format
 
 # Create a DataFrame for easier viewing
 table = pd.DataFrame({
     'Frequency (Hz)': frequencies,
-    'Wavelength (m)': wavelengths,
-    'Frequency / c (1/m)': f_over_c_values,
-    '(Frequency / c) * hc (J)': f_over_c_hc_values
+    'λ (m)': wavelengths,
+    '1/λ': "1 / λ =",
+    'f / c (1/m)': f_over_c_values,
+    '(f / c) * K (J)': f_over_c_hc_values,
+    '(E = hf (J))': hf_energies,
+    'diffs': diffs
 })
 
 # Print the table
+print (f"K = ratio between h and c, taken as hc with units J m")
 print(table)
 
 # --------------------------------------------------------------------------------
 # Results:
 
-#    Frequency (Hz)  Wavelength (m)  Frequency / c (1/m)  (Frequency / c) * hc (J)
-#0    1.000000e+12        0.000300          3335.640952              6.626070e-22
-#1    1.100000e+12        0.000273          3669.205047              7.288677e-22
-#2    1.200000e+12        0.000250          4002.769142              7.951284e-22
-#3    1.300000e+12        0.000231          4336.333238              8.613891e-22
-#4    1.400000e+12        0.000214          4669.897333              9.276498e-22
-#5    1.500000e+12        0.000200          5003.461428              9.939105e-22
-#6    1.600000e+12        0.000187          5337.025523              1.060171e-21
-#7    1.700000e+12        0.000176          5670.589618              1.126432e-21
-#8    1.800000e+12        0.000167          6004.153714              1.192693e-21
-#9    1.900000e+12        0.000158          6337.717809              1.258953e-21
+#K = ratio between h and c, taken as hc with units J m
+#   Frequency (Hz)          λ (m)      1/λ    f / c (1/m)  (f / c) * K (J)   (E = hf (J))           diffs
+#0  1.00000000e+12 2.99792458e-04  1 / λ = 3.33564095e+03   6.62607015e-22 6.62607015e-22 -6.62607015e-22
+#1  1.10000000e+12 2.72538598e-04  1 / λ = 3.66920505e+03   7.28867716e-22 7.28867716e-22 -6.62607015e-23
+#2  1.20000000e+12 2.49827048e-04  1 / λ = 4.00276914e+03   7.95128418e-22 7.95128418e-22 -6.62607015e-23
+#3  1.30000000e+12 2.30609583e-04  1 / λ = 4.33633324e+03   8.61389119e-22 8.61389119e-22 -6.62607015e-23
+#4  1.40000000e+12 2.14137470e-04  1 / λ = 4.66989733e+03   9.27649821e-22 9.27649821e-22 -6.62607015e-23
+#5  1.50000000e+12 1.99861639e-04  1 / λ = 5.00346143e+03   9.93910522e-22 9.93910522e-22 -6.62607015e-23
+#6  1.60000000e+12 1.87370286e-04  1 / λ = 5.33702552e+03   1.06017122e-21 1.06017122e-21 -6.62607015e-23
+#7  1.70000000e+12 1.76348505e-04  1 / λ = 5.67058962e+03   1.12643193e-21 1.12643193e-21 -6.62607015e-23
+#8  1.80000000e+12 1.66551366e-04  1 / λ = 6.00415371e+03   1.19269263e-21 1.19269263e-21 -6.62607015e-23
+#9  1.90000000e+12 1.57785504e-04  1 / λ = 6.33771781e+03   1.25895333e-21 1.25895333e-21 -6.62607015e-23

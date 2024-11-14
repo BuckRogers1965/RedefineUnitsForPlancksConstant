@@ -3,6 +3,9 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 
 [Reinterpreting Planck's Constant: From Fundamental Constant to Geometric Unit Conversion Factor](https://mystry-geek.blogspot.com/2024/11/reinterpreting-plancks-constant-from.html)
 
+The quantization_demo.py program shows step by step how h works. The following is the paper where the idea was explained. 
+[Reinterpreting Planck's Constant: A Geometric Perspective on Quantum Mechanics](https://mystry-geek.blogspot.com/2024/11/reinterpreting-plancks-constant.html)
+
 The above paper is my latest understnding of what this probram shows. 
 
 # Reframing Fundamental Constants: A New Perspective on Energy, Wavelength, and Relativity

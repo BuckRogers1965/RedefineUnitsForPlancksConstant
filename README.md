@@ -31,7 +31,7 @@ This project introduces a novel framework for understanding fundamental constant
 
 4. **Revised Equations Using K  as a Scaling Factor**
    - **Geometric-Replacement_for_h**: h = K/c 
-   - **Energy-Frequency**: E = K / c 
+   - **Energy-Frequency**: E = K f / c 
    - **Energy-Wavelength**: E = K / wavelength
    - **Reduced Planck Constant**: hbar = K / (2 pi c)
    - **Fine Structure Constant**: alpha = e^2 / (2 epsilon_0 K)

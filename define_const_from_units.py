@@ -1,3 +1,4 @@
+#!/home/jrogers/Documents/ai/chat/ragserver/venv/bin/python3
 import math
 import numpy as np
 
@@ -18,9 +19,10 @@ relationships between all these units one constant at a time.
 James M. Rogers, SE Ohio, 21 Nov 2024 1400
 '''
 
-h = 6.62607015e-34
-c = 299792458
-G = 6.6743015e-11
+h   = 6.62607015e-34
+c   = 299792458
+G   = 6.6743015e-11
+mol = 2.63394301e+173
 
 # Known physical constants for validation - with units commented
 KNOWN_VALUES = {
@@ -63,7 +65,19 @@ KNOWN_VALUES = {
     # Nuclear Constants
     'mu_B': 9.2740100783e-24, # Bohr magneton (J/T)
     'mu_N': 5.0507837461e-27, # Nuclear magneton (J/T)
-    'gamma_p': 2.675221874e8,  # Proton gyromagnetic ratio (rad·s⁻¹·T⁻¹)
+    'gamma_p': 2.675221874e8, # Proton gyromagnetic ratio (rad·s⁻¹·T⁻¹)
+
+    'b': 2.897771955e-3,      # Wien displacement constant 
+    'c₁': 3.741771852e-16,    # First radiation constant 
+    'G₀': 7.748091729e-5,     # Conductance quantum 
+    'mᵤ': 1.660539067e-27,    # Atomic mass constant 
+    'Vm': 0.02271095464,      # Molar gas volume 
+    'F': 96485.33212,         # Faraday constant 
+    'nₑ': 2.686780111e25,     # Loschmidt constant 
+    'Φ₀': 2.067833848e-15,    # Magnetic flux quantum 
+    'h/2me': 3.636947552e-4,  # Quantum of circulation 
+    'σₑ':  6.652458732e-29,   # Thomson cross section 
+    'n₀': 2.686780111e25,     # Loschmidt constant 
 }
 
 def calculate_base_units(h, c, G):
@@ -93,7 +107,9 @@ def calculate_derived_constants(kg, s, m, K):
     constants['G'] = m**3 / (kg * s**2) * (1.17476068e-10)**3
     constants['c'] = m / s
     constants['k'] = kg * m**2 * K / s**2 / 1.00080553745694328382e-01
-    constants['sigma'] = kg / (s**3 * K**4 * 2.63394301e+173)
+    constants['sigma'] = kg / (s**3 * K**4 * mol)
+    constants['Vm'] = m**3 / mol /2.60863443123433978791e-186
+    constants['Na'] = 1 / mol / 6.30438495012785702600e-198
 
     # Electromagnetic constants
     constants['epsilon_0'] = 1 / (kg * m**3) * s**4 * 1.56140418156780126208e+20
@@ -105,11 +121,20 @@ def calculate_derived_constants(kg, s, m, K):
     # Quantum constants
     constants['h'] = constants['hc'] / constants['c']
     constants['hbar'] = constants['h'] / (2 * np.pi)
-    
-    # Atomic constants - need scaling factors
+
+    # Atomic constants 
+    constants['me'] =  1 / constants['c']**3 / 4.07426141597807945800e+04
+    constants['mp'] =  1 / constants['c']**3 / 2.21891211711987956789
+    constants['mn'] =  1 / constants['c']**3 / 2.21585773603883424698
+    constants['mᵤ'] =  1 / constants['c']**3 / 2.23505795653533034795
+
+    '''
+    # Atomic constants 
     constants['me'] = kg / 5.98889170448846013071e+22 
     constants['mp'] = kg / 3.26165236209272954880e+19
     constants['mn'] = kg / 3.25716262624836771840e+19
+    constants['mᵤ'] = kg / 3.28538566584147353600e+19
+    '''
     
     # Length scales
     constants['a0'] = m  / 4.72226689504315145314e+05
@@ -123,6 +148,28 @@ def calculate_derived_constants(kg, s, m, K):
     
     # Thermodynamic
     constants['R'] = constants['k'] * 6.02214076e23
+
+    constants['b'] = m*K / 2.43020872084939700453e-36
+    constants['n₀'] = 1/m**3 / 2.38513458128641773216e-12
+    constants['h/2me'] = m**2 / s / 2.05984873094217106700e+07
+    constants['nₑ'] = m**2 / 2.32418770435622876114e-35 
+    constants['c₁'] = 2*np.pi * h * c**2
+    #constants['c₁'] = m**4 * kg * s**(-3) / 9.81684484941898414497e+28
+
+    '''
+Conductance quantum 
+G₀
+S (siemens = A/V)
+
+Faraday constant 
+F
+C/mol
+
+Magnetic flux quantum 
+Φ₀
+Wb (weber = V⋅s)
+
+'''
     
     return constants
 

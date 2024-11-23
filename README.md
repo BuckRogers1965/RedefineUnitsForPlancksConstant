@@ -4,21 +4,19 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 
 I deconstructed Planck's and the gravitational constants (h and G) to separate the contribution from the mass and length units.  This work is in the simplified_plancks_constants.py file.  This has the simplified formulas with just the needed scaling, the uneeded scaling cancelled out. The alpha and beta scaling units are 100% only unit scaling. They are an artifact entirely created by how we define our units.  
 
-Formulas: 
+Here are the four formulas together:
+h = α³β/c
+G = α³/β
+k = α³β/γ
+ε₀ = δ²/(α³β)
 
-planck's constant 
-h = (alpha^3 * beta) / c 
+And the values for each parameter:
+α ≈ 1.53844×10⁻⁶ m (length scaling)
+β ≈ 5.45551×10⁻⁸ kg (mass scaling)
+γ ≈ 1.438776877504×10⁻² K⁻¹ (temperature scaling)
+δ ≈ 1.32621132205611221308×10⁻¹⁸ C (charge scaling)
 
-Gravitational constant 
-G = alpha^3 / beta 
-
-Scaling Factors: 
-
-Meter scaling factor (alpha): 
-alpha = 1.53843951260968407858e-06 m 
-
-Kilogram scaling factor (beta): 
-beta = 5.45551124829157414485e-08 kg
+This reduces Planck’s charge = δ √2 
 
 Simple Explanation: Imagine you have two super tiny numbers, one representing a piece of length and the other a piece of weight. They aren't really the length or weight, but more about how the units for weight and length interact with each other.
 

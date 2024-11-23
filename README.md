@@ -1,6 +1,11 @@
 # RedefineUnitsForPlancksConstant
 This project reinterprets Planck’s constant h as a product of unit choices rather than intrinsic mysteries. By redefining h and the speed of light c as unit-derived quantities. Complexities in quantum mechanics and relativity could stem from unit systems.
 
+
+I deconstructed Planck's and the gravitational constants (h and G) to separate the contribution from the mass and length units.  This work is in the simplified_plancks_constants.py file.  This has the simplified formulas with just the needed scaling, the uneeded scaling cancelled out. The alpha and beta scaling units are 100% only unit scaling. They are an artifact entirely created by how we define our units.  
+
+
+
 [Reinterpreting Planck's Constant: From Fundamental Constant to Geometric Unit Conversion Factor](https://mystry-geek.blogspot.com/2024/11/reinterpreting-plancks-constant-from.html)
 
 The quantization_demo.py program shows step by step how h works. The following is the paper where the idea was explained. 

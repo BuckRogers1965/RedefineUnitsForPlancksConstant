@@ -4,6 +4,32 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 
 I deconstructed Planck's and the gravitational constants (h and G) to separate the contribution from the mass and length units.  This work is in the simplified_plancks_constants.py file.  This has the simplified formulas with just the needed scaling, the uneeded scaling cancelled out. The alpha and beta scaling units are 100% only unit scaling. They are an artifact entirely created by how we define our units.  
 
+Formulas: 
+
+planck's constant 
+h = (alpha^3 * beta) / c 
+
+Gravitational constant 
+G = alpha^3 / beta 
+
+Scaling Factors: 
+
+Meter scaling factor (alpha): 
+alpha = 1.53843951260968407858e-06 m 
+
+Kilogram scaling factor (beta): 
+beta = 5.45551124829157414485e-08 kg
+
+Simple Explanation: Imagine you have two super tiny numbers, one representing a piece of length and the other a piece of weight. They aren't really the length or weight, but more about how the units for weight and length interact with each other.
+
+When you combine these tiny pieces in a certain way, you can understand important things about the universe, like how small particles behave and how gravity works. 
+
+1. Planck's Constant (h): Think of it as a way to measure the smallest bits of energy. You get this by combining the tiny length piece (alpha) and the tiny weight piece (beta), and then dividing by the speed of light. This is a way to convert units from one kind of thing to another relationship.
+
+2. Gravitational Constant (G): This helps us understand how gravity works. You find it by taking the tiny length piece (alpha) and dividing it by the tiny weight piece (beta).  This is almost the same as h, but it converts a different set of units to another similar relationship. 
+
+These formulas act as a scaling factor for the different units.  Think of them as a translator.
+
 
 
 [Reinterpreting Planck's Constant: From Fundamental Constant to Geometric Unit Conversion Factor](https://mystry-geek.blogspot.com/2024/11/reinterpreting-plancks-constant-from.html)

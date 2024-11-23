@@ -1,96 +1,81 @@
 import numpy as np
-import pandas as pd
-'''
+from dataclasses import dataclass
+from typing import Dict, Tuple
 
-This program simplified the various Planck's units and constants.
+@dataclass
+class PhysicsConstants:
+    alpha: float = 1.53843951260968407858e-6  # length unit scaling
+    beta: float  = 5.45551124829157414485e-8  # mass unit scaling
+    c: float     = 299792458.0                # Speed of light (m/s)
+    epsilon_0: float = 8.854187817e-12        # Vacuum permittivity (C^2/N·m^2)
+    k_B: float   = 1.380649e-23               # Boltzmann constant (J/K)
+    gamma        = 1.438776877504e-02         # K⁻¹ (temperature scaling) 
+    delta        = 1.32621132205611221308e-18 # C (charge scaling)
 
-h = (alpha**3 * beta)/c
-G = alpha**3 / beta
-
-Replace h and G in Planck's formulas.
-
-This program then tests those formulas to see if they match the known value.
-
-James Rogers, SE Ohio, 23 Nov 2024 0400
-'''
-
-# Constants
-alpha = 1.53843951260968407858e-6  # length unit scaling
-beta = 5.45551124829157414485e-8   # mass unit scaling
-c = 299792458  # Speed of light (m/s)
-epsilon_0 = 8.854187817e-12  # Vacuum permittivity (C^2/N·m^2)
-k_B = 1.380649e-23  # Boltzmann constant (J/K)
-
-# Planck Unit Formulas
-
-# Planck Length
-def planck_length(alpha, c):
-    return (alpha ** 3) / ((2 * np.pi)**(1/2) * c ** 2)
-
-# Planck Time
-def planck_time(alpha, c):
-    return (alpha ** 3) / ((2 * np.pi)**(1/2) * c ** 3)
-
-# Planck Mass
-def planck_mass(beta):
-    return beta / (2 * np.pi)**(1/2)
-
-# Planck Charge
-def planck_charge(alpha, beta, epsilon_0):
-    return (2 * (alpha ** 3) * beta * epsilon_0)**(1/2)
-
-# Planck Temperature
-def planck_temperature(beta, k_B):
-    return (c**2 * beta ) / ((2 * np.pi)**(1/2) * k_B)
-
-# Known values for comparison
-known_values = {
-    'Planck Length (m)': 1.616255e-35,
-    'Planck Time (s)': 5.391247e-44,
-    'Planck Mass (kg)': 2.176434e-8,
-    'Planck Charge (C)': 1.875545e-18,
-    'Planck Temperature (K)': 1.416784e32,
-}
-
-# Testing function
-def test_planck_units(alpha, beta, c, epsilon_0, k_B, known_values):
-    results = []
-
-    # Planck Length
-    calculated_length = planck_length(alpha, c)
-    error_length = abs(calculated_length - known_values['Planck Length (m)'])
-    results.append(('Planck Length (m)', known_values['Planck Length (m)'], calculated_length, error_length))
-
-    # Planck Time
-    calculated_time = planck_time(alpha, c)
-    error_time = abs(calculated_time - known_values['Planck Time (s)'])
-    results.append(('Planck Time (s)', known_values['Planck Time (s)'], calculated_time, error_time))
-
-    # Planck Mass
-    calculated_mass = planck_mass(beta)
-    error_mass = abs(calculated_mass - known_values['Planck Mass (kg)'])
-    results.append(('Planck Mass (kg)', known_values['Planck Mass (kg)'], calculated_mass, error_mass))
-
-    # Planck Charge
-    calculated_charge = planck_charge(alpha, beta, epsilon_0)
-    error_charge = abs(calculated_charge - known_values['Planck Charge (C)'])
-    results.append(('Planck Charge (C)', known_values['Planck Charge (C)'], calculated_charge, error_charge))
-
-    # Planck Temperature
-    calculated_temperature = planck_temperature(beta, k_B)
-    error_temperature = abs(calculated_temperature - known_values['Planck Temperature (K)'])
-    results.append(('Planck Temperature (K)', known_values['Planck Temperature (K)'], calculated_temperature, error_temperature))
-
+def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float, float, float]]:
+    """
+    Validates that the scaling factors correctly reproduce Planck units
+    """
+    # Calculate Planck units using simplified formulas
+    h_calc = (constants.alpha**3 * constants.beta) / constants.c
+    G_calc = constants.alpha**3 / constants.beta
+    length_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**2)
+    time_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**3)
+    mass_calc = constants.beta / (2 * np.pi)**(1/2)
+    charge_calc = (2 * (constants.alpha**3) * constants.beta * constants.epsilon_0)**(1/2)
+    temp_calc = (constants.c**2 * constants.beta) / ((2 * np.pi)**(1/2) * constants.k_B)
+    boltzmann_calc = (constants.alpha**3 * constants.beta) / constants.gamma
+    e0_calc = constants.delta**2 / (constants.alpha**3 * constants.beta) 
+    charge2_calc = constants.delta *(2)**(1/2)
+    temp2_calc = (constants.c**2 * constants.gamma) / ((2 * np.pi)**(1/2) * constants.alpha**3)
+    
+    # Known values
+    expected = {
+        'Planck constant': 6.62607015e-34,
+        'Gravitational constant': 6.67430e-11, 
+        'Planck Length': 1.616255e-35,
+        'Planck Time': 5.391247e-44,
+        'Planck Mass': 2.176434e-8,
+        'Planck Charge': 1.875545e-18,
+        'Planck Temperature': 1.416784e32,
+        'Bolzmann Temperature': 1.380649e-23,
+        'epsilon_0 Temperature': 8.854187817e-12,
+        'Planck Charge2': 1.875545e-18,
+        'Planck Temperature2': 1.416784e32,
+    }
+    
+    # Calculate relative errors and return results
+    results = {}
+    calcs = {
+        'Planck constant': h_calc,
+        'Gravitational constant': G_calc, 
+        'Planck Length': length_calc,
+        'Planck Time'  : time_calc,
+        'Planck Mass'  : mass_calc,
+        'Planck Charge': charge_calc,
+        'Planck Temperature': temp_calc,
+        'Bolzmann Temperature': boltzmann_calc,
+        'epsilon_0 Temperature': e0_calc,
+        'Planck Charge2': charge2_calc,
+        'Planck Temperature2': temp2_calc,
+    }
+    
+    for name, exp_val in expected.items():
+        calc_val = calcs[name]
+        rel_error = abs((calc_val - exp_val) / exp_val)
+        results[name] = (exp_val, calc_val, rel_error)
+    
     return results
 
-# Run the test
-test_results = test_planck_units(alpha, beta, c, epsilon_0, k_B, known_values)
-
-# Print the results as an ASCII table
-print(f"{'Unit':<30} {'Known Value':<20} {'Calculated Value':<20} {'Absolute Error':<20}")
-print("="*90)
-
-for result in test_results:
-    unit, known, calculated, error = result
-    print(f"{unit:<30} {known:<20} {calculated:<20} {error:<20}")
-
+# Example usage and validation
+if __name__ == "__main__":
+    constants = PhysicsConstants()
+    
+    # Validate Planck units
+    planck_results = validate_planck_units(constants)
+    print("\nPlanck Units Validation:")
+    print(f"Name                       | Expected        | Calculated      | Rel Error")
+           #Planck constant            | 6.62607015e-34  | 6.62607015e-34  | 2.4524958
+    print("-" * 80)
+    for name, (expected, calculated, error) in planck_results.items():
+        print(f"{name:<25}  | {expected:<15.8e} | {calculated:<15.8e} | {error:.20e}")

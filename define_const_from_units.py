@@ -123,17 +123,23 @@ def calculate_derived_constants(kg, s, m, K):
     constants['hbar'] = constants['h'] / (2 * np.pi)
 
     # Atomic constants 
-    constants['me'] =  1 / constants['c']**3 / 4.07426141597807945800e+04
-    constants['mp'] =  1 / constants['c']**3 / 2.21891211711987956789
-    constants['mn'] =  1 / constants['c']**3 / 2.21585773603883424698
-    constants['mᵤ'] =  1 / constants['c']**3 / 2.23505795653533034795
+    constants['me'] =  constants['hc'] / constants['c']**3 / 8.09329971071142584000e-21
+    constants['mp'] =  constants['hc'] / constants['c']**3 / 4.40774878243036581266e-24
+    constants['mn'] =  constants['hc'] / constants['c']**3 / 4.40168141978576925907e-24
+    constants['mᵤ'] =  constants['hc'] / constants['c']**3 / 4.43982161824738003273e-24
 
     '''
+    # Atomic constants 
+    constants['me'] =  1 / constants['c']**3 / 4.07426141597807945800e+04
+    constants['mp'] =  1 / constants['c']**3 / 22.1891211711987956789
+    constants['mn'] =  1 / constants['c']**3 / 22.1585773603883424698
+    constants['mᵤ'] =  1 / constants['c']**3 / 22.3505795653533034795
+
     # Atomic constants 
     constants['me'] = kg / 5.98889170448846013071e+22 
     constants['mp'] = kg / 3.26165236209272954880e+19
     constants['mn'] = kg / 3.25716262624836771840e+19
-    constants['mᵤ'] = kg / 3.28538566584147353600e+19
+    constants['mᵤ'] = kg 
     '''
     
     # Length scales

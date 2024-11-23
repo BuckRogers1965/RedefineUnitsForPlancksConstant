@@ -1,9 +1,22 @@
 import numpy as np
 import pandas as pd
+'''
+
+This program simplified the various Planck's units and constants.
+
+h = (alpha**3 * beta)/c
+G = alpha**3 / beta
+
+Replace h and G in Planck's formulas.
+
+This program then tests those formulas to see if they match the known value.
+
+James Rogers, SE Ohio, 23 Nov 2024 0400
+'''
 
 # Constants
-alpha = 1.53843951260968407858e-6  
-beta = 5.45551124829157414485e-8
+alpha = 1.53843951260968407858e-6  # length unit scaling
+beta = 5.45551124829157414485e-8   # mass unit scaling
 c = 299792458  # Speed of light (m/s)
 epsilon_0 = 8.854187817e-12  # Vacuum permittivity (C^2/N·m^2)
 k_B = 1.380649e-23  # Boltzmann constant (J/K)

@@ -63,7 +63,8 @@ def run_Gc_calculations(target_Gc_values):
             print(f"Relative difference from target Gc: {abs(final_Gc - target_Gc) / target_Gc:.12e}")
 
 # List of target Gc values to calculate
-target_Gc_values = [initial_G * initial_c,1.0]  # Example target Gc values
+target_Gc_values = [1.0]  # Example target Gc values
+#target_Gc_values = [initial_G * initial_c,1.0]  # Example target Gc values
 
 # Run the calculations for each target Gc value
 run_Gc_calculations(target_Gc_values)

@@ -23,8 +23,8 @@ h = 6.62607015e-34  # Planck's constant in J·s
 hc = h * c
 
 # Parameters
-start_frequency = 1.0e12  # Starting frequency in Hz
-step = 0.1e12             # Step size in Hz
+start_frequency = 1.0e1  # Starting frequency in Hz
+step = 0.1e1             # Step size in Hz
 num_steps = 10            # Number of steps (you can adjust this as needed)
 
 # Create lists to store the values

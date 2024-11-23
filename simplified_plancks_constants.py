@@ -4,13 +4,13 @@ from typing import Dict, Tuple
 
 @dataclass
 class PhysicsConstants:
-    alpha: float = 1.53843951260968407858e-6  # length unit scaling
-    beta: float  = 5.45551124829157414485e-8  # mass unit scaling
-    c: float     = 299792458.0                # Speed of light (m/s)
-    epsilon_0: float = 8.854187817e-12        # Vacuum permittivity (C^2/N·m^2)
-    k_B: float   = 1.380649e-23               # Boltzmann constant (J/K)
-    gamma        = 1.438776877504e-02         # K⁻¹ (temperature scaling) 
-    delta        = 1.32621132205611221308e-18 # C (charge scaling)
+    c: float     = 299792458.0                 # Speed of light (m/s)
+    epsilon_0: float = 8.854187817e-12         # Vacuum permittivity (C^2/N·m^2)
+    k_B: float   = 1.380649e-23                # Boltzmann constant (J/K)
+    alpha: float  = 1.53843945498419101549e-06  # length unit scaling
+    beta: float   = 5.45551186133462110058e-08  # mass unit scaling
+    gamma: float  = 1.43877687750393716548e-02  # K⁻¹ (temperature scaling) 
+    delta: float  = 1.32621132205611221308e-18  # C (charge scaling)
 
 def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float, float, float]]:
     """
@@ -20,6 +20,9 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
     h_calc = (constants.alpha**3 * constants.beta) / constants.c
     G_calc = constants.alpha**3 / constants.beta
     length_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**2)
+    #                       (alpha**3) / ((2 * np.pi)**(1/2) * c ** 2)
+
+
     time_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**3)
     mass_calc = constants.beta / (2 * np.pi)**(1/2)
     charge_calc = (2 * (constants.alpha**3) * constants.beta * constants.epsilon_0)**(1/2)

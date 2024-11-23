@@ -11,6 +11,7 @@ class PhysicsConstants:
     beta: float   = 5.45551186133462110058e-08  # mass unit scaling
     gamma: float  = 1.43877687750393716548e-02  # K⁻¹ (temperature scaling) 
     delta: float  = 1.32621132205611221308e-18  # C (charge scaling)
+    e : float = 1.602176634e-19  # Elementary charge (Coulombs)
 
 def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float, float, float]]:
     """
@@ -31,6 +32,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
     e0_calc = constants.delta**2 / (constants.alpha**3 * constants.beta) 
     charge2_calc = constants.delta *(2)**(1/2)
     temp2_calc = (constants.c**2 * constants.gamma) / ((2 * np.pi)**(1/2) * constants.alpha**3)
+    alphafine_calc = constants.e**2  / (2 *(constants.delta**2))
     
     # Known values
     expected = {
@@ -42,9 +44,10 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
         'Planck Charge': 1.875545e-18,
         'Planck Temperature': 1.416784e32,
         'Bolzmann Temperature': 1.380649e-23,
-        'epsilon_0 Temperature': 8.854187817e-12,
+        'Epsilon_0 Temperature': 8.854187817e-12,
         'Planck Charge2': 1.875545e-18,
         'Planck Temperature2': 1.416784e32,
+        'Fine Structure Constant': 0.0072973525693,
     }
     
     # Calculate relative errors and return results
@@ -58,9 +61,10 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
         'Planck Charge': charge_calc,
         'Planck Temperature': temp_calc,
         'Bolzmann Temperature': boltzmann_calc,
-        'epsilon_0 Temperature': e0_calc,
+        'Epsilon_0 Temperature': e0_calc,
         'Planck Charge2': charge2_calc,
         'Planck Temperature2': temp2_calc,
+        'Fine Structure Constant': alphafine_calc,
     }
     
     for name, exp_val in expected.items():

@@ -7,11 +7,13 @@ class PhysicsConstants:
     c: float     = 299792458.0                 # Speed of light (m/s)
     epsilon_0: float = 8.854187817e-12         # Vacuum permittivity (C^2/N·m^2)
     k_B: float   = 1.380649e-23                # Boltzmann constant (J/K)
+    e : float     = 1.602176634e-19  # Elementary charge (Coulombs)
+    mol: float    = 6.02214076e23    # Avogadro's number
+
     alpha: float  = 1.53843945498419101549e-06  # length unit scaling
     beta: float   = 5.45551186133462110058e-08  # mass unit scaling
     gamma: float  = 1.43877687750393716548e-02  # K⁻¹ (temperature scaling) 
     delta: float  = 1.32621132205611221308e-18  # C (charge scaling)
-    e : float = 1.602176634e-19  # Elementary charge (Coulombs)
 
 def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float, float, float]]:
     """
@@ -21,18 +23,25 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
     h_calc = (constants.alpha**3 * constants.beta) / constants.c
     G_calc = constants.alpha**3 / constants.beta
     length_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**2)
-    #                       (alpha**3) / ((2 * np.pi)**(1/2) * c ** 2)
-
-
     time_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**3)
     mass_calc = constants.beta / (2 * np.pi)**(1/2)
     charge_calc = (2 * (constants.alpha**3) * constants.beta * constants.epsilon_0)**(1/2)
     temp_calc = (constants.c**2 * constants.beta) / ((2 * np.pi)**(1/2) * constants.k_B)
+
     boltzmann_calc = (constants.alpha**3 * constants.beta) / constants.gamma
     e0_calc = constants.delta**2 / (constants.alpha**3 * constants.beta) 
     charge2_calc = constants.delta *(2)**(1/2)
     temp2_calc = (constants.c**2 * constants.gamma) / ((2 * np.pi)**(1/2) * constants.alpha**3)
+    Kb_calc =  2 * np.pi**5 * ((constants.alpha**3 * constants.beta) / constants.gamma**4)* constants.c / 15   
     alphafine_calc = constants.e**2  / (2 *(constants.delta**2))
+
+    # J⋅mol ^−1 ⋅ K^−1  The unit definition says mol is on bottom
+    r_gas_calc =  constants.beta *constants.alpha**3  * constants.mol / (constants.gamma )
+
+    RK_calc =   (constants.beta * constants.alpha**3) / (constants.e**2 * constants.c)
+
+    #mag flux = (alpha^3 * beta)/ (2ec)
+    #mag flux = (2ec)*(alpha^3 * beta)
     
     # Known values
     expected = {
@@ -48,6 +57,9 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
         'Planck Charge2': 1.875545e-18,
         'Planck Temperature2': 1.416784e32,
         'Fine Structure Constant': 0.0072973525693,
+        'Gas Constant R': 8.31446261815324,
+        'Stefan-Boltzmann': 5.670374419e-8,
+        'von Klitzing RK': 25812.807,
     }
     
     # Calculate relative errors and return results
@@ -65,8 +77,12 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
         'Planck Charge2': charge2_calc,
         'Planck Temperature2': temp2_calc,
         'Fine Structure Constant': alphafine_calc,
+        'Gas Constant R': r_gas_calc,
+        'Stefan-Boltzmann': Kb_calc,
+        'von Klitzing RK': RK_calc,
     }
     
+
     for name, exp_val in expected.items():
         calc_val = calcs[name]
         rel_error = abs((calc_val - exp_val) / exp_val)

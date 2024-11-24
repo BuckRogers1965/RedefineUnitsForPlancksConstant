@@ -26,7 +26,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
     length_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**2)
     time_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**3)
     mass_calc = constants.beta / (2 * np.pi)**(1/2)
-    charge_calc = (2 * (constants.alpha**3) * constants.beta * constants.epsilon_0)**(1/2)
+    charge_calc = constants.delta * (2)**(1/2)
     temp_calc = (constants.c**2 * constants.beta) / ((2 * np.pi)**(1/2) * constants.k_B)
 
     boltzmann_calc = (constants.alpha**3 * constants.beta) / constants.gamma

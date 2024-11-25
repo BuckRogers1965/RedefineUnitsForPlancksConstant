@@ -27,12 +27,10 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
     time_calc = (constants.alpha**3) / ((2 * np.pi)**(1/2) * constants.c**3)
     mass_calc = constants.beta / (2 * np.pi)**(1/2)
     charge_calc = constants.delta * (2)**(1/2)
-    temp_calc = (constants.c**2 * constants.beta) / ((2 * np.pi)**(1/2) * constants.k_B)
+    temp_calc = (constants.c**2 * constants.gamma) / ((2 * np.pi)**(1/2) * constants.alpha**3)
 
     boltzmann_calc = (constants.alpha**3 * constants.beta) / constants.gamma
     e0_calc = constants.delta**2 / (constants.alpha**3 * constants.beta) 
-    charge2_calc = constants.delta *(2)**(1/2)
-    temp2_calc = (constants.c**2 * constants.gamma) / ((2 * np.pi)**(1/2) * constants.alpha**3)
     Kb_calc =  2 * np.pi**5 * ((constants.alpha**3 * constants.beta) / constants.gamma**4)* constants.c / 15   
     alphafine_calc = constants.e**2  / (2 *(constants.delta**2))
 
@@ -92,8 +90,6 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
         'Planck pressure': 4.63324611732735e+113,
         'Bolzmann Temperature': 1.380649e-23,
         'Epsilon_0 Temperature': 8.854187817e-12,
-        'Planck Charge2': 1.875545e-18,
-        'Planck Temperature2': 1.416784e32,
         'Fine Structure Constant': 0.0072973525693,
         'Gas Constant R': 8.31446261815324,
         'Stefan-Boltzmann': 5.670374419e-8,
@@ -123,8 +119,6 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[float,
  
         'Bolzmann Temperature': boltzmann_calc,
         'Epsilon_0 Temperature': e0_calc,
-        'Planck Charge2': charge2_calc,
-        'Planck Temperature2': temp2_calc,
         'Fine Structure Constant': alphafine_calc,
         'Gas Constant R': r_gas_calc,
         'Stefan-Boltzmann': Kb_calc,

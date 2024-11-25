@@ -13,14 +13,10 @@ class PhysicsConstants:
     e: Decimal = Decimal('1.602176634e-19')
     mol: Decimal = Decimal('6.02214076e23')
 
-    #alpha: Decimal = Decimal('1.53843945498419101549e-06')
     alpha: Decimal = Decimal('1.53843945498418988525651584231678083324584755185780e-6')
-    #beta: Decimal = Decimal('5.45551186133462110058e-08')
     beta: Decimal = Decimal('5.45551186133462083261573179563841219265538485514280e-8')
     gamma: Decimal = Decimal('1.43877687750393380214667160154391159519906942314870e-2')
-    #gamma: Decimal = Decimal('1.43877687750393716548e-02')
     delta: Decimal = Decimal('1.32621132205611059057563089920041186351594040760140e-18')
-    #delta: Decimal = Decimal('1.32621132205611221308e-18')
 
 def decimal_pow(base: Decimal, exponent: Decimal) -> Decimal:
     """Raise a Decimal to a power using high-precision arithmetic."""

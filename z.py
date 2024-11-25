@@ -35,7 +35,7 @@ def analyze_hc_G_scaling():
 
     # Define alpha (scaling for meter) based on kg_scale and original constants
     print()
-    alpha = (hc_new ) ** (1/3)
+    alpha = (hc_new ) #** (1/3)
     print(f"Meter scaling factor (alpha) = {alpha:.20e}")
     print(f"1/ Meter scaling factor (alpha) = {1/alpha:.20e}")
     print(f"Meter/c scaling factor (alpha) = {alpha/c:.20e}")
@@ -53,8 +53,8 @@ def analyze_hc_G_scaling():
     print(f"beta/alpha     = {beta/alpha:.20e}")
 
         # Verify the calculated constants based on alpha and beta
-    h_calc = (alpha**3  * beta) / c
-    G_calc =  alpha**3 / beta
+    h_calc = (alpha  * beta) / c
+    G_calc =  alpha / beta
 
     print("\nDerived constants based on alpha and beta:")
     print(f"           h = {h:.8e} (scaled_kg)⋅m^2/s")

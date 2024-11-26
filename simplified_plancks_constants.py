@@ -13,10 +13,10 @@ class PhysicsConstants:
     e: Decimal = Decimal('1.602176634e-19')
     mol: Decimal = Decimal('6.02214076e23')
 
-    alpha: Decimal = Decimal('1.53843945498418988525651584231678083324584755185780e-6')
-    beta:  Decimal = Decimal('5.45551186133462083261573179563841219265538485514280e-8')
-    gamma: Decimal = Decimal('1.43877687750393380214667160154391159519906942314870e-2')
-    delta: Decimal = Decimal('1.32621132205611059057563089920041186351594040760140e-18')
+    alpha: Decimal = Decimal('1.53843945498418988525651584231678083324584755185780e-6')  # length (m)
+    beta:  Decimal = Decimal('5.45551186133462083261573179563841219265538485514280e-8')  # mass (kg)
+    gamma: Decimal = Decimal('1.43877687750393380214667160154391159519906942314870e-2')  # temperature (K)
+    delta: Decimal = Decimal('1.32621132205611059057563089920041186351594040760140e-18') # charge (C)
 
 def decimal_pow(base: Decimal, exponent: Decimal) -> Decimal:
     """Raise a Decimal to a power using high-precision arithmetic."""
@@ -59,14 +59,14 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
     acceleration_calc = decimal_pow(constants.c, Decimal(2)) / length_calc
     pressure_calc = constants.beta * decimal_pow(constants.c, Decimal(8)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(9))
 
-
-    #inprogress
-    #cosmo_calc = decimal_pow(constants.alpha, Decimal(9) ) / Decimal(9) * pi**3
-
     #c_2_calc = (h_calc * constants.c) / (boltzmann_calc)
     #c_2_calc = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) )
              # / (decimal_pow(constants.alpha, Decimal(3)) * constants.beta / constants.gamma)
     c_2_calc =  constants.gamma
+
+    #inprogress
+    #cosmo_calc = decimal_pow(constants.alpha, Decimal(9) ) / Decimal(9) * pi**3
+
 
     '''
 c_1 = 2pi alpha^3 beta c

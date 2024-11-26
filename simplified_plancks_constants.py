@@ -33,10 +33,10 @@ def calculate_unit_scaling():
 
     # Define scaling for meter) based on kg_scale and original constants
     # this scaled the meter so that hc = G = 1
-    alpha = decimal_pow(hc_new, Decimal(Decimal('1')/Decimal('3')))
+    alpha = hc_new
     beta  =  kg_scale
-    gamma = (alpha ** 3 * beta) / k_B
-    delta = (alpha ** 3 * beta * e0).sqrt()
+    gamma = (alpha * beta) / k_B
+    delta = (alpha * beta * e0).sqrt()
 
     return alpha, beta, gamma, delta
 
@@ -69,50 +69,49 @@ def decimal_pow(base: Decimal, exponent: Decimal) -> Decimal:
 def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decimal, Decimal, Decimal]]:
     pi = Decimal('3.141592653589793238462643383279502884197169399375105820974944592')
     
-    h_calc = (decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c
-    h_bar_calc = (decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)
-    G_calc = decimal_pow(constants.alpha, Decimal(3)) / constants.beta
-    length_calc = decimal_pow(constants.alpha, Decimal(3)) / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * decimal_pow(constants.c, Decimal(2)))
-    time_calc = decimal_pow(constants.alpha, Decimal(3)) / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * decimal_pow(constants.c, Decimal(3)))
+    h_calc = (constants.alpha * constants.beta) / constants.c
+    h_bar_calc = (constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)
+    G_calc = constants.alpha / constants.beta
+    length_calc = constants.alpha / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * decimal_pow(constants.c, Decimal(2)))
+    time_calc = constants.alpha / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * decimal_pow(constants.c, Decimal(3)))
     mass_calc = constants.beta / decimal_pow(Decimal('2') * pi, Decimal('0.5'))
     charge_calc = constants.delta * decimal_pow(Decimal('2'), Decimal('0.5'))
-    temp_calc = decimal_pow(constants.c, Decimal(2)) * constants.gamma / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * decimal_pow(constants.alpha, Decimal(3)))
-
-    boltzmann_calc = decimal_pow(constants.alpha, Decimal(3)) * constants.beta / constants.gamma
-    e0_calc = decimal_pow(constants.delta, Decimal(2)) / (decimal_pow(constants.alpha, Decimal(3)) * constants.beta)
-    Kb_calc = Decimal('2') * decimal_pow(pi, Decimal(5)) * (decimal_pow(constants.alpha, Decimal(3)) * constants.beta / decimal_pow(constants.gamma, Decimal(4))) * constants.c / Decimal('15')
-    alphafine_calc = decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-
-    r_gas_calc = constants.beta * decimal_pow(constants.alpha, Decimal(3)) * constants.mol / constants.gamma
-
-    RK_calc = constants.beta * decimal_pow(constants.alpha, Decimal(3)) / (decimal_pow(constants.e, Decimal(2)) * constants.c)
-    # 2e/h
-    K_J_calc = (Decimal('2') * constants.e*constants.c)/(constants.beta*decimal_pow(constants.alpha,Decimal(3)))
+    temp_calc = decimal_pow(constants.c, Decimal(2)) * constants.gamma / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * constants.alpha)
 
     angular_momentum_calc = h_calc / (Decimal('2') * pi)
     energy_calc = constants.beta * decimal_pow(constants.c, Decimal(2)) / decimal_pow((Decimal('2') * pi), Decimal(0.5))
-    force_calc = constants.beta * decimal_pow(constants.c, Decimal(4)) / decimal_pow(constants.alpha, Decimal(3))
-    power_calc = constants.beta * decimal_pow(constants.c, Decimal(5)) / decimal_pow(constants.alpha, Decimal(3))
-    density_calc = constants.beta * decimal_pow(constants.c, Decimal(6)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(9))
+    force_calc = constants.beta * decimal_pow(constants.c, Decimal(4)) / constants.alpha
+    power_calc = constants.beta * decimal_pow(constants.c, Decimal(5)) / constants.alpha
+    density_calc = constants.beta * decimal_pow(constants.c, Decimal(6)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(3))
     area_calc = decimal_pow(length_calc, Decimal(2))
     volume_calc = decimal_pow(length_calc, Decimal(3))
     acceleration_calc = decimal_pow(constants.c, Decimal(2)) / length_calc
-    pressure_calc = constants.beta * decimal_pow(constants.c, Decimal(8)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(9))
+    pressure_calc = constants.beta * decimal_pow(constants.c, Decimal(8)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(3))
 
-    c_1_calc = Decimal('2') * pi * decimal_pow(constants.alpha, Decimal(3)) * constants.beta * constants.c
-    c_1L_calc  = (Decimal('2') * decimal_pow(constants.alpha, Decimal(3)) * constants.beta * constants.c)
+    boltzmann_calc = constants.alpha * constants.beta / constants.gamma
+    e0_calc = decimal_pow(constants.delta, Decimal(2)) / (constants.alpha * constants.beta)
+    Kb_calc = Decimal('2') * decimal_pow(pi, Decimal(5)) * (constants.alpha * constants.beta / decimal_pow(constants.gamma, Decimal(4))) * constants.c / Decimal('15')
+    alphafine_calc = decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
+
+    r_gas_calc = constants.beta * constants.alpha * constants.mol / constants.gamma
+
+    RK_calc = constants.beta * constants.alpha / (decimal_pow(constants.e, Decimal(2)) * constants.c)
+    # 2e/h
+    K_J_calc = (Decimal('2') * constants.e*constants.c)/(constants.beta*constants.alpha)
+    c_1_calc = Decimal('2') * pi * constants.alpha * constants.beta * constants.c
+    c_1L_calc  = Decimal('2') * constants.alpha * constants.beta * constants.c
     #c_2_calc = (h_calc * constants.c) / (boltzmann_calc)
-    #c_2_calc = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) )
-             # / (decimal_pow(constants.alpha, Decimal(3)) * constants.beta / constants.gamma)
+    #c_2_calc = ((constants.alpha * constants.beta) )
+             # / (constants.alpha * constants.beta / constants.gamma)
     c_2_calc =  constants.gamma
 
     # G_0 = 2 e^2 / h
-    G_0_calc = (Decimal('2') * decimal_pow(constants.e, Decimal(2)) * constants.c)/(decimal_pow(constants.alpha, Decimal(3)) * constants.beta)
+    G_0_calc = (Decimal('2') * decimal_pow(constants.e, Decimal(2)) * constants.c)/(constants.alpha * constants.beta)
 
-    Phi_0_calc = (decimal_pow(constants.alpha, Decimal(3)) * constants.beta)/(constants.c *Decimal('2') * constants.e)
+    Phi_0_calc = (constants.alpha * constants.beta)/(constants.c *Decimal('2') * constants.e)
 
     #inprogress
-    #cosmo_calc = decimal_pow(constants.alpha, Decimal(9) ) / Decimal(9) * pi**3
+    #cosmo_calc = decimal_pow(constants.alpha, Decimal(3) ) / Decimal(9) * pi**3
 
     '''
     b_e
@@ -130,35 +129,35 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
 
 
     mu_0 = 4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2c}
+) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2c}
         'vacuum magnetic permeability':
         'vacuum magnetic permeability':         Decimal('1.25663706127e−6'), # N⋅A−2
 
     Z_0=4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
+) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
         'characteristic impedance of vacuum':
         'characteristic impedance of vacuum':         Decimal('376.730313412'), # Ω
 
     epsilon_0 = e^2/4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) c}
+) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) c}
         'vacuum electric permittivity':
         'vacuum electric permittivity':         Decimal('8.8541878188e−12'), # F⋅m−1
 
 
-    ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c)/2m_e
+    ((constants.alpha * constants.beta) / constants.c)/2m_e
         'quantum of circulation':
         'quantum of circulation':         Decimal('3.6369475467'), # m2⋅s−1	
 
-    mu_B=e ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) 2m_e
+    mu_B=e ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) 2m_e
         'Bohr magneton':
         'Bohr magneton':         Decimal('9.2740100657e−24'), # J⋅T−1
 
-    mu_N = e ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / 2m_p
+    mu_N = e ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / 2m_p
         'nuclear magneton':
         'nuclear magneton':         Decimal('5.0507837393e−27'), # J⋅T−1
 
     r_e = (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / (m_e c)
+) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / (m_e c)
         'classical electron radius':
         'classical electron radius':         Decimal('2.8179403205e−15'), # m
 
@@ -166,17 +165,17 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Thomson cross section':
         'Thomson cross section':         Decimal('6.6524587051e−29'), # m^2
 
-    a_0 = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
+    a_0 = ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
  ) m_e c
         'Bohr radius':
         'Bohr radius':         Decimal('29177210544e−11'), # m
 
     R_inf = ((decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-)^2 m_e c) / (2 ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c) )
+)^2 m_e c) / (2 ((constants.alpha * constants.beta) / constants.c) )
         'Rydberg constant':
         'Rydberg constant':         Decimal('10973731.568157'), # m^−1
 
-    Ry = R_inf ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c) c = E_h/2}
+    Ry = R_inf ((constants.alpha * constants.beta) / constants.c) c = E_h/2}
         'Rydberg unit of energy':
         'Rydberg unit of energy':         Decimal('2.1798723611030e−18'), # J
 
@@ -185,7 +184,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Hartree energy':
         'Hartree energy':         Decimal('4.3597447222060e−18'), # J
 
-    G_F / (((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) c)^3
+    G_F / (((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) c)^3
         'Fermi coupling constant':
         'Fermi coupling constant':         Decimal('1.1663787e−5'), # GeV−2	
 
@@ -332,4 +331,3 @@ if __name__ == "__main__":
     
     for name, (expected, calculated, error) in planck_results.items():
         print(f"{name:<25} | {expected:<20} | {calculated:<30.20e} | {error:.10e}")
-

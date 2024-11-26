@@ -63,6 +63,11 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
     #inprogress
     #cosmo_calc = decimal_pow(constants.alpha, Decimal(9) ) / Decimal(9) * pi**3
 
+    #c_2_calc = (h_calc * constants.c) / (boltzmann_calc)
+    #c_2_calc = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) )
+             # / (decimal_pow(constants.alpha, Decimal(3)) * constants.beta / constants.gamma)
+    c_2_calc =  constants.gamma
+
     '''
 c_1 = 2pi alpha^3 beta c
         'first radiation
@@ -72,59 +77,56 @@ c_1L  = (2 alpha^3 beta c)/sr
         'first radiation spectral radiancer
         'first radiation spectral radiancer':         Decimal('1.191042972e−16'), # W⋅m2⋅sr−1	
 
-c_2 =    (decimal_pow(constants.gamma, Decimal(4))) * constants.c ) /  Decimal('15') * Decimal('2') * decimal_pow(pi, Decimal(5)) 
-        'second radiation
-        'second radiation':         Decimal('1.438776877e−2'), # m⋅K
 
 b_e
-        'Wien wavelength displacement 
+        'Wien wavelength displacement': 
         'Wien wavelength displacement':         Decimal('2.897771955e−3'), # m⋅K
 
 b_f
-        'Wien frequency displacement 
+        'Wien frequency displacement':
         'Wien frequency displacement':         Decimal('5.878925757e10'), # Hz⋅K−1
 
 b_{\text{entropy}}}
-        'Wien entropy displacement 
+        'Wien entropy displacement':
         'Wien entropy displacement':         Decimal('3.002916077e−3'), # m⋅K
 
 e
-        'elementary charge
+        'elementary charge':
         'elementary charge':         Decimal('1.602176634e−19'), # C
 
 G_0 = 2e^{2}/(decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c}
-        'conductance quantum	
+        'conductance quantum':
         'conductance quantum':         Decimal('748091729e−5'), # S
 
 G_0^-1 = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c)/2e^2}
-        'inverse conductance quantum
+        'inverse conductance quantum':
         'inverse conductance quantum':         Decimal('12906.40372'), # Ω
 
 K_J = 2e/((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c)	
-        'Josephson constant	
+        'Josephson constant':
         'Josephson constant':         Decimal('483597.8484e9'), # Hz⋅V−1
 
 Phi_0 = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c)/2e	
-        'magnetic flux quantum	
+        'magnetic flux quantum':
         'magnetic flux quantum':         Decimal('2.067833848e−15'), # Wb
 
 mu_0 = 4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 ) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2c}
-        'vacuum magnetic permeability
+        'vacuum magnetic permeability':
         'vacuum magnetic permeability':         Decimal('1.25663706127e−6'), # N⋅A−2
 
 Z_0=4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 ) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
-        'characteristic impedance of vacuum
+        'characteristic impedance of vacuum':
         'characteristic impedance of vacuum':         Decimal('376.730313412'), # Ω
 
 epsilon_0 = e^2/4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 ) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) c}
-        'vacuum electric permittivity
+        'vacuum electric permittivity':
         'vacuum electric permittivity':         Decimal('8.8541878188e−12'), # F⋅m−1
 
 m_e
-        'electron mass
+        'electron mass':
         'electron mass':         Decimal('9.1093837139e−31'), # kg
 
 m_{\mu }}	muon mass	1.883531627(42)×10−28  # kg
@@ -139,95 +141,95 @@ sine-square weak mixing angle
 0.223052 
 
 g_e
-        'electron g-factor
+        'electron g-factor':
         'electron g-factor':         Decimal('−2.00231930436092'), 
 
 g_mu 
-        'muon g-factor
+        'muon g-factor':
         'muon g-factor':         Decimal('−2.00233184123'),
 
 g_p
-        'proton g-factor
+        'proton g-factor':
         'proton g-factor':         Decimal('5.5856946893'),
 
 ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c)/2m_e
-        'quantum of circulation
+        'quantum of circulation':
         'quantum of circulation':         Decimal('3.6369475467'), # m2⋅s−1	
 
 mu_B=e ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) 2m_e
-        'Bohr magneton
+        'Bohr magneton':
         'Bohr magneton':         Decimal('9.2740100657e−24'), # J⋅T−1
 
 mu_N = e ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / 2m_p
-        'nuclear magneton
+        'nuclear magneton':
         'nuclear magneton':         Decimal('5.0507837393e−27'), # J⋅T−1
 
 r_e = (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 ) ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / (m_e c)
-        'classical electron radius
+        'classical electron radius':
         'classical electron radius':         Decimal('2.8179403205e−15'), # m
 
 sigma_e = (8pi/3)r_e^2
-        'Thomson cross section
+        'Thomson cross section':
         'Thomson cross section':         Decimal('6.6524587051e−29'), # m^2
 
 a_0 = ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) / (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
  ) m_e c
-        'Bohr radius
+        'Bohr radius':
         'Bohr radius':         Decimal('29177210544e−11'), # m
 
 R_inf = ((decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 )^2 m_e c) / (2 ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c) )
-        'Rydberg constant
+        'Rydberg constant':
         'Rydberg constant':         Decimal('10973731.568157'), # m^−1
 
 Ry = R_inf ((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / constants.c) c = E_h/2}
-        'Rydberg unit of energy
+        'Rydberg unit of energy':
         'Rydberg unit of energy':         Decimal('2.1798723611030e−18'), # J
 
 E_h = decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
 ^2 m_e c^2
-        'Hartree energy
+        'Hartree energy':
         'Hartree energy':         Decimal('4.3597447222060e−18'), # J
 
 G_F / (((decimal_pow(constants.alpha, Decimal(3)) * constants.beta) / (Decimal('2') * pi * constants.c)) c)^3
-        'Fermi coupling constant
+        'Fermi coupling constant':
         'Fermi coupling constant':         Decimal('1.1663787e−5'), # GeV−2	
 
 N_A
-        'Avogadro constant
+        'Avogadro constant':
         'Avogadro constant':         Decimal('6.02214076e23'), # mol^−1	
 
 R=N_A k_B
-        'molar gas constant
+        'molar gas constant':
         'molar gas constant':         Decimal('8.31446261815324 '), # J⋅mol−1⋅K−1
 
 F=N_A e
-        'Faraday constant
+        'Faraday constant':
         'Faraday constant':         Decimal('96485.3321233100184'), # C⋅mol−1	
 
 N_A h
-        'molar Planck constant
+        'molar Planck constant':
         'molar Planck constant':         Decimal('3.9903127128934314e−10'), # J⋅s⋅mol−1
 
 M(12C)=N_A m (12 C)
-        'molar mass of carbon-12
+        'molar mass of carbon-12':
         'molar mass of carbon-12':         Decimal('12.0000000126e−3'), # kg⋅mol−1
 
 m_u=m(12 C)/12
-        'atomic mass constant
+        'atomic mass constant':
         'atomic mass constant':         Decimal('1.66053906892e−27'), # kg
 
 M_u=M(12 C)/12
-        'molar mass constant
+        'molar mass constant':
         'molar mass constant':         Decimal('1.00000000105e−3'), # kg⋅mol−1	
 
 V_m(Si)
-        'molar volume of silicon
+        'molar volume of silicon':
         'molar volume of silicon':         Decimal('1.205883199e−5'), # m3⋅mol−1
 
 Delta nu _Cs
-        'hyperfine transition frequency of 133Cs
+        'hyperfine transition frequency of 133Cs':
         'hyperfine transition frequency of 133Cs':         Decimal('9192631770'), # Hz
 
     '''
@@ -257,6 +259,7 @@ Delta nu _Cs
         'Gas Constant R':          Decimal('8.31446261815324'),
         'Stefan-Boltzmann':        Decimal('5.670374419e-8'),
         'von Klitzing RK':         Decimal('25812.807'),
+        'second radiation':        Decimal('1.438776877e-2'), # m⋅K
 
    #in-progress
         # 'cosmological' :           Decimal('1.089e-52'),
@@ -286,6 +289,7 @@ Delta nu _Cs
         'Gas Constant R': r_gas_calc,
         'Stefan-Boltzmann': Kb_calc,
         'von Klitzing RK': RK_calc,
+        'second radiation': c_2_calc,
 
    #in-progress
         #'cosmological' : cosmo_calc,

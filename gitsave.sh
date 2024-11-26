@@ -10,6 +10,13 @@ fi
 commit_message="$1"
 shift
 
+# Ensure at least two arguments (commit message) is provided
+if [ -z "$1" ]; then
+  echo "Usage: gitsave \"commit message\" [files or directories to add]"
+  exit 1
+fi
+
+
 # Pull the latest changes from the repository
 echo "Pulling latest changes..."
 if ! git pull; then

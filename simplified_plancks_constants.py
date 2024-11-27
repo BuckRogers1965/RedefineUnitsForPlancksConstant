@@ -84,57 +84,53 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     # s_temp temperature (K)
     # s_charge charge (C)
     
-    h_calc      = (s_length * s_mass) / c
-    h_bar_calc  = (s_length * s_mass) / (D('2') * pi * c)
-    G_calc      = s_length / s_mass
-    length_calc = s_length / (d_p(D('2') * pi, D('0.5')) * d_p(c, D(2)))
-    time_calc   = s_length / (d_p(D('2') * pi, D('0.5')) * d_p(c, D(3)))
-    mass_calc   = s_mass / d_p(D('2') * pi, D('0.5'))
-    charge_calc = s_charge * d_p(D('2'), D('0.5'))
-    temp_calc   = d_p(c, D(2)) * s_temp / (d_p(D('2') * pi, D('0.5')) * s_length)
-    angular_momentum_calc = h_calc / (D('2') * pi)
-    #momentun_calc = d_p(((h_bar_calc * c* c* c)/G_calc), D(0.5))
-    #momentun_calc = d_p((((s_length * s_mass) / (D('2') * pi * c) * c* c* c)/(s_length / s_mass)), D(0.5))
-    momentun_calc  =(s_mass * c) / d_p((D('2') * pi ), D(0.5))
-    energy_calc    = s_mass * d_p(c, D(2)) / d_p((D('2') * pi), D(0.5))
-    force_calc     = s_mass * d_p(c, D(4)) / s_length
-    power_calc     = s_mass * d_p(c, D(5)) / s_length
-    density_calc   = s_mass * d_p(c, D(6)) * D('2') * pi / d_p(s_length, D(3))
+    h_calc       = (s_length * s_mass) / c
+    h_bar_calc   = (s_length * s_mass) / (D(2) * pi * c)
+    G_calc       =  s_length / s_mass
+    length_calc  =  s_length / (d_p(D(2) * pi, D('0.5')) * d_p(c, D(2)))
+    time_calc    =  s_length / (d_p(D(2) * pi, D('0.5')) * d_p(c, D(3)))
+    charge_calc  =  s_charge * d_p(D(2), D('0.5'))
+    temp_calc    =  d_p(c, D(2)) * s_temp / (d_p(D(2) * pi, D('0.5')) * s_length)
+    angular_momentum_calc = h_calc / (D(2) * pi)
+    mass_calc      = s_mass                            / d_p(D(2) * pi, D('0.5'))
+    #momentun_calc = d_p(((h_bar_calc * c* c* c)       /G_calc), D(0.5))
+    #momentun_calc = d_p((((s_length * s_mass) / (D(2) * pi * c) * c* c* c)/(s_length / s_mass)), D(0.5))
+    momentun_calc  = s_mass * c                        / d_p((D(2) * pi ), D(0.5))
+    energy_calc    = s_mass * d_p(c, D(2))             / d_p((D(2) * pi), D(0.5))
+    force_calc     = s_mass * d_p(c, D(4))             / s_length
+    power_calc     = s_mass * d_p(c, D(5))             / s_length
+    density_calc   = s_mass * d_p(c, D(6)) * D(2) * pi / d_p(s_length, D(3))
+    pressure_calc  = s_mass * d_p(c, D(8)) * D(2) * pi / d_p(s_length, D(3))
     area_calc      = d_p(length_calc, D(2))
     volume_calc    = d_p(length_calc, D(3))
     acceleration_calc = d_p(c, D(2)) / length_calc
-    pressure_calc  = s_mass * d_p(c, D(8)) * D('2') * pi / d_p(s_length, D(3))
 
+    alpha_calc   = d_p(e, D(2)) / (D(2) * d_p(s_charge, D(2)))
     boltzmann_calc = s_length * s_mass / s_temp
-    e0_calc        = d_p(s_charge, D(2)) / (s_length * s_mass)
-    Kb_calc        = D('2') * d_p(pi, D(5)) * (s_length * s_mass / d_p(s_temp, D(4))) * c / D('15')
-    alpha_calc     = d_p(e, D(2)) / (D('2') * d_p(s_charge, D(2)))
-    r_gas_calc  = s_mass * s_length * mol / s_temp
-    RK_calc     = s_mass * s_length / (d_p(e, D(2)) * c)
-    R_inf_calc  = (d_p(e, D(4)) * d_p(c, D(2)) * m_e)/(D('8') * s_length * s_mass *  d_p(s_charge, D(4)) )
-    # 2e/h
-    K_J_calc    = (D('2') * e*c)/(s_mass*s_length)
-    c_1_calc    = D('2') * pi * s_length * s_mass * c
-    c_1L_calc   = D('2') * s_length * s_mass * c
-    #c_2_calc   =       (h_calc * c)     / (boltzmann_calc)
-    #c_2_calc   = ((s_length * s_mass) ) / (s_length * s_mass / s_temp)
+    Phi_0_calc   =  (s_length * s_mass)     / (c *D(2) * e)
+    Z_0_calc     =  (s_length * s_mass)     / (c * d_p(s_charge, D(2)) )
+    qof_calc     =  (s_length * s_mass)     / (c*D(2) * m_e)
+    mu_B_calc    =  (s_length * s_mass) * e / (D(4) * pi * c * m_e)
+    mu_N_calc    =  (s_length * s_mass) * e / (D(4) * pi * c * m_p)
+    r_e_calc     =  (s_length * s_mass) * alpha_calc / (m_e * c * D(2) * pi * c)
+    r_gas_calc   =   s_length * s_mass * mol / s_temp
+    RK_calc      =   s_length * s_mass       / (d_p(e, D(2)) * c)
+    a_0_calc     =  (s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)
+    e0_calc      = d_p(s_charge, D(2))       / (s_length * s_mass)
+    Kb_calc      = d_p(pi, D(5)) * D(2) * (s_length * s_mass / d_p(s_temp, D(4))) * c / D(15)
+    R_inf_calc  = (d_p(e, D(4)) * d_p(c, D(2)) * m_e)/(D(8) * s_length * s_mass *  d_p(s_charge, D(4)) )
+    K_J_calc    = (D(2) * e*c)/(s_mass*s_length)     # 2e/h
+    c_1_calc    =  D(2) * pi * s_length * s_mass * c
+    c_1L_calc   =  D(2) * s_length * s_mass * c
+    #c_2_calc   =     (h_calc * c)  / (boltzmann_calc)
+    #c_2_calc   = s_length * s_mass / (s_length * s_mass / s_temp)
     c_2_calc    =  s_temp
-    # G_0       = 2 e^2 / h
-    G_0_calc    = (D('2') * d_p(e, D(2)) * c)/(s_length * s_mass)
-    Phi_0_calc  = (s_length * s_mass)/(c *D('2') * e)
-    #mu_0_calc  =  D('4') * pi *  alpha_calc*  h_bar_calc/(d_p(e, D(2)) * c)
-    mu_0_calc   =  D('4') * pi *  alpha_calc* (s_length * s_mass) / (d_p(e, D(2)) * c * D('2') * pi * c)
-    Z_0_calc    = (s_length * s_mass) / (c * d_p(s_charge, D(2)) )
-    qof_calc    =  (s_length * s_mass) / (c*D('2') * m_e)
-    mu_B_calc   = e * (s_length * s_mass) / (D('4') * pi * c * m_e)
-    mu_N_calc   = e * (s_length * s_mass) / (D('4') * pi * c * m_p)
-    r_e_calc    =  alpha_calc * (s_length * s_mass) / (m_e * c * D('2') * pi * c)
-    #r_e_calc   = (d_p(e, D(2)) / (D('2') * d_p(s_charge, D(2)))) ((s_length * s_mass) / (D('2') * pi * c)) / (m_e c)
-    #sigma_e_calc = (D('8') * pi/ D('3'))* d_p(r_e, D(2))
-    a_0_calc      = (s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)
+    G_0_calc    = (D(2) * d_p(e, D(2)) * c) / (s_length * s_mass)       # 2 e^2 / h
+    mu_0_calc   =  D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
+    #sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e, D(2))
     E_h_calc      = d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D('4') * d_p(s_charge, D(4)))
 
-    # This works, but the 9.8 seems to be arbitary
+    # This works, but the 9.8 seems to be arbitrary
     cosmo_calc    = d_p(s_length, D(3) )/( s_temp * pi* D('9.8'))
 
     '''
@@ -142,7 +138,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
         'Rydberg unit of energy': Ry_calc,
         'Rydberg unit of energy':         D('2.1798723611030e−18'), # J
 
-    fcc_calc = G_F / (((s_length * s_mass) / (D('2') * pi * c)) c)^3
+    fcc_calc = G_F / (((s_length * s_mass) / (D(2) * pi * c)) c)^3
         'Fermi coupling constant': fcc_calc,
         'Fermi coupling constant':         D('1.1663787e−5'), # GeV−2	
     '''
@@ -251,8 +247,8 @@ if __name__ == "__main__":
     s_length, s_mass, s_temp, s_charge  = calculate_unit_scaling()
     # Print the result with high precision
     print(f"s_length: {s_length:.50e} m    length unit scaling")
-    print(f"s_mass : {s_mass:.50e} kg   mass unit scaling")
-    print(f"s_temp: {s_temp:.50e} K^-1 temperature unit scaling")
+    print(f"s_mass  : {s_mass:.50e} kg   mass unit scaling")
+    print(f"s_temp  : {s_temp:.50e} K^-1 temperature unit scaling")
     print(f"s_charge: {s_charge:.50e} C   charge unit scaling")
 
     

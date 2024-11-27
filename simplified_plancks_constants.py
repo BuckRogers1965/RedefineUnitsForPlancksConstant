@@ -112,11 +112,10 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
 
     #momentun_calc = decimal_pow(((h_bar_calc * constants.c* constants.c* constants.c)/G_calc), Decimal(0.5))
     #momentun_calc = decimal_pow((((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c) * constants.c* constants.c* constants.c)/(constants.alpha / constants.beta)), Decimal(0.5))
-    momentun_calc = ( constants.beta  * constants.c) / decimal_pow((Decimal('2') * pi ), Decimal(0.5))
-
-    energy_calc = constants.beta * decimal_pow(constants.c, Decimal(2)) / decimal_pow((Decimal('2') * pi), Decimal(0.5))
-    force_calc = constants.beta * decimal_pow(constants.c, Decimal(4)) / constants.alpha
-    power_calc = constants.beta * decimal_pow(constants.c, Decimal(5)) / constants.alpha
+    momentun_calc=(constants.beta * constants.c) / decimal_pow((Decimal('2') * pi ), Decimal(0.5))
+    energy_calc  = constants.beta * decimal_pow(constants.c, Decimal(2)) / decimal_pow((Decimal('2') * pi), Decimal(0.5))
+    force_calc   = constants.beta * decimal_pow(constants.c, Decimal(4)) / constants.alpha
+    power_calc   = constants.beta * decimal_pow(constants.c, Decimal(5)) / constants.alpha
     density_calc = constants.beta * decimal_pow(constants.c, Decimal(6)) * Decimal('2') * pi / decimal_pow(constants.alpha, Decimal(3))
     area_calc = decimal_pow(length_calc, Decimal(2))
     volume_calc = decimal_pow(length_calc, Decimal(3))

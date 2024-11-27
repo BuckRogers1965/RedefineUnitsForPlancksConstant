@@ -152,8 +152,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
     #mu_0_calc =  Decimal('4') * pi *  alphafine_calc*  h_bar_calc/(decimal_pow(constants.e, Decimal(2)) * constants.c)
     mu_0_calc =  Decimal('4') * pi *  alphafine_calc* (constants.alpha * constants.beta) / (decimal_pow(constants.e, Decimal(2)) * constants.c * Decimal('2') * pi * constants.c)
 
-    Z_0_calc =  Decimal('4') * pi *  alphafine_calc* (constants.alpha * constants.beta) / (decimal_pow(constants.e, Decimal(2)) * constants.c * Decimal('2') * pi )
- #=4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
+    Z_0_calc = (constants.alpha * constants.beta) / (constants.c * decimal_pow(constants.delta, Decimal(2)) )
 
     qof_calc =  (constants.alpha * constants.beta) / (constants.c*Decimal('2') * constants.m_e)
 
@@ -167,8 +166,8 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
 
     E_h_calc = decimal_pow(constants.e, Decimal(4)) * constants.m_e* decimal_pow(constants.c, Decimal(2))/ (Decimal('4') * decimal_pow(constants.delta, Decimal(4)))
 
-    #inprogress
-    #cosmo_calc = decimal_pow(constants.alpha, Decimal(3) ) / Decimal(9) * pi**3
+    # This works, but the 9.8 seems to be arbitary
+    cosmo_calc = decimal_pow(constants.alpha, Decimal(3) )/( constants.gamma * pi* Decimal('9.8'))
 
     '''
     Ry_calc = R_inf ((constants.alpha * constants.beta) / constants.c) c = E_h/2}
@@ -223,7 +222,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Hartree energy':           Decimal('4.3597447222060e-18'), # J
 
    #in-progress
-        # 'cosmological' :           Decimal('1.089e-52'),
+        'cosmological' :           Decimal('1.089e-52'),
     }
 
     calcs = {
@@ -269,7 +268,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Hartree energy': E_h_calc,
 
    #in-progress
-        #'cosmological' : cosmo_calc,
+        'cosmological' : cosmo_calc,
     }
 
     results = {}

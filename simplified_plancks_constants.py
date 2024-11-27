@@ -2,6 +2,36 @@ from decimal import Decimal, getcontext, Context, ROUND_DOWN
 from dataclasses import dataclass
 from typing import Dict, Tuple
 
+'''
+    This program calculates the individual unit scaling
+    factors for length, mass, temperature, and charge.
+
+    These scaling factors are assigned to constants.
+
+    Then these constants are used to recreate all the
+    other constants using these basic scaling factors 
+    and other counting constants. 
+
+    The scaling factors themselve are just half the equation.
+    How the scaling factors relate to each other and the
+    counting constants inside the constant is as important 
+    as the presence of the scaling factor. 
+
+    Counting constants are things that are counts of other thing.
+    How many meters fit inside the distance light travels in a second?
+    How many atoms are in a mole?
+    How many electrons are in a coulomb? 
+    These counting constants are used with the value they have in this framework. 
+    
+    This is a new field of Unit System Science. The ability to predict 
+    the values that a new constant would have from how the units relate
+    to each other upgrade unit analysis from discriptive to predictive.
+
+
+    Author: James Rogers, SE Ohio, 26 Nov 2024 1824
+
+'''
+
 # Set precision to 50 decimal places
 getcontext().prec = 50
 
@@ -34,7 +64,7 @@ def calculate_unit_scaling():
     # Define scaling for meter) based on kg_scale and original constants
     # this scaled the meter so that hc = G = 1
     alpha = hc_new
-    beta  =  kg_scale
+    beta  = kg_scale
     gamma = (alpha * beta) / k_B
     delta = (alpha * beta * e0).sqrt()
 
@@ -79,6 +109,11 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
     temp_calc = decimal_pow(constants.c, Decimal(2)) * constants.gamma / (decimal_pow(Decimal('2') * pi, Decimal('0.5')) * constants.alpha)
 
     angular_momentum_calc = h_calc / (Decimal('2') * pi)
+
+    #momentun_calc = decimal_pow(((h_bar_calc * constants.c* constants.c* constants.c)/G_calc), Decimal(0.5))
+    #momentun_calc = decimal_pow((((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c) * constants.c* constants.c* constants.c)/(constants.alpha / constants.beta)), Decimal(0.5))
+    momentun_calc = ( constants.beta  * constants.c) / decimal_pow((Decimal('2') * pi ), Decimal(0.5))
+
     energy_calc = constants.beta * decimal_pow(constants.c, Decimal(2)) / decimal_pow((Decimal('2') * pi), Decimal(0.5))
     force_calc = constants.beta * decimal_pow(constants.c, Decimal(4)) / constants.alpha
     power_calc = constants.beta * decimal_pow(constants.c, Decimal(5)) / constants.alpha
@@ -237,14 +272,15 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Planck Charge':           Decimal('1.875545e-18'),
         'Planck Temperature':      Decimal('1.416784e32'),
         "Planck angular momentum": Decimal('1.054571817e-34'),
-        'Planck energy':           Decimal('1.95611259e+09'),
-        'Planck force':            Decimal('1.21065905e+44'),
-        'Planck power':            Decimal('3.62831546e+52'),
-        'Planck density':          Decimal('5.15500742e+96'),
-        'Planck area':             Decimal('2.61205695e-70'),
-        'Planck volume':           Decimal('4.22419000e-105'),
-        'Planck acceleration':     Decimal('5.55995869e+51'),
-        'Planck pressure':         Decimal('4.63324611e+113'),
+        'Planck momentum':         Decimal('6.5249'),
+        'Planck energy':           Decimal('1.9561e+09'),
+        'Planck force':            Decimal('1.2103e+44'),
+        'Planck power':            Decimal('3.6283e+52'),
+        'Planck density':          Decimal('5.1550e+96'),
+        'Planck area':             Decimal('2.6121e-70'),
+        'Planck volume':           Decimal('4.2217e-105'),
+        'Planck acceleration':     Decimal('5.5608e+51'),
+        'Planck pressure':         Decimal('4.6332e+113'),
         'Bolzmann Temperature':    Decimal('1.380649e-23'),
         'Epsilon_0 Temperature':   Decimal('8.854187817e-12'),
         'Fine Structure Constant': Decimal('0.0072973525693'),
@@ -272,6 +308,7 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'Planck Charge': charge_calc,
         'Planck Temperature': temp_calc,
         "Planck angular momentum": angular_momentum_calc,
+        'Planck momentum': momentun_calc,
         "Planck energy": energy_calc,
         "Planck force": force_calc,
         "Planck power": power_calc,

@@ -77,7 +77,9 @@ class PhysicsConstants:
     k_B: Decimal = Decimal('1.380649e-23')
     e: Decimal = Decimal('1.602176634e-19')
     mol: Decimal = Decimal('6.02214076e23')
-    m_e: Decimal = Decimal('9.1093837139e-31') #  kg
+    m_e: Decimal = Decimal('9.1093837139e-31')  # kg electron mass
+    m_p: Decimal = Decimal('1.67262192595e-27') # kg proton mass
+    N_A: Decimal = Decimal('6.02214076e23')     # mol^−1 Avogadro constant
 
     # the following 4 are set in main from the output of the 
     # calculate_unit_scaling() funtion above
@@ -149,115 +151,34 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
 
     #mu_0_calc =  Decimal('4') * pi *  alphafine_calc*  h_bar_calc/(decimal_pow(constants.e, Decimal(2)) * constants.c)
     mu_0_calc =  Decimal('4') * pi *  alphafine_calc* (constants.alpha * constants.beta) / (decimal_pow(constants.e, Decimal(2)) * constants.c * Decimal('2') * pi * constants.c)
-    # mu_0_calc = Decimal('4') * pi * (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2c}
+
+    Z_0_calc =  Decimal('4') * pi *  alphafine_calc* (constants.alpha * constants.beta) / (decimal_pow(constants.e, Decimal(2)) * constants.c * Decimal('2') * pi )
+ #=4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
+
+    qof_calc =  (constants.alpha * constants.beta) / (constants.c*Decimal('2') * constants.m_e)
+
+    mu_B_calc = constants.e * (constants.alpha * constants.beta) / (Decimal('4') * pi * constants.c * constants.m_e)
+    mu_N_calc = constants.e * (constants.alpha * constants.beta) / (Decimal('4') * pi * constants.c *constants.m_p)
+    r_e_calc =  alphafine_calc * (constants.alpha * constants.beta) / (constants.m_e * constants.c * Decimal('2') * pi * constants.c)
+    #r_e_calc = (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / (m_e c)
+
+    #sigma_e_calc = (Decimal('8') * pi/ Decimal('3'))* decimal_pow(constants.r_e, Decimal(2))
+    a_0_calc = (constants.alpha * constants.beta * decimal_pow(constants.delta, Decimal(2))) / ( pi *decimal_pow(constants.c * constants.e, Decimal(2)) * constants.m_e)
+
+    E_h_calc = decimal_pow(constants.e, Decimal(4)) * constants.m_e* decimal_pow(constants.c, Decimal(2))/ (Decimal('4') * decimal_pow(constants.delta, Decimal(4)))
 
     #inprogress
     #cosmo_calc = decimal_pow(constants.alpha, Decimal(3) ) / Decimal(9) * pi**3
 
     '''
-    b_e
-        'Wien wavelength displacement': 
-        'Wien wavelength displacement':         Decimal('2.897771955e-3'), # m⋅K
-
-    b_f
-        'Wien frequency displacement':
-        'Wien frequency displacement':         Decimal('5.878925757e10'), # Hz⋅K−1
-
-    b_{\text{entropy}}}
-        'Wien entropy displacement':
-        'Wien entropy displacement':         Decimal('3.002916077e−3'), # m⋅K
-
-
-
-
-    Z_0_calc =4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) /e^2
-        'characteristic impedance of vacuum': Z_0_calc,
-        'characteristic impedance of vacuum':         Decimal('376.730313412'), # Ω
-
-    epsilon_0 = e^2/4pi (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) c}
-        'vacuum electric permittivity':
-        'vacuum electric permittivity':         Decimal('8.8541878188e−12'), # F⋅m−1
-
-
-   qof_calc =  ((constants.alpha * constants.beta) / constants.c)/2m_e
-        'quantum of circulation': qof_calc,
-        'quantum of circulation':         Decimal('3.6369475467'), # m2⋅s−1	
-
-    mu_B_calc =e ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) 2m_e
-        'Bohr magneton': mu_B_calc,
-        'Bohr magneton':         Decimal('9.2740100657e−24'), # J⋅T−1
-
-    mu_N_calc = e ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / 2m_p
-        'nuclear magneton': mu_N_calc,
-        'nuclear magneton':         Decimal('5.0507837393e−27'), # J⋅T−1
-
-    r_e_calc = (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))) ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / (m_e c)
-        'classical electron radius': r_e_calc, 
-        'classical electron radius':         Decimal('2.8179403205e−15'), # m
-
-    sigma_e_calc = (8pi/3)r_e^2
-        'Thomson cross section': sigma_e_calc,
-        'Thomson cross section':         Decimal('6.6524587051e−29'), # m^2
-
-    a_0_calc = ((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) / (decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
- ) m_e c
-        'Bohr radius': a_0_calc,
-        'Bohr radius':         Decimal('29177210544e−11'), # m
-
-
     Ry_calc = R_inf ((constants.alpha * constants.beta) / constants.c) c = E_h/2}
         'Rydberg unit of energy': Ry_calc,
         'Rydberg unit of energy':         Decimal('2.1798723611030e−18'), # J
 
-    E_h_calc = decimal_pow(constants.e, Decimal(2)) / (Decimal('2') * decimal_pow(constants.delta, Decimal(2)))
-^2 m_e c^2
-        'Hartree energy': E_h_calc,
-        'Hartree energy':         Decimal('4.3597447222060e−18'), # J
-
     fcc_calc = G_F / (((constants.alpha * constants.beta) / (Decimal('2') * pi * constants.c)) c)^3
         'Fermi coupling constant': fcc_calc,
         'Fermi coupling constant':         Decimal('1.1663787e−5'), # GeV−2	
-
-    N_A
-        'Avogadro constant':
-        'Avogadro constant':         Decimal('6.02214076e23'), # mol^−1	
-
-    R=N_A k_B
-        'molar gas constant':
-        'molar gas constant':         Decimal('8.31446261815324 '), # J⋅mol−1⋅K−1
-
-    F=N_A e
-        'Faraday constant':
-        'Faraday constant':         Decimal('96485.3321233100184'), # C⋅mol−1	
-
-    N_A h
-        'molar Planck constant':
-        'molar Planck constant':         Decimal('3.9903127128934314e−10'), # J⋅s⋅mol−1
-
-    M_12C_calc=N_A m (12 C)
-        'molar mass of carbon-12': M_12C_calc,
-        'molar mass of carbon-12':         Decimal('12.0000000126e−3'), # kg⋅mol−1
-
-    m_u_calc=m(12 C)/12
-        'atomic mass constant': m_u_calc,
-        'atomic mass constant':         Decimal('1.66053906892e−27'), # kg
-
-    M_u_calc =M(12 C)/12
-        'molar mass constant': M_u_calc,
-        'molar mass constant':         Decimal('1.00000000105e−3'), # kg⋅mol−1	
-
-    V_m(Si)
-        'molar volume of silicon':
-        'molar volume of silicon':         Decimal('1.205883199e−5'), # m3⋅mol−1
-
-    Delta nu _Cs
-        'hyperfine transition frequency of 133Cs':
-        'hyperfine transition frequency of 133Cs':         Decimal('9192631770'), # Hz
-
     '''
-
 
     expected = {
         'Planck constant':         Decimal('6.62607015e-34'),
@@ -291,7 +212,15 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'second radiation':        Decimal('1.438776877e-2'), # m⋅K
         'magnetic flux quantum':   Decimal('2.067833848e-15'), # Wb
         'Rydberg constant':         Decimal('10973731.568157'), # m^−1
-        'vacuum magnetic permeability':         Decimal('1.25663706127e-6'), # N⋅A−2
+        'vacuum magnetic permeability':  Decimal('1.25663706127e-6'), # N⋅A−2
+        'characteristic impedance of vacuum': Decimal('376.730313412'), # Ω
+        'quantum of circulation':   Decimal('3.6369475467e-4'), # m2⋅s−1	
+        'Bohr magneton':            Decimal('9.2740100657e-24'), # J⋅T−1
+        'nuclear magneton':         Decimal('5.0507837393e-27'), # J⋅T−1
+        'classical electron radius':Decimal('2.8179403205e-15'), # m
+        #'Thomson cross section':   Decimal('6.6524587051e-29'), # m^2
+        'Bohr radius':              Decimal('5.29177210544e-11'), # m
+        'Hartree energy':           Decimal('4.3597447222060e-18'), # J
 
    #in-progress
         # 'cosmological' :           Decimal('1.089e-52'),
@@ -330,6 +259,14 @@ def validate_planck_units(constants: PhysicsConstants) -> Dict[str, Tuple[Decima
         'magnetic flux quantum': Phi_0_calc,
         'Rydberg constant': R_inf_calc,
         'vacuum magnetic permeability': mu_0_calc,
+        'characteristic impedance of vacuum': Z_0_calc,
+        'quantum of circulation': qof_calc,
+        'Bohr magneton': mu_B_calc,
+        'nuclear magneton': mu_N_calc,
+        'classical electron radius': r_e_calc, 
+        #'Thomson cross section': sigma_e_calc,
+        'Bohr radius': a_0_calc,
+        'Hartree energy': E_h_calc,
 
    #in-progress
         #'cosmological' : cosmo_calc,

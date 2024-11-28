@@ -79,6 +79,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     # s_temp temperature (K)
     # s_charge charge (C)
     
+    hc_calc      = (s_length * s_mass)
     h_calc       = (s_length * s_mass) / c
     h_bar_calc   = (s_length * s_mass) / (D(2) * pi * c)
     G_calc       =  s_length / s_mass
@@ -139,6 +140,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     '''
 
     expected = {
+        'hc':                      D('1.9864458571489287e-25'),
         'Planck constant':         D('6.62607015e-34'),
         'h_bar':                   D('1.054571817e-34'),
         'Gravitational constant':  D('6.67430e-11'),
@@ -185,6 +187,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     }
 
     calcs = {
+        'hc': hc_calc,
         'Planck constant': h_calc,
         'h_bar': h_bar_calc,
         'Gravitational constant': G_calc,
@@ -251,8 +254,8 @@ if __name__ == "__main__":
     planck_results = validate_planck_units(s_length, s_mass, s_temp, s_charge)
     
     print("\nPlanck Units Validation:")
-    print(f"{'Name':<28} | {'Expected':<20} | {'Calculated':<30} | {'Rel Error'}")
+    print(f"{'Name':<28} | {'Expected':<22} | {'Calculated':<30} | {'Rel Error'}")
     print("-" * 108)
     
     for name, (expected, calculated, error) in planck_results.items():
-        print(f"{name:<28} | {expected:<20} | {calculated:<30.20e} | {error:.10e}")
+        print(f"{name:<28} | {expected:<22} | {calculated:<30.20e} | {error:.10e}")

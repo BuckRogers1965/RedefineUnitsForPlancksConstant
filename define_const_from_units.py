@@ -22,7 +22,8 @@ James M. Rogers, SE Ohio, 21 Nov 2024 1400
 h   = 6.62607015e-34
 c   = 299792458
 G   = 6.6743015e-11
-mol = 2.63394301e+173
+mol = 6.0221407600e+23 #2.63394301e+173
+e = 1.602176634e-19     # Elementary charge (C)
 
 # Known physical constants for validation - with units commented
 KNOWN_VALUES = {
@@ -84,83 +85,64 @@ def calculate_base_units(h, c, G):
     """Calculate base units from fundamental constants."""
     hc = h * c
     kg = np.sqrt(hc / G)
-
-                       # define second value
-    s = ((G**(3/2) * kg**(5/2)) / hc)**(3/2)
-
+    s = ((G**(3/2) * kg**(5/2)) / hc)**(3/2) # define second value
     m_cubed = G * kg * (s**2)
     m = m_cubed**(1/3)
-    
-    scale = 1.17476068e-10
-    m = m / scale       # define meter value
-    
-    K = 2.81809817e-34  # define Kelvin value
-    
-    return kg, s, m, K
+    K = 1/4.90108670499514355469e+12  # define Kelvin value
+    C = (1/1.15967826341182373079e-05)**(.5)
+    return kg, s, m, K, C
 
-def calculate_derived_constants(kg, s, m, K):
+def calculate_derived_constants(kg, s, m, K, C):
     """Calculate derived constants from base units."""
     constants = {}
+    print (f"*** {s/m}")
     
     # Basic constants
-    constants['hc'] = m**3 * kg / s**2 * (1.17476068e-10)**3
-    constants['G'] = m**3 / (kg * s**2) * (1.17476068e-10)**3
-    constants['c'] = m / s
-    constants['k'] = kg * m**2 * K / s**2 / 1.00080553745694328382e-01
-    constants['sigma'] = kg / (s**3 * K**4 * mol)
-    constants['Vm'] = m**3 / mol /2.60863443123433978791e-186
-    constants['Na'] = 1 / mol / 6.30438495012785702600e-198
+    constants['hc'] = m**3 * kg / s**2 
+    constants['G'] = m**3 / (kg * s**2) 
+    constants['k'] = kg * m**2 * K / s**2 
+    constants['sigma'] = m * kg *mol / (s**3 * K ) / 1.43937911919058257853e+61
+    #r_gas_calc   =   s_length * s_mass * N_A / s_temp
+
+    constants['Vm'] =  1 / 4.40316145160510075129e+01
+    constants['Na'] = mol 
 
     # Electromagnetic constants
-    constants['epsilon_0'] = 1 / (kg * m**3) * s**4 * 1.56140418156780126208e+20
-    constants['mu_0'] = kg * m / s**2 / 1.56140418156780126208e+20
-    constants['e'] = np.sqrt(4 * np.pi * constants['epsilon_0'] * constants['hc']) / 2.93431860926347312102e+01
-    constants['alpha'] = constants['e']**2 / (2 * constants['epsilon_0'] * constants['hc'])
-    
+    constants['epsilon_0'] = C**2 / (kg * m**2) * s**4 
+    constants['mu_0'] = kg * m  / s**2   / 1.83427623809343376160e+10
+    #constants['e'] = np.sqrt(4 * np.pi * constants['epsilon_0'] * constants['hc']) 
+    constants['alpha'] = e**2 / (2 * C) / 5.98955035930460787984e-39
    
     # Quantum constants
-    constants['h'] = constants['hc'] / constants['c']
+    constants['h'] = constants['hc'] / c
     constants['hbar'] = constants['h'] / (2 * np.pi)
 
     # Atomic constants 
-    constants['me'] =  constants['hc'] / constants['c']**3 / 8.09329971071142584000e-21
-    constants['mp'] =  constants['hc'] / constants['c']**3 / 4.40774878243036581266e-24
-    constants['mn'] =  constants['hc'] / constants['c']**3 / 4.40168141978576925907e-24
-    constants['mᵤ'] =  constants['hc'] / constants['c']**3 / 4.43982161824738003273e-24
-
-    '''
-    # Atomic constants 
-    constants['me'] =  1 / constants['c']**3 / 4.07426141597807945800e+04
-    constants['mp'] =  1 / constants['c']**3 / 22.1891211711987956789
-    constants['mn'] =  1 / constants['c']**3 / 22.1585773603883424698
-    constants['mᵤ'] =  1 / constants['c']**3 / 22.3505795653533034795
-
-    # Atomic constants 
-    constants['me'] = kg / 5.98889170448846013071e+22 
+    constants['me'] = kg / 5.98889170448846013071e+22
     constants['mp'] = kg / 3.26165236209272954880e+19
     constants['mn'] = kg / 3.25716262624836771840e+19
-    constants['mᵤ'] = kg 
-    '''
+    constants['mᵤ'] = kg / 3.28538566584147353600e+19
     
     # Length scales
-    constants['a0'] = m  / 4.72226689504315145314e+05
-    constants['rc'] = m   / 8.86788127280288887024e+09
-    constants['lambda_C'] = m  /1.02992436203389391303e+07 
+    constants['a0'] = m       / 5.54753346876238134181e-05
+    constants['rc'] = m       / 1.04176382341971884848e+00
+    constants['lambda_C'] = m / 1.20991464389150356860e-03
     
+
     # Magnetic constants
-    constants['Phi_0'] = constants['h'] / (2 * constants['e']) 
-    constants['mu_B'] = constants['e'] * constants['hbar'] / (2 * constants['me']) 
-    constants['mu_N'] = constants['e'] * constants['hbar'] / (2 * constants['mp']) 
+    constants['Phi_0'] = constants['h'] / (2 * e) 
+    constants['mu_B'] = e * constants['hbar'] / (2 * constants['me']) 
+    constants['mu_N'] = e * constants['hbar'] / (2 * constants['mp']) 
     
     # Thermodynamic
     constants['R'] = constants['k'] * 6.02214076e23
 
-    constants['b'] = m*K / 2.43020872084939700453e-36
-    constants['n₀'] = 1/m**3 / 2.38513458128641773216e-12
-    constants['h/2me'] = m**2 / s / 2.05984873094217106700e+07
-    constants['nₑ'] = m**2 / 2.32418770435622876114e-35 
+    constants['b'] = m*K           / 2.06701902243347360058e-25
+    constants['n₀'] = 1/m**3       / 1.47117617541269324800e+18
+    constants['h/2me'] = m**2 / s  / 2.84272030908696081178e-13
+    constants['nₑ'] = m**2         / 3.20752465462918465256e-55
     constants['c₁'] = 2*np.pi * h * c**2
-    #constants['c₁'] = m**4 * kg * s**(-3) / 9.81684484941898414497e+28
+    #constants['c₁'] = m**4 * kg * s**(-3) 
 
     '''
 Conductance quantum 
@@ -195,19 +177,20 @@ def validate_constants(calculated, known=KNOWN_VALUES):
 
 def main():
     
-    kg, s, m, K = calculate_base_units(h, c, G)
+    kg, s, m, K, C = calculate_base_units(h, c, G)
     
     print("Base units:")
     print(f"kg: {kg:.8e} kg")
     print(f"s: {s:.8e} seconds")
     print(f"m: {m:.8e} meters")
     print(f"K: {K:.8e} Kelvin")
+    print(f"C: {C:.8e} Charge")
     
-    constants = calculate_derived_constants(kg, s, m, K)
+    constants = calculate_derived_constants(kg, s, m, K, C)
     
-    print("\nCalculated constants:")
-    for name, value in constants.items():
-        print(f"{name:<12} {value:.8e}")
+    #print("\nCalculated constants:")
+    #for name, value in constants.items():
+    #    print(f"{name:<12} {value:.8e}")
     
     validate_constants(constants)
 

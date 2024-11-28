@@ -24,6 +24,7 @@ c   = 299792458
 G   = 6.6743015e-11
 mol = 6.0221407600e+23 #2.63394301e+173
 e = 1.602176634e-19     # Elementary charge (C)
+A =  135435.4546672854700613699 #amp scaling
 
 # Known physical constants for validation - with units commented
 KNOWN_VALUES = {
@@ -101,17 +102,18 @@ def calculate_derived_constants(kg, s, m, K, C):
     constants['hc'] = m**3 * kg / s**2 
     constants['G'] = m**3 / (kg * s**2) 
     constants['k'] = kg * m**2 * K / s**2 
-    constants['sigma'] = m * kg *mol / (s**3 * K ) / 1.43937911919058257853e+61
-    #r_gas_calc   =   s_length * s_mass * N_A / s_temp
+    constants['sigma'] = m**2 * kg  / (s**3 * K *mol )  / .116513019504658504877
 
     constants['Vm'] =  1 / 4.40316145160510075129e+01
     constants['Na'] = mol 
 
     # Electromagnetic constants
     constants['epsilon_0'] = C**2 / (kg * m**2) * s**4 
-    constants['mu_0'] = kg * m  / s**2   / 1.83427623809343376160e+10
+    #constants['mu_0'] = kg * m  / s**2   / 1.83427623809343376160e+10
+    #D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
     #constants['e'] = np.sqrt(4 * np.pi * constants['epsilon_0'] * constants['hc']) 
     constants['alpha'] = e**2 / (2 * C) / 5.98955035930460787984e-39
+    constants['mu_0'] = (m * kg)/( s**2  * A**2)
    
     # Quantum constants
     constants['h'] = constants['hc'] / c

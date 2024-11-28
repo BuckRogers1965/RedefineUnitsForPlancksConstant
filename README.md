@@ -6,17 +6,17 @@ I deconstructed Planck's and the gravitational constants (h and G) to separate t
 
 Here are the four formulas together:
 
--h = (s_lenght x s_mass) / c
--G = s_length/s_mass
--k = (s_lenght x s_mass) /s_temp
--ε₀ = s_charge²/(s_lenght x s_mass) 
+* h = (s_lenght x s_mass) / c
+* G = s_length/s_mass
+* k = (s_lenght x s_mass) /s_temp
+*ε₀ = s_charge²/(s_lenght x s_mass) 
 
 And the values for each parameter:
 
--s_length: 3.64117228161056598231271787236294544974398351386800e-18 m    length unit scaling
--s_mass  : 5.45551186133462083261573179563841219265538485514280e-8 kg   mass unit scaling
--s_temp  : 1.43877687750393380214667160154391159519906942314810e-2 K^-1 temperature unit scaling
--s_charge: 1.32621132205611059057563089920041186351594040760120e-18 C   charge unit scaling
+* s_length: 3.64117228161056598231271787236294544974398351386800e-18 m    length unit scaling
+* s_mass  : 5.45551186133462083261573179563841219265538485514280e-8 kg   mass unit scaling
+* s_temp  : 1.43877687750393380214667160154391159519906942314810e-2 K^-1 temperature unit scaling
+* s_charge: 1.32621132205611059057563089920041186351594040760120e-18 C   charge unit scaling
 
 This reduces Planck’s charge = δ √2 
 

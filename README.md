@@ -9,7 +9,7 @@ Here are the four formulas together:
 * h = (s_lenght x s_mass) / c
 * G = s_length/s_mass
 * k = (s_lenght x s_mass) /s_temp
-*ε₀ = s_charge²/(s_lenght x s_mass) 
+* ε₀ = s_charge²/(s_lenght x s_mass) 
 
 And the values for each parameter:
 
@@ -18,7 +18,7 @@ And the values for each parameter:
 * s_temp  : 1.43877687750393380214667160154391159519906942314810e-2 K^-1 temperature unit scaling
 * s_charge: 1.32621132205611059057563089920041186351594040760120e-18 C   charge unit scaling
 
-This reduces Planck’s charge = δ √2 
+This reduces Planck’s charge = s_charge x √2 
 
 Simple Explanation: Imagine you have two super tiny numbers, one representing a piece of length and the other a piece of weight. They aren't really the length or weight, but more about how the units for weight and length interact with each other.
 

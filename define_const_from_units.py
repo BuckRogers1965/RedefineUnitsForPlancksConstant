@@ -1,4 +1,3 @@
-#!/home/jrogers/Documents/ai/chat/ragserver/venv/bin/python3
 import math
 import numpy as np
 
@@ -97,7 +96,7 @@ def calculate_base_units(h, c, G):
 def calculate_derived_constants(kg, s, m, K, C):
     """Calculate derived constants from base units."""
     constants = {}
-    print (f"*** {s/m}")
+    print (f"conversion between 2 constant systems: s_length = m^3/s^2 = {m**3/s**2}")
     
     # Basic constants
     constants['hc'] = m**3 * kg / s**2 

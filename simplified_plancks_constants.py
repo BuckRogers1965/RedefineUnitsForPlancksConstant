@@ -5,11 +5,9 @@ from typing import Dict, Tuple
     This program calculates the individual unit scaling
     factors for length, mass, temperature, and charge.
 
-    These scaling factors are assigned to 
-
     Then these constants are used to recreate all the
     other constants using these basic scaling factors 
-    and other counting  
+    and other counting constants. 
 
     The scaling factors themselve are just half the equation.
     How the scaling factors relate to each other and the
@@ -26,16 +24,14 @@ from typing import Dict, Tuple
     the values that a new constant would have from how the units relate
     to each other upgrade unit analysis from descriptive to predictive.
 
-
     Author: James Rogers, SE Ohio, 26 Nov 2024 1824
-
 '''
 c   = D('299792458.0')     # speed of light
 e_0 = D('8.854187817e-12') # epsilon_0
 k_B = D('1.380649e-23')    # Boltzmann constant in J/K
 
 # Set precision to 50 D places
-getcontext().prec = 50
+getcontext().prec = 100
 
 def calculate_unit_scaling():
 
@@ -72,7 +68,6 @@ def d_p(base: D, exponent: D) -> D:
 def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple[D, D, D]]:
     pi        = D('3.141592653589793238462643383279502884197169399375105820974944592')
     e         = D('1.602176634e-19')
-    mol       = D('6.02214076e23')
     m_e       = D('9.1093837139e-31')  # kg electron mass
     m_p       = D('1.67262192595e-27') # kg proton mass
     N_A       = D('6.02214076e23')     # mol^−1 Avogadro constant
@@ -113,7 +108,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     mu_B_calc    =  (s_length * s_mass) * e / (D(4) * pi * c * m_e)
     mu_N_calc    =  (s_length * s_mass) * e / (D(4) * pi * c * m_p)
     r_e_calc     =  (s_length * s_mass) * alpha_calc / (m_e * c * D(2) * pi * c)
-    r_gas_calc   =   s_length * s_mass * mol / s_temp
+    r_gas_calc   =   s_length * s_mass * N_A / s_temp
     RK_calc      =   s_length * s_mass       / (d_p(e, D(2)) * c)
     a_0_calc     =  (s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)
     e0_calc      = d_p(s_charge, D(2))       / (s_length * s_mass)
@@ -128,10 +123,10 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     G_0_calc    = (D(2) * d_p(e, D(2)) * c) / (s_length * s_mass)       # 2 e^2 / h
     mu_0_calc   =  D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
     #sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e, D(2))
-    E_h_calc      = d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D('4') * d_p(s_charge, D(4)))
+    E_h_calc      = d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(s_charge, D(4)))
 
     # This works, but the 9.8 seems to be arbitrary
-    cosmo_calc    = d_p(s_length, D(3) )/( s_temp * pi* D('9.8'))
+    cosmo_calc    = d_p(s_length, D(3) )/( s_temp * pi* D(9.8))
 
     '''
     Ry_calc = R_inf ((s_length * s_mass) / c) c = E_h/2}

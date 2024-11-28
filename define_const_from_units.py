@@ -90,7 +90,8 @@ def calculate_base_units(h, c, G):
     m_cubed = G * kg * (s**2)
     m = m_cubed**(1/3)
     K = 1/4.90108670499514355469e+12  # define Kelvin value
-    C = (1/1.15967826341182373079e-05)**(.5)
+    C = (1/4.97610867058752827143e+99)**(.5)
+    #C = (1/1.15967826341182373079e-05)**(.5)
     return kg, s, m, K, C
 
 def calculate_derived_constants(kg, s, m, K, C):
@@ -108,11 +109,11 @@ def calculate_derived_constants(kg, s, m, K, C):
     constants['Na'] = mol 
 
     # Electromagnetic constants
-    constants['epsilon_0'] = C**2 / (kg * m**2) * s**4 
+    constants['epsilon_0'] = C**2 / (kg * m**2 * s**4 )
     #constants['mu_0'] = kg * m  / s**2   / 1.83427623809343376160e+10
     #D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
     #constants['e'] = np.sqrt(4 * np.pi * constants['epsilon_0'] * constants['hc']) 
-    constants['alpha'] = e**2 / (2 * C) / 5.98955035930460787984e-39
+    constants['alpha'] =  e**2 * s**6 / (2 * C**2 * m) 
     constants['mu_0'] = (m * kg)/( s**2  * A**2)
    
     # Quantum constants

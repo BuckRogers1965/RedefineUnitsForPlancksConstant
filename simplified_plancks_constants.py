@@ -261,7 +261,9 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     for name, exp_val in expected.items():
         calc_val = calcs[name]
         rel_error = abs((calc_val - exp_val) / exp_val)
+        #ratio = ( exp_val / calc_val)
         results[name] = (exp_val, calc_val, rel_error)
+        #results[name] = (exp_val, calc_val, rel_error, ratio)
 
     return results
 
@@ -282,4 +284,6 @@ if __name__ == "__main__":
     print("-" * 108)
     
     for name, (expected, calculated, error) in planck_results.items():
-        print(f"{name:<28} | {expected:<20} | {calculated:<22.16e} | {error:.6e}")
+    #for name, (expected, calculated, error, ratio) in planck_results.items():
+        print(f"{name:<28} | {expected:<20} | {calculated:<22.16e} | {error:<12.6e} ")
+        #print(f"{name:<28} | {expected:<20} | {calculated:<22.16e} | {error:<12.6e} | {ratio:.6e}")

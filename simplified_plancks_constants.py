@@ -29,6 +29,7 @@ from typing import Dict, Tuple
 c   = D('299792458.0')     # speed of light
 e_0 = D('8.854187817e-12') # epsilon_0
 k_B = D('1.380649e-23')    # Boltzmann constant in J/K
+pi  = D('3.141592653589793238462643383279502884197169399375105820974944592')
 
 # Set precision to 50 D places
 getcontext().prec = 100
@@ -48,6 +49,24 @@ def calculate_unit_scaling():
     s_mass   = (hc / G).sqrt()                  # Calculate new hc with scaled kg so that hc = G
     s_length =  hc / s_mass                      # Dividing by kg_scale because hc has kg in numerator
 
+   # exploring a more geometric basis for these factors
+    isl = 1/s_length
+    factor1 = isl/ c**2
+    #print (f" *** {pi-factor}")
+    #print (f" *** {pi/factor}")
+    #print (f" *** {factor/pi}")
+    #print (f" *** {pi -(4-pi)/10}")
+    #print (f" *** factor1 = {factor1}")
+    #factor = pi -(4-pi)/10 
+    #x = factor-factor1
+    #print (f" *   factor  = {factor}")
+    #print (f" *   f-f1    = {factor-factor1}")
+    #print (f" ***    x    = {x}")
+    #factor = pi -(4-pi)/10 - x
+    #s_length = (1/ (factor * c**2))
+    #s_mass   = hc / s_length                  # Calculate new hc with scaled kg so that hc = G
+    #print()
+
     # solve for the unknowns
     s_temp   = (s_length * s_mass) / k_B     
     s_charge = (s_length * s_mass * e_0).sqrt() 
@@ -66,7 +85,6 @@ def d_p(base: D, exponent: D) -> D:
         return (base.ln() * exponent).exp()
 
 def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple[D, D, D]]:
-    pi        = D('3.141592653589793238462643383279502884197169399375105820974944592')
     e         = D('1.602176634e-19')
     m_e       = D('9.1093837139e-31')  # kg electron mass
     m_p       = D('1.67262192595e-27') # kg proton mass
@@ -254,8 +272,8 @@ if __name__ == "__main__":
     planck_results = validate_planck_units(s_length, s_mass, s_temp, s_charge)
     
     print("\nPlanck Units Validation:")
-    print(f"{'Name':<28} | {'Expected':<22} | {'Calculated':<30} | {'Rel Error'}")
+    print(f"{'Name':<28} | {'Expected':<20} | {'Calculated':<22} | {'Rel Error'}")
     print("-" * 108)
     
     for name, (expected, calculated, error) in planck_results.items():
-        print(f"{name:<28} | {expected:<22} | {calculated:<30.20e} | {error:.10e}")
+        print(f"{name:<28} | {expected:<20} | {calculated:<22.16e} | {error:.6e}")

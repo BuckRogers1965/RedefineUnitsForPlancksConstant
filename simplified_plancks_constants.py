@@ -68,7 +68,7 @@ def calculate_unit_scaling():
     #print()
  
     # what happens if we scale the meter or the mass to make these scaling factors1?
-    s_length = 1
+    #s_length = 1
     #s_mass   = 1                  # Calculate new hc with scaled kg so that hc = G
 
     # solve for the unknowns

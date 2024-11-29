@@ -73,13 +73,13 @@ def calculate_unit_scaling():
     #s_mass  = D(1.0000000000000001)
 
     # convert to american measuremetns
-    s_length = s_length * D(39.3701) #inches
-    s_mass   = s_mass   * D(2.20462) # pounds
+    #s_length = s_length * D(39.3701) #inches
+    #s_mass   = s_mass   * D(2.20462) # pounds
 
 
     # solve for the unknowns
-    #s_temp   = (s_length * s_mass) / k_B     
-    #s_charge = (s_length * s_mass * e_0).sqrt() 
+    s_temp   = (s_length * s_mass) / k_B     
+    s_charge = (s_length * s_mass * e_0).sqrt() 
 
     return s_length, s_mass, s_temp, s_charge
 

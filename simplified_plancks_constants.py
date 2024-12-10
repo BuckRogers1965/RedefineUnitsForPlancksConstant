@@ -48,10 +48,12 @@ def calculate_unit_scaling():
     # this scales the kg and meter so that hc = G = 1
     s_mass   = (hc / G).sqrt()                  # Calculate new hc with scaled kg so that hc = G
     s_length =  hc / s_mass                      # Dividing by kg_scale because hc has kg in numerator
+    #s_length =  (hc * G).sqrt()                      # Dividing by kg_scale because hc has kg in numerator
 
    # exploring a more geometric basis for these factors
-    isl = 1/s_length
-    factor1 = isl/ c**2
+    #isl = 1/s_length
+    #factor1 = isl/ c**2
+    #print (f" *   factor  = {factor1}")
     #print (f" *** {pi-factor}")
     #print (f" *** {pi/factor}")
     #print (f" *** {factor/pi}")
@@ -80,6 +82,13 @@ def calculate_unit_scaling():
     # solve for the unknowns
     s_temp   = (s_length * s_mass) / k_B     
     s_charge = (s_length * s_mass * e_0).sqrt() 
+
+    #is_mass = s_mass
+    #is_length = s_length
+    #print(f"  1 inverse length unit is : {is_length}")
+    #print(f"  1 inverse mass   unit is : {is_mass}")
+    #print(f"  = : {(s_length * (is_length))}   {(s_mass * (is_mass))}")
+    #print(f"  = : {(s_length * is_mass)/(s_mass * is_length)}")
 
     return s_length, s_mass, s_temp, s_charge
 
@@ -110,6 +119,8 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     hc_calc      = (s_length * s_mass)
     h_calc       = (s_length * s_mass) / c
     h_bar_calc   = (s_length * s_mass) / (D(2) * pi * c)
+    p_calc       = (s_length * s_mass) / c**2
+    m_calc       = (s_length * s_mass) / c**3
     G_calc       =  s_length / s_mass
     length_calc  =  s_length / (d_p(D(2) * pi, D('0.5')) * d_p(c, D(2)))
     time_calc    =  s_length / (d_p(D(2) * pi, D('0.5')) * d_p(c, D(3)))
@@ -141,7 +152,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     RK_calc      =   s_length * s_mass       / (d_p(e, D(2)) * c)
     a_0_calc     =  (s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)
     e0_calc      = d_p(s_charge, D(2))       / (s_length * s_mass)
-    Kb_calc      = d_p(pi, D(5)) * D(2) * (s_length * s_mass / d_p(s_temp, D(4))) * c / D(15)
+    sKb_calc      = d_p(pi, D(5)) * D(2) * (s_length * s_mass / d_p(s_temp, D(4))) * c / D(15)
     R_inf_calc  = (d_p(e, D(4)) * d_p(c, D(2)) * m_e)/(D(8) * s_length * s_mass *  d_p(s_charge, D(4)) )
     K_J_calc    = (D(2) * e*c)/(s_mass*s_length)     # 2e/h
     c_1_calc    =  D(2) * pi * s_length * s_mass * c
@@ -151,8 +162,11 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     c_2_calc    =  s_temp
     G_0_calc    = (D(2) * d_p(e, D(2)) * c) / (s_length * s_mass)       # 2 e^2 / h
     mu_0_calc   =  D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
-    #sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e, D(2))
+    sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e_calc, D(2))
     E_h_calc      = d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(s_charge, D(4)))
+    # e^2/a_0E_h = 10_7/c^2 = 4πε_0	permittivity	1.112 650 056... × 10−10 F m−1
+    #  e^2 / ((s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)) *  d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(s_charge, D(4)))
+    perm_calc =  D(4) * pi * d_p(s_charge, D(2)) / (s_length * s_mass )   
 
     # This works, but the 9.8 seems to be arbitrary
     cosmo_calc    = d_p(s_length, D(3) )/( s_temp * pi* D(9.8))
@@ -169,7 +183,9 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
 
     expected = {
         'hc':                      D('1.9864458571489287e-25'),
-        'Planck constant':         D('6.62607015e-34'),
+        'Planck constant E at 1Hz':D('6.62607015e-34'),
+        'momentum at 1Hz':         D('2.2102190943042336e-42'),
+        'mass at 1Hz':             D('7.3724973238127079e-51'),
         'h_bar':                   D('1.054571817e-34'),
         'Gravitational constant':  D('6.67430e-11'),
         'Planck Length':           D('1.616255e-35'),
@@ -199,14 +215,15 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
         'first radiation sr':      D('1.191042972e-16'), # W⋅m2⋅sr−1	
         'second radiation':        D('1.438776877e-2'), # m⋅K
         'magnetic flux quantum':   D('2.067833848e-15'), # Wb
-        'Rydberg constant':         D('10973731.568157'), # m^−1
+        'Rydberg constant':        D('10973731.568157'), # m^−1
         'vacuum magnetic permeability':  D('1.25663706127e-6'), # N⋅A−2
+        'permittivity':            D('1.112650056e-10'), # F m−1
         'character impedance vacuum': D('376.730313412'), # Ω
         'quantum of circulation':   D('3.6369475467e-4'), # m2⋅s−1	
         'Bohr magneton':            D('9.2740100657e-24'), # J⋅T−1
         'nuclear magneton':         D('5.0507837393e-27'), # J⋅T−1
         'classical electron radius':D('2.8179403205e-15'), # m
-        #'Thomson cross section':   D('6.6524587051e-29'), # m^2
+        'Thomson cross section':   D('6.6524587051e-29'), # m^2
         'Bohr radius':              D('5.29177210544e-11'), # m
         'Hartree energy':           D('4.3597447222060e-18'), # J
 
@@ -216,49 +233,50 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
 
     calcs = {
         'hc': hc_calc,
-        'Planck constant': h_calc,
-        'h_bar': h_bar_calc,
+        'Planck constant E at 1Hz':h_calc,
+        'momentum at 1Hz':        p_calc,
+        'mass at 1Hz':            m_calc,
+        'h_bar':                  h_bar_calc,
         'Gravitational constant': G_calc,
-        'Planck Length': length_calc,
-        'Planck Time': time_calc,
-        'Planck Mass': mass_calc,
-        'Planck Charge': charge_calc,
-        'Planck Temperature': temp_calc,
-        "Planck angular momentum": angular_momentum_calc,
-        'Planck momentum': momentun_calc,
-        "Planck energy": energy_calc,
-        "Planck force": force_calc,
-        "Planck power": power_calc,
-        "Planck density": density_calc,
-        "Planck area": area_calc,
-        "Planck volume": volume_calc,
-        "Planck acceleration": acceleration_calc,
-        "Planck pressure": pressure_calc,
-        'Bolzmann Temperature': boltzmann_calc,
-        'Epsilon_0 Temperature': e0_calc,
-        'Fine Structure Constant': alpha_calc,
-        'Gas Constant R': r_gas_calc,
-        'Stefan-Boltzmann': Kb_calc,
-        'von Klitzing RK': RK_calc,
-        'Josephson constant': K_J_calc,
-        'conductance quantum': G_0_calc,
-        'first radiation': c_1_calc,
-        'first radiation sr': c_1L_calc,
-        'second radiation': c_2_calc,
-        'magnetic flux quantum': Phi_0_calc,
-        'Rydberg constant': R_inf_calc,
+        'Planck Length':          length_calc,
+        'Planck Time':            time_calc,
+        'Planck Mass':            mass_calc,
+        'Planck Charge':          charge_calc,
+        'Planck Temperature':     temp_calc,
+        "Planck angular momentum":angular_momentum_calc,
+        'Planck momentum':        momentun_calc,
+        "Planck energy":          energy_calc,
+        "Planck force":           force_calc,
+        "Planck power":           power_calc,
+        "Planck density":         density_calc,
+        "Planck area":            area_calc,
+        "Planck volume":          volume_calc,
+        "Planck acceleration":    acceleration_calc,
+        "Planck pressure":        pressure_calc,
+        'Bolzmann Temperature':   boltzmann_calc,
+        'Epsilon_0 Temperature':  e0_calc,
+        'Fine Structure Constant':alpha_calc,
+        'Gas Constant R':         r_gas_calc,
+        'Stefan-Boltzmann':       sKb_calc,
+        'von Klitzing RK':        RK_calc,
+        'Josephson constant':     K_J_calc,
+        'conductance quantum':    G_0_calc,
+        'first radiation':        c_1_calc,
+        'first radiation sr':     c_1L_calc,
+        'second radiation':       c_2_calc,
+        'magnetic flux quantum':  Phi_0_calc,
+        'Rydberg constant':       R_inf_calc,
         'vacuum magnetic permeability': mu_0_calc,
+        'permittivity':            perm_calc,
         'character impedance vacuum': Z_0_calc,
         'quantum of circulation': qof_calc,
-        'Bohr magneton': mu_B_calc,
-        'nuclear magneton': mu_N_calc,
+        'Bohr magneton':          mu_B_calc,
+        'nuclear magneton':       mu_N_calc,
         'classical electron radius': r_e_calc, 
-        #'Thomson cross section': sigma_e_calc,
-        'Bohr radius': a_0_calc,
-        'Hartree energy': E_h_calc,
-
-   #in-progress
-        'cosmological' : cosmo_calc,
+        'Thomson cross section':  sigma_e_calc,
+        'Bohr radius':            a_0_calc,
+        'Hartree energy':         E_h_calc,
+        'cosmological' :          cosmo_calc,
     }
 
     results = {}
@@ -276,6 +294,9 @@ if __name__ == "__main__":
     # Print the result with high precision
     print(f"s_length: {s_length:.50e} m    length unit scaling")
     print(f"s_mass  : {s_mass:.50e} kg   mass unit scaling")
+    #print(f" c**2*s_lenth: {c**2 *s_length}")
+    #print(f" c*s_mass: {c*s_mass}")
+    #print(f" : {s_mass/ (c*s_length)}")
     print(f"s_temp  : {s_temp:.50e} K^-1 temperature unit scaling")
     print(f"s_charge: {s_charge:.50e} C   charge unit scaling")
 

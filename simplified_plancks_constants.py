@@ -168,17 +168,12 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
     #  e^2 / ((s_length * s_mass * d_p(s_charge, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)) *  d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(s_charge, D(4)))
     perm_calc =  D(4) * pi * d_p(s_charge, D(2)) / (s_length * s_mass )   
 
+    fcc_calc = G_F / (((s_length * s_mass) / (D(2) * pi * c)) c)^3
+
     # This works, but the 9.8 seems to be arbitrary
     cosmo_calc    = d_p(s_length, D(3) )/( s_temp * pi* D(9.8))
 
     '''
-    Ry_calc = R_inf ((s_length * s_mass) / c) c = E_h/2}
-        'Rydberg unit of energy': Ry_calc,
-        'Rydberg unit of energy':         D('2.1798723611030e−18'), # J
-
-    fcc_calc = G_F / (((s_length * s_mass) / (D(2) * pi * c)) c)^3
-        'Fermi coupling constant': fcc_calc,
-        'Fermi coupling constant':         D('1.1663787e−5'), # GeV−2	
     '''
 
     expected = {
@@ -223,12 +218,11 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
         'Bohr magneton':            D('9.2740100657e-24'), # J⋅T−1
         'nuclear magneton':         D('5.0507837393e-27'), # J⋅T−1
         'classical electron radius':D('2.8179403205e-15'), # m
-        'Thomson cross section':   D('6.6524587051e-29'), # m^2
+        'Thomson cross section':    D('6.6524587051e-29'), # m^2
         'Bohr radius':              D('5.29177210544e-11'), # m
         'Hartree energy':           D('4.3597447222060e-18'), # J
-
-   #in-progress
-        'cosmological' :           D('1.089e-52'),
+        'cosmological' :            D('1.089e-52'),
+        'Fermi coupling constant':  D('1.1663787e−5'), # GeV−2	
     }
 
     calcs = {
@@ -277,6 +271,7 @@ def validate_planck_units(s_length, s_mass, s_temp, s_charge) -> Dict[str, Tuple
         'Bohr radius':            a_0_calc,
         'Hartree energy':         E_h_calc,
         'cosmological' :          cosmo_calc,
+        'Fermi coupling constant': fcc_calc,
     }
 
     results = {}

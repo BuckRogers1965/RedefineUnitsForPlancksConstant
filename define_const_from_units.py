@@ -23,7 +23,7 @@ c   = 299792458
 G   = 6.6743015e-11
 mol = 6.0221407600e+23 #2.63394301e+173
 e = 1.602176634e-19     # Elementary charge (C)
-A =  135435.4546672854700613699 #amp scaling
+k = 1.380649e-23        # Boltzmann constant (J/K)
 
 # Known physical constants for validation - with units commented
 KNOWN_VALUES = {
@@ -85,15 +85,15 @@ def calculate_base_units(h, c, G):
     """Calculate base units from fundamental constants."""
     hc = h * c
     kg = np.sqrt(hc / G)
-    s = ((G**(3/2) * kg**(5/2)) / hc)**(3/2) # define second value
-    m_cubed = G * kg * (s**2)
-    m = m_cubed**(1/3)
-    K = 1/4.90108670499514355469e+12  # define Kelvin value
-    C = (1/4.97610867058752827143e+99)**(.5)
-    #C = (1/1.15967826341182373079e-05)**(.5)
-    return kg, s, m, K, C
+    m =  (hc/kg)**(1/3) #m_cubed**(1/3)
+    s =  1
+    K = 9.35218359715236874763e+03 # define Kelvin value
+#    K =  (m**3 * kg) / k
+    C = (1/8.74691615124164123308e+29)**(.5)
+    A = np.sqrt(6.67891654548134738424e-08) #amp scaling
+    return kg, s, m, K, C, A
 
-def calculate_derived_constants(kg, s, m, K, C):
+def calculate_derived_constants(kg, s, m, K, C, A):
     """Calculate derived constants from base units."""
     constants = {}
     print (f"conversion between 2 constant systems: s_length = m^3/s^2 = {m**3/s**2}")
@@ -101,18 +101,26 @@ def calculate_derived_constants(kg, s, m, K, C):
     # Basic constants
     constants['hc'] = m**3 * kg / s**2 
     constants['G'] = m**3 / (kg * s**2) 
-    constants['k'] = kg * m**2 * K / s**2 
-    constants['sigma'] = m**2 * kg  / (s**3 * K *mol )  / .116513019504658504877
+    constants['k'] = m**2 * kg / ( K )
+    print (f"{m**3} * {kg} * {mol}  / {K}")
+    #constants['sigma'] = m**2 * kg / (s**3  *K * mol ) 
 
     constants['Vm'] =  1 / 4.40316145160510075129e+01
     constants['Na'] = mol 
 
     # Electromagnetic constants
     constants['epsilon_0'] = C**2 / (kg * m**2 * s**4 )
-    #constants['mu_0'] = kg * m  / s**2   / 1.83427623809343376160e+10
+    constants['mu_0'] = kg * m  / s**2  
     #D(2) *  alpha_calc * s_length * s_mass / (d_p(e, D(2)) * c *  c)
+
+    # my basic assumtion is that the definitons for meter and kg and time define how we see energy
+    # this feeds back to our unit system and how we scale things like charge and temperature. 
+    constants['e'] =   ((1/(h * c*10e42 *np.pi)  - 10e23/( np.pi ))/(-h*c))/10e66
+    #constants['e'] =   ((1/(h * c*10e42 *np.pi)  - 1/( np.pi / 10e23))/(-h*c))/10e66
+    #constants['e'] =   ((1/(h * c*10e42 *np.pi)  - 1/( np.pi / 10e23))/-1.98673404310670210384e-25)/10e67
     #constants['e'] = np.sqrt(4 * np.pi * constants['epsilon_0'] * constants['hc']) 
-    constants['alpha'] =  e**2 * s**6 / (2 * C**2 * m) 
+
+    constants['alpha'] =  e**2  / (2 * C**2 * m) 
     constants['mu_0'] = (m * kg)/( s**2  * A**2)
    
     # Quantum constants
@@ -126,9 +134,9 @@ def calculate_derived_constants(kg, s, m, K, C):
     constants['mᵤ'] = kg / 3.28538566584147353600e+19
     
     # Length scales
-    constants['a0'] = m       / 5.54753346876238134181e-05
-    constants['rc'] = m       / 1.04176382341971884848e+00
-    constants['lambda_C'] = m / 1.20991464389150356860e-03
+    constants['a0']       = m / 2.90722933813505696889e+04       
+    constants['lambda_C'] = m / 6.34065457949429983273e+05
+    constants['rc']       = m / 5.45944673954211711884e+08       
     
 
     # Magnetic constants
@@ -137,13 +145,15 @@ def calculate_derived_constants(kg, s, m, K, C):
     constants['mu_N'] = e * constants['hbar'] / (2 * constants['mp']) 
     
     # Thermodynamic
-    constants['R'] = constants['k'] * 6.02214076e23
+    constants['R'] =  m**2 * kg * mol / K 
 
-    constants['b'] = m*K           / 2.06701902243347360058e-25
-    constants['n₀'] = 1/m**3       / 1.47117617541269324800e+18
-    constants['h/2me'] = m**2 / s  / 2.84272030908696081178e-13
-    constants['nₑ'] = m**2         / 3.20752465462918465256e-55
+    constants['b'] = m*K            / 4.96511423206156710108
+    constants['n₀'] = 1/m**3        / 1.02217816214287725441e-08
+    constants['h/2me'] =  constants['h'] / (2* constants ['me'] )
+    constants['h/2me'] =  m**3 * kg / (2* constants ['me'] * c)
+    constants['nₑ'] = m**2          /8.80904292937399339815e-38
     constants['c₁'] = 2*np.pi * h * c**2
+    constants['c₁'] = 2*np.pi * m**3  * kg * c
     #constants['c₁'] = m**4 * kg * s**(-3) 
 
     '''
@@ -179,7 +189,7 @@ def validate_constants(calculated, known=KNOWN_VALUES):
 
 def main():
     
-    kg, s, m, K, C = calculate_base_units(h, c, G)
+    kg, s, m, K, C, A = calculate_base_units(h, c, G)
     
     print("Base units:")
     print(f"kg: {kg:.8e} kg")
@@ -187,8 +197,9 @@ def main():
     print(f"m: {m:.8e} meters")
     print(f"K: {K:.8e} Kelvin")
     print(f"C: {C:.8e} Charge")
+    print(f"A: {A:.8e} Amp")
     
-    constants = calculate_derived_constants(kg, s, m, K, C)
+    constants = calculate_derived_constants(kg, s, m, K, C, A)
     
     #print("\nCalculated constants:")
     #for name, value in constants.items():

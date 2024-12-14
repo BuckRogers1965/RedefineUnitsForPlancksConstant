@@ -1,4 +1,8 @@
 import math
+'''
+Shows an impractial unit definition that makes hc=G=1 and examines most of the properties of a photon at 1Hz
+Also does a lot of different calculations afterward.
+'''
 
 # Define constants and scaling factors
 c_old = 299792458.0  # m/s
@@ -80,6 +84,9 @@ print ( f"old s_length = 1/{s_length}*{c_old**2} = {1/(s_length*c_old**2)}")
 print ( f"old s_length = {c_old}*{0.327252244477045} = {c_old*0.327252244477045}")
 print ( f"old s_length = {0.327252244477045}/{c_old} = {0.327252244477045/c_old}")
 print()
+print ("This one is very important")
+print ("This shows that the ratio between  c**3/s_length is the inverse of the ratio between mass/s_mass")
+print ("This ratio is set by needing to work with E=mc^2")
 print ( f"old c**3/s_length = {c_old**3} / {s_length} = {c_old**3/s_length}")
 print ( f"mass_old/s_mass   = {mass_old} / {s_mass} = {mass_old / s_mass}")
 print (f" {c_old**3/s_length} * {mass_old / s_mass}  = {c_old**3/s_length * mass_old / s_mass}")
@@ -87,23 +94,3 @@ print()
 print ( f"old s_length/c**3 = {s_length} / {c_old**3} = {s_length/c_old**3}")
 print ( f"s_mass/mass_old   = {s_mass} / {mass_old} = {s_mass / mass_old}")
 print ( f"new c^3 / 1       = {c_new**3} / {1}        = {c_new**3}")
-print()
-
-print (f" mass  old {mass_old} new {mass_new} s_mass {s_mass} ")
-print()
-print (f" new mass  {f*h_new} / {f*h_old}  {(f*h_new) / (f*h_old)}")  
-print()
-print (f"")
-print()
-print (f"")
-print()
-print (f"")
-
-# c=fw
-# E=hc/w
-# E=mc^2
-# E=hf
-# p=hf/c
-# m=hf/c^2
-
-

@@ -34,13 +34,17 @@ energy_old = calculate_energy(mass_old, c_old)
 frequency_old = calculate_frequency(energy_old, h_old)
 
 # New values
+
+#set hc = 1
 meter_scaling = 1/s_length**(1/3)
 mass_scaling  = 1/s_mass
 
 
+# set hc = 2*10^-25
 #meter_scaling = 0.997735853701971098
 #mass_scaling  = 1.0136931846243198
 
+# Our current system
 #meter_scaling = 1.0
 #mass_scaling  = 1.0
 

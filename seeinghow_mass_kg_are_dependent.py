@@ -36,20 +36,23 @@ frequency_old = calculate_frequency(energy_old, h_old)
 # New values
 
 #set hc = 1
-meter_scaling = 1/s_length**(1/3)
-mass_scaling  = 1/s_mass
-
+#meter_scaling = 1/s_length**(1/3)
+#mass_scaling  = 1/s_mass
 
 # set hc = 2*10^-25
 #meter_scaling = 0.997735853701971098
 #mass_scaling  = 1.0136931846243198
 
+# set c = 3*10^8
+meter_scaling = 0.9993081933333333
+mass_scaling  = 1.00891578925934697358163051967611361
+
 # Our current system
 #meter_scaling = 1.0
 #mass_scaling  = 1.0
 
-s_length_new = s_length * meter_scaling**3
-s_mass_new   = s_mass * mass_scaling
+s_length_new   = s_length * meter_scaling**3
+s_mass_new     = s_mass   * mass_scaling
 
 c_new          =          c_old / meter_scaling
 meter_new      =              1 * meter_scaling
@@ -63,27 +66,31 @@ energy_new    = calculate_energy    (mass_new, c_new)
 frequency_new = calculate_frequency (energy_new, h_new)
 
 # Print results
-print(f"meter_scaling : {meter_scaling}")
-print(f"kg scaling    : {mass_scaling}")
+print()
+print(f" meter_scaling : {meter_scaling}")
+print(f" kg scaling    : {mass_scaling}")
 
 
 print()
 
-print(f"       Freq   Meter      c          Wavelength       Mass              Momentum        Energy           h")
+print(f"         Freq   Meter      c            Wavelength       Mass              Momentum        Energy           h")
 
-print(f"  old: {frequency_old:<6.3} {meter_old:<10.3} {c_old:<10.3e} {wavelength_old:<16.10} {mass_old:<16.10} {energy_old/c_old:<16.10} {energy_old:<16.10e} {h_old:<16.10}")
-print(f"  new: {frequency_new:<6.3} {meter_new:<10.3} {c_new:<10.3e} {wavelength_new:<16.10} {mass_new:<16.10} {energy_new/c_new:<16.10} {energy_new:<16.10e} {h_new:<16.10e}")
-print(f"ratio: {frequency_new/frequency_old:<6.3} {meter_new/meter_old:<10.3} {c_new/c_old:<10.3e} {wavelength_new/wavelength_old:<16.10} {mass_new/mass_old:<16.10} {(energy_new/c_new)/(energy_old/c_old):<16.10} {energy_new/energy_old:<16.10} {h_new/h_old:<16.10e}")
+print(f"   old: {frequency_old:<6.3} {meter_old:<10.3} {c_old:<12.10} {wavelength_old:<16.10} {mass_old:<16.10} {energy_old/c_old:<16.10} {energy_old:<16.10e} {h_old:<16.10}")
+print(f"   new: {frequency_new:<6.3} {meter_new:<10.3} {c_new:<12.10} {wavelength_new:<16.10} {mass_new:<16.10} {energy_new/c_new:<16.10} {energy_new:<16.10e} {h_new:<16.10e}")
+print(f" ratio: {frequency_new/frequency_old:<6.3} {meter_new/meter_old:<10.3} {c_new/c_old:<12.10} {wavelength_new/wavelength_old:<16.10} {mass_new/mass_old:<16.10} {(energy_new/c_new)/(energy_old/c_old):<16.10} {energy_new/energy_old:<16.10} {h_new/h_old:<16.10e}")
 
 print()
 print ( f"          old                    new")
 print ( f" s_length {s_length}  {s_length_new} \n   s_mass {s_mass}  {s_mass_new}")
 print ( f"       hc {h_old * c_old} {s_length_new * s_mass_new}")
 print ( f"        h {h_old:<22.10} {(s_length_new * s_mass_new)/c_new}")
+print ( f"        G {s_length/s_mass:<22.10} {(s_length_new / s_mass_new)}")
 
 print()
 print (f" c_new              1/c_new              1/c_new^2            1/c_new^3              2/c_new")
 print (f" {c_new} {1/c_new} {1/c_new**2} {1/c_new**3} {2/c_new} ")
 
 print()
-print (f"                             mass_old/mass_new : {mass_old/mass_new}\n mass_old/mass_new * s_length_new * s_mass_new : {mass_old/mass_new * s_length_new * s_mass_new}\n             (s_length_new * s_mass_new)/c_new : {(s_length_new * s_mass_new)/c_new} ")
+print ( f"                             mass_old/mass_new : {mass_old/mass_new}")
+print ( f" mass_old/mass_new * s_length_new * s_mass_new : {mass_old/mass_new * s_length_new * s_mass_new} ")
+print()

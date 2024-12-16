@@ -69,21 +69,21 @@ print(f"kg scaling    : {mass_scaling}")
 
 print()
 
-print(f"       Meter        c         Wavelength           Mass            Energy            Freq            h")
+print(f"       Freq   Meter      c          Wavelength       Mass              Momentum        Energy           h")
 
-print(f"  old: {meter_old:<10.3} {c_old:<10.3e} {wavelength_old:<16.10} {mass_old:<16.10} {energy_old:<16.10} {frequency_old:<16.10} {h_old:<16.10}")
-print(f"  new: {meter_new:<10.3} {c_new:<10.3e} {wavelength_new:<16.10} {mass_new:<16.10} {energy_new:<16.10} {frequency_new:<16.10} {h_new:<16.10}")
-print(f"ratio: {meter_new/meter_old:10.3} {c_new/c_old:10.3e} {wavelength_new/wavelength_old:16.10} {mass_new/mass_old:16.10} {energy_new/energy_old:16.10} {frequency_new/frequency_old:16.10} {h_new/h_old:16.10}")
-
-print()
-print ( f" {s_length}  {s_length_new} \n {s_mass}  {s_mass_new}")
+print(f"  old: {frequency_old:<6.3} {meter_old:<10.3} {c_old:<10.3e} {wavelength_old:<16.10} {mass_old:<16.10} {energy_old/c_old:<16.10} {energy_old:<16.10e} {h_old:<16.10}")
+print(f"  new: {frequency_new:<6.3} {meter_new:<10.3} {c_new:<10.3e} {wavelength_new:<16.10} {mass_new:<16.10} {energy_new/c_new:<16.10} {energy_new:<16.10e} {h_new:<16.10e}")
+print(f"ratio: {frequency_new/frequency_old:<6.3} {meter_new/meter_old:<10.3} {c_new/c_old:<10.3e} {wavelength_new/wavelength_old:<16.10} {mass_new/mass_old:<16.10} {(energy_new/c_new)/(energy_old/c_old):<16.10} {energy_new/energy_old:<16.10} {h_new/h_old:<16.10e}")
 
 print()
-print (f"new_hc: {s_length_new * s_mass_new}   new_h {(s_length_new * s_mass_new)/c_new} ")
+print ( f"          old                    new")
+print ( f" s_length {s_length}  {s_length_new} \n   s_mass {s_mass}  {s_mass_new}")
+print ( f"       hc {h_old * c_old} {s_length_new * s_mass_new}")
+print ( f"        h {h_old:<22.10} {(s_length_new * s_mass_new)/c_new}")
 
 print()
-print (f" c_new             1/c_new                2/c_new")
-print (f" {c_new} {1/c_new} {2/c_new}")
+print (f" c_new              1/c_new              1/c_new^2            1/c_new^3              2/c_new")
+print (f" {c_new} {1/c_new} {1/c_new**2} {1/c_new**3} {2/c_new} ")
 
 print()
-print (f" {mass_old/mass_new}  {mass_old/mass_new * s_length_new * s_mass_new}    {(s_length_new * s_mass_new)/c_new} ")
+print (f"                             mass_old/mass_new : {mass_old/mass_new}\n mass_old/mass_new * s_length_new * s_mass_new : {mass_old/mass_new * s_length_new * s_mass_new}\n             (s_length_new * s_mass_new)/c_new : {(s_length_new * s_mass_new)/c_new} ")

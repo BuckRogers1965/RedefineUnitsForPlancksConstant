@@ -1,6 +1,78 @@
 # RedefineUnitsForPlancksConstant
 This project reinterprets Planck’s constant h as a product of unit choices rather than intrinsic mysteries. By redefining h and the speed of light c as unit-derived quantities. Complexities in quantum mechanics and relativity could stem from unit systems.
 
+When you finally see that the interaction of the curved space of the photon with space time is the key to understanding the photon.
+
+This framework is modeled in the above constants_framework.py file.
+
+More info here:
+https://mystry-geek.blogspot.com/2025/01/mass-of-photon-defines-its-energy-not.html
+https://mystry-geek.blogspot.com/2025/01/the-quantum-of-relative-mass-new.html
+
+
+Summary
+
+This is the framework in a nutshell:
+
+m   = h/c^2                 with no scaling, this extracts the encoded potential mass with units of kg s which is only real at an observed frequency.
+c                           is the length scaling, also the velocity.
+p  = m * f * c              momentum  is a mass times a velocity, in this case velocity is c 
+h  = m * c**2 *1s           Planck's constant is a potential mass encoded with a second to represent the required frequency scaling that is observed. 
+E  = m * f * c**2           How planck's constant has always worked.  Energy is a mass times velocity squared, or c^2 for a photon
+hc/ = m * c**3 / wavelength  same thing, but decoded with an extra c and wavelength
+G = (m * c**3) / m_p^2      G encoded the same photon mass and a Planck mass squared in the denomintator
+
+m is the mass of a photon in the photon.  This value is encoded into both h and G.  
+
+m = h/c^2 gives kg s units which is a mass just waiting to be scaled to the right value. 
+
+that m is literally the value of the mass at 1Hz in a photon, it is kg s units because it is only valued at a frequency. 
+7.3724973E-51 kg s = 6.62607015e-34 / c^2
+
+This mass is litterally encoded into h along with with speed of light squared. 
+This is not a metaphore, in order for m = h/c^2 to give a value, that value has to be encoded in h with c^2.
+And yes, if you know the energy and velocity of anything, you can infer its exact mass and that is 100% valid, for any particle. Feel free to qualify the mass, but curved space time is curved space time and it has real mass and real gravity effects even if that mass is from interactions of a particle with space time in their worldline. 
+
+you can use E=mc^2 to go from the mass and velocity a photon has to the energy as well.
+E=1/2 mv^2 where the velocity is c turns into E = mc^2
+6.62607015e-34 = 7.3724973E-51 kg * c^2
+
+And you can pull this same potential mass out of G too:
+
+7.3724973E-51 kg s = G *m_p / c^3
+where the m_p is the standard plank mass.  m_p=sqrt(hc/G)
+
+this mass m with units of kg s is what scales as the worldline changes in a photon that scaled mass is then used to derive the energy and momentum of something moving in space time. 
+
+m_observed = (m kg s * f 1/s) 
+p_observed = (m kg s * f 1/s) * c
+E_observed = (m kg s * f 1/s) * c^2
+E_observed = (m kg s * f 1/s) * c^3/wavelenth
+
+observing the frequency observes the mass, and that mass is then used to drive the momentum and enrgy. It is literally encoded in h. 
+
+Why have we never seen this before?  
+
+Here is the problem with unit analysis of a final value when you don't know what values went into a number.  Planck mass only picked up part of the mass from the denominator that is inside h and G.  There is the photon mass in the numerator, and two factors of m_p
+G  = m * c^3 / m_p^2
+
+When we isolate the m_P value which scales the mass on the top of the formula with
+
+hc which is hc = m * c^3
+
+So m_P = sqrt ( hc/G) we get the following:
+m_p = sqrt( m * c^3/m * c^3 / m_p^2)
+m_p = sqrt( 1/1 / m_p^2)
+m_p = sqrt( m_p^2)
+
+And when we isolated s_t = sqrt(hcG)
+s_t = sqrt(m * c^3 *  m * c^3 / m_p^2)
+s_t = m * c^3 / m_p
+which is just hc/m_p  and if I had recognized that months ago I would have understood things as well as I understand them now.
+
+
+---
+
 
 I deconstructed Planck's and the gravitational constants (h and G) to separate the contribution from the mass and length units.  This work is in the simplified_plancks_constants.py file.  This has the simplified formulas with just the needed scaling, the uneeded scaling cancelled out. The alpha and beta scaling units are 100% only unit scaling. They are an artifact entirely created by how we define our units.  
 

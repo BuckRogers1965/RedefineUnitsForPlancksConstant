@@ -5,9 +5,7 @@ When you finally see that the interaction of the curved space of the photon with
 
 This framework is modeled in the above constants_framework.py file.
 
-More info here:
-https://mystry-geek.blogspot.com/2025/01/mass-of-photon-defines-its-energy-not.html
-https://mystry-geek.blogspot.com/2025/01/the-quantum-of-relative-mass-new.html
+More info here:  https://docs.google.com/presentation/d/e/2PACX-1vQvkEua3rCAui3O87HFVlZTIHmkabKsIDimF2yKUKsSmBKIhvNEMs_ziEQllDWzZMNypY0CXn0a8tDj/pub?start=true&loop=false&delayms=30000&slide=id.p
 
 
 Summary

@@ -1,10 +1,10 @@
-## Dictionary of Physics Symbols
+# Dictionary of Physics Symbols
 
-This document provides a dictionary of common physics symbols, their meanings, approximate pronunciations, and typical SI units.  Note that context is crucial in physics, and the meaning of a symbol can vary depending on the field and equation.
+This document provides a dictionary of common physics symbols, their meanings, approximate pronunciations, and typical SI units. Note that context is crucial in physics, and the meaning of a symbol can vary depending on the field and equation.
 
 ---
 
-### 1. Classical Mechanics
+## 1. Classical Mechanics
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -25,7 +25,7 @@ This document provides a dictionary of common physics symbols, their meanings, a
 
 ---
 
-### 2. Thermodynamics and Statistical Mechanics
+## 2. Thermodynamics and Statistical Mechanics
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -37,11 +37,11 @@ This document provides a dictionary of common physics symbols, their meanings, a
 | `β` (beta)  | Beta (thermodynamics, 1/kT)                        | Greek           | "BAY-tuh"                            | 1/J or 1/eV                     |  Thermodynamic beta, inverse temperature scale.                          |
 | `W`    | Number of microstates (statistical mechanics)          | Latin           | "double-you"                         | dimensionless                     |                                                                         |
 | `N`    | Number of particles                                    | Latin           | "en"                                 | dimensionless (number of entities) |                                                                         |
-| `μ` (mu)    | Chemical potential                                   | Greek           | "mew"                                | J (Joule) or eV                   |                                                                         |
+| `μ` (mu)    | Chemical potential                                   | Greek           | "mew" or "myoo"                      | J (Joule) or eV                   |                                                                         |
 
 ---
 
-### 3. Electromagnetism
+## 3. Electromagnetism
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -53,16 +53,16 @@ This document provides a dictionary of common physics symbols, their meanings, a
 | `ρ` (rho)   | Resistivity, Charge density                         | Greek           | "row"                                | Ω⋅m (Ohm-meter) or C/m³           |                                                                         |
 | `σ` (sigma) | Conductivity                                         | Greek           | "SIG-muh"                            | S/m (Siemens per meter)         |                                                                         |
 | `ε` (epsilon)| Permittivity (often vacuum permittivity ε₀)          | Greek           | "EP-si-lon"                         | F/m (Farads per meter)            | `ε₀` for vacuum permittivity, `ε` or `κ` for relative permittivity.     |
-| `μ` (mu)    | Permeability (often vacuum permeability μ₀), Magnetic moment | Greek           | "mew"                                | H/m (Henries per meter) or A⋅m²    | `μ₀` for vacuum permeability, `μ` or `μ_r` for relative permeability. |
+| `μ` (mu)    | Permeability (often vacuum permeability μ₀), Magnetic moment | Greek           | "mew" or "myoo"                      | H/m (Henries per meter) or A⋅m²    | `μ₀` for vacuum permeability, `μ` or `μ_r` for relative permeability. |
 | `B`    | Magnetic field (Magnetic flux density)                  | Latin           | "bee"                                | T (Tesla, N/(A⋅m))              |                                                                         |
 | `H`    | Magnetic field strength                                | Latin           | "aitch"                               | A/m (Amperes per meter)         |                                                                         |
 | `Φ` (Phi)   | Magnetic flux                                         | Greek           | "fie" (rhymes with "sky")           | Wb (Weber, V⋅s)                   | Uppercase phi.                                                            |
 | `φ` (phi)   | Electric potential                                   | Greek           | "fie" (rhymes with "sky")           | V (Volt)                          | Lowercase phi.                                                            |
-| `χ` (chi)   | Electric susceptibility                              | Greek           | "kie" (rhymes with "sky")           | dimensionless                     | Electric susceptibility `χ_e`, magnetic susceptibility `χ_m`.          |
+| `χ` (chi)   | Electric susceptibility                              | Greek           | "kie" or "kai"                       | dimensionless                     | Electric susceptibility `χ_e`, magnetic susceptibility `χ_m`.          |
 
 ---
 
-### 4. Optics and Waves
+## 4. Optics and Waves
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -72,12 +72,12 @@ This document provides a dictionary of common physics symbols, their meanings, a
 | `I`    | Intensity (of light/waves)                           | Latin           | "eye"                                | W/m² (Watts per square meter)     |                                                                         |
 | `P`    | Polarization                                          | Latin           | "pee"                                | dimensionless                     | Polarization state of light.                                            |
 | `n`    | Refractive index                                       | Latin           | "en"                                 | dimensionless                     |                                                                         |
-| `k`    | Wave number (wavenumber = 1/wavelength)              | Latin           | "kay"                                | m⁻¹ (per meter)                  | Often `k = 2π/λ`                                                        |
+| `k`    | Wave number (wavenumber = 2π/λ)                      | Latin           | "kay"                                | m⁻¹ (per meter)                  | Often `k = 2π/λ`                                                        |
 | `ω` (omega) | Angular frequency                                    | Greek           | "oh-MAY-guh"                         | rad/s                             | Lowercase omega.                                                            |
 
 ---
 
-### 5. Quantum Mechanics
+## 5. Quantum Mechanics
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -85,8 +85,8 @@ This document provides a dictionary of common physics symbols, their meanings, a
 | `p`    | Momentum                                             | Latin           | "pee"                                | various (depending on context)   | Momentum operator, or expectation value of momentum.                  |
 | `h`    | Planck constant                                        | Latin           | "aitch"                               | J⋅s (Joule-seconds)             |                                                                         |
 | `ħ` (hbar) | Reduced Planck constant (h-bar = h/2π)              | Latin           | "aitch-bar"                          | J⋅s (Joule-seconds)             |                                                                         |
-| `ψ` (psi)   | Wave function                                        | Greek           | "sigh" (rhymes with "sky")          | varies (depends on representation) | Lowercase psi.                                                            |
-| `Ψ` (Psi)   | Wave function (time-dependent)                       | Greek           | "sigh" (rhymes with "sky")          | varies (depends on representation) | Uppercase psi for time-dependent wave function.                         |
+| `ψ` (psi)   | Wave function                                        | Greek           | "sigh" or "psee"                     | varies (depends on representation) | Lowercase psi.                                                            |
+| `Ψ` (Psi)   | Wave function (time-dependent)                       | Greek           | "sigh" or "psee"                     | varies (depends on representation) | Uppercase psi for time-dependent wave function.                         |
 | `φ` (phi)   | Electric potential (also in EM), Angle (also in Mechanics) | Greek           | "fie" (rhymes with "sky")           | V (Volt) or radian                | Context dependent, can also be angle in spherical coordinates.        |
 | `α` (alpha) | Fine-structure constant, Alpha particle             | Greek           | "AL-fuh"                             | dimensionless, etc.              |                                                                         |
 | `β` (beta)  | Beta particle                                        | Greek           | "BAY-tuh"                            | etc.                              |                                                                         |
@@ -95,7 +95,7 @@ This document provides a dictionary of common physics symbols, their meanings, a
 
 ---
 
-### 6. Nuclear and Particle Physics
+## 6. Nuclear and Particle Physics
 
 | Symbol | Common Meanings                                       | Alphabet Origin | Pronunciation (Approximate English) | SI Units (Typical)             | Notes                                                                  |
 |--------|--------------------------------------------------------|-----------------|--------------------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -111,3 +111,6 @@ This document provides a dictionary of common physics symbols, their meanings, a
 | `λ` (lambda) | Decay constant, Wavelength (also in Optics/QM)     | Greek           | "LAM-duh"                            | s⁻¹ or m                         | Decay constant in nuclear physics, wavelength in wave contexts.        |
 
 ---
+
+### **Conclusion**
+This dictionary provides a **clear and intuitive reference** for understanding common physics symbols, their meanings, pronunciations, and typical SI units. It’s designed to be **user-friendly** and **accessible**, making it a valuable resource for students, researchers, and anyone interested in physics.

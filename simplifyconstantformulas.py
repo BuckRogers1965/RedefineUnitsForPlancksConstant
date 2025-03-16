@@ -2,7 +2,7 @@ from sympy import symbols, sqrt, pi, simplify,Mul
 
 # Define symbols
 m, f_m, f_T, T, c, f, e = symbols("m f_m f_T T c f e", positive=True)
-h, k = symbols("h k")  # Planck's constant and Boltzmann's constant
+h, k, λ_max = symbols("h k λ_max")  # Planck's constant and Boltzmann's constant
 
 # Define modular unit scaling factors
 Hz_kg, kg_J = symbols("Hz_kg kg_J", positive=True)
@@ -45,36 +45,13 @@ print("Original:   ", planck_law)
 print("Simplified: ", planck_law_simplified)
 print()
 
-'''
-Steps to Automate This
-Define a database of scaling factors
 
-A dictionary that maps physical constants to their modular unit forms.
-Example:
-python
-Copy
-Edit
-scaling_factors = {
-    "h": "Hz_kg * kg_J",
-    "k": "K_Hz * Hz_kg * kg_J",
-    "c": "m/s",
-    "σ": "2 * pi**5 / 15 * (K_Hz**4 * Hz_kg)"
-}
-Parse the input equation symbolically
+x_peak = h*c / (λ_max * k*T)
+x_peak_simplified = x_peak.subs({h: Hz_kg * c**2, k: K_Hz * Hz_kg * c**2 })
+x_peak_simplified = simplify(x_peak_simplified)
 
-Use SymPy to recognize variables and constants.
-Example:
-python
-Copy
-Edit
-expr = h / sqrt(2 * pi * m * k * T)  
-Substitute constants using the scaling factor dictionary
-
-Loop through the equation and replace each predefined constant with its modular form.
-Example:
-python
-Copy
-Edit
-expr_simplified = expr.subs(scaling_factors)
-'''
+print("Wien's Displacement Constant:")
+print("Original:   ", x_peak)
+print("Simplified: ", x_peak_simplified)
+print()
 

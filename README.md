@@ -3,6 +3,26 @@ This project reinterprets Planck’s constant h as a product of unit choices rat
 
 When you finally see that the interaction of the curved space of the photon with space time is the key to understanding the photon.
 
+
+A simple progressive restatement.
+What I am looking at is that I am finding the values needed to scale the constants to natural units, as factors inside the constants. h and k contain the unit scaling for the meter, the kg, and the K unit of measure scaling to set those constants to 1.
+
+For instance, c itself is the scaling to make the meter definition 1meter =1 light second makes c=1 meter/second. But we can see that c^2 is the unit conversion from m to E as in E=mc^2, this is why mass is equivalent to energy. We can define kg_J = c^2 and has units of J/kg
+
+And in h you can extract the Hz_kg scaling factor that converts Hz in natural units to the equivalent mass in SI units of kg measure. Hz_kg = h/c^2 has units of kg/Hz. This lets us define h as h = Hz_J = Hz_kg kg_J and has units of J/Hz. We can say m = f Hz_kg showing that there is a frequency mass equivalence.
+
+If the kg were to be rescaled by this value then Hz_kg=1 would be true. That would make h = Hz_kg * c^2 = 1kg/Hz * (1m/s)^2 = 1J/Hz. So now we have converted the meter and the kg to natural units, where 5kg ~ 5 Hz.
+
+Now we just have to look at k, we can see there that we can extract out a K_Hz unit scaling factor by saying K_Hz = k/ (Hz_kg kg_J) and has units of Hz/K. This lets us convert the SI units of K as we define it to match the natural unit scaling of frequency. This lets us define k = K_J = K_Hz Hz_kg kg_J with units of J/K. this lets us say: f = T K_Hz.
+
+This value for K_Hz lets us rescale K unit scaling to make K_Hz =1 which then lets us say k= K_Hz Hz_kg kg_J = 1Hz/K 1kg/Hz * (1m/s)^2 = 1 J/K.
+
+And these scalings to and from frequency does not mean that frequency is more important, or more primary, or more central than the other units.  It just means that frequency is already in natural units, so of course scaling the K and kg units to natural units would by definition mean they have the same value as frequency. 
+
+As you can see the values of c, h and k are the exact unit scaling we would have to do to the meter, kg, and K to achieve an actual real natural unit system. I am not recommending it, because it would be impractical for day to day use. But what it shows us is that our SI unit system differs from natural units by the scaling that can be found in the constants c, h and k.
+
+The natural units are in no way more special than SI unit system we use, it is just another unit system that is a tool to see certain aspects of reality more clearly. It is not better or worse or more fundamental than the SI unit system we currently use. Just different and each unit system has their strengths and weaknesses.  Unit systems are just human created tools for us to use to explore the universe. 
+
 This framework is modeled in the above constants_framework.py file.
 
 More info here:  https://docs.google.com/presentation/d/e/2PACX-1vQvkEua3rCAui3O87HFVlZTIHmkabKsIDimF2yKUKsSmBKIhvNEMs_ziEQllDWzZMNypY0CXn0a8tDj/pub?start=true&loop=false&delayms=30000&slide=id.p

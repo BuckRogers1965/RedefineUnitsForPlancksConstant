@@ -170,7 +170,12 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     mu_N_calc    =  (((Hz_kg * c**2))) * e / (D(4) * pi  * m_pro)
     r_e_calc     =  (((Hz_kg * c**2))) * alpha_calc / (m_e  * D(2) * pi * c)
-    r_gas_calc   =   ((Hz_kg * c**2)) * N_A * K_Hz
+    r_e_calc     =  Hz_kg * c * alpha_calc / (m_e  * D(2) * pi )
+    r_e_calc     =  Hz_kg * c * (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )) / (m_e  * D(2) * pi )
+    r_e_calc     =  (e**2 / (D('10e6') )) / (m_e )
+    r_e_calc     =  e**2 / (m_e * D('10e6') )
+
+    r_gas_calc   =   N_A * K_Hz * Hz_kg * c**2 
 
     #RK_calc      =   ((Hz_kg * c**2))       / (d_p(e, D(2)) * c)
     RK_calc      =    ((Hz_kg * c**2))       / (d_p(e, D(2)) )
@@ -178,7 +183,9 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     #R_inf_calc  = alpha_calc**2 * m_e * c / (2 * h_calc)
     #R_inf_calc  =  (e**2 / (D('10e6') * (Hz_kg * c) / (2 * pi)))**2 * m_e * c / (2 * Hz_kg * c**2 )
     #R_inf_calc  =  (e**2 * (2*pi)/ (D('10e6')) )**2 * m_e * c / (2 * Hz_kg * c**2  * (Hz_kg * c)**2 )
-    R_inf_calc  =  (e**4 * (4*pi**2)/ (D('10e13')) ) * m_e / (2 * Hz_kg**3 * c**3 )
+    #R_inf_calc  =  (e**4 * (4*pi**2)/ (D('10e13')) ) * m_e / (2 * Hz_kg**3 * c**3 )
+    #R_inf_calc  =  e**4 * 4*pi**2 * m_e / (2 * Hz_kg**3 * c**3 * D('10e13') )
+    R_inf_calc  =  e**4 * 2 * pi**2 * m_e / (Hz_kg**3 * c**3 * D('10e13') )
 
     #a_0_calc    =  h_bar_calc / (alpha_calc * m_e * c)
     #a_0_calc    =  (Hz_kg * c**2) / (2 * pi ) / ((e**2 / (D('10e6') * (Hz_kg * c) / (2 * pi))) * m_e * c)
@@ -203,12 +210,13 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     #  4* pi *  alpha_calc * h_bar_calc  / e**2 * c
     #mu_0_calc   = 2*  alpha_calc * (m*c)  / e**2 
-    mu_0_calc    = 4* pi *  alpha_calc * h_bar_calc  /( e**2 * c)
-    mu_0_calc    = 4* pi *  (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )) * h_bar_calc  /( e**2 * c)
-    mu_0_calc    = 4* pi *  (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )) * (Hz_kg * c**2) / (2 * pi )  /( e**2 * c)
+    #mu_0_calc    = 4* pi *  alpha_calc * h_bar_calc  /( e**2 * c)
+    #mu_0_calc    = 4* pi *  (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )) * h_bar_calc  /( e**2 * c)
+    #mu_0_calc    = 4* pi *  (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )) * (Hz_kg * c**2) / (2 * pi )  /( e**2 * c)
     mu_0_calc    = 4* pi    / D('10e6' )
 
-    sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e_calc, D(2))
+    #sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e_calc, D(2))
+    sigma_e_calc = D(8) * pi * e**4 / (m_e**2 * D('10e13') * D('3')) 
 
     #E_h_calc      = alpha_calc**2 * m_e * c**2
     #E_h_calc      = (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c ))**2 * m_e * c**2

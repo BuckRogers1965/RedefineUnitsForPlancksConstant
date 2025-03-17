@@ -138,10 +138,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     #temp_calc     = d_p( c**3 / ( 2 * pi * ((Hz_kg * c**3) / m_p**2) * K_Hz**2 * Hz_kg  ) , D('.5'))
     #temp_calc     = d_p( m_p**2 / ( 2 * pi * K_Hz**2 * Hz_kg**2  ) , D('.5'))
     temp_calc     = m_p / (d_p( 2 * pi , D('.5')) * K_Hz * Hz_kg ) 
-
-    #temp_calc_h   = d_p( c**3 / ( G_calc * K_Hz**2 * Hz_kg  ) , D('.5'))
-    #temp_calc_h   = d_p( m_p**2 / ( K_Hz**2 * Hz_kg**2  ) , D('.5'))
-    temp_calc_h   = m_p / ( K_Hz * Hz_kg ) 
+    temp_calc_h   = m_p / (                         K_Hz * Hz_kg ) 
 
     angular_momentum_calc = h_calc / (D(2) * pi)
     #momentun_calc = d_p(((h_bar_calc * c* c* c)       /G_calc), D(0.5))

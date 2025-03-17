@@ -114,6 +114,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     #alpha_calc   =  e**2 / ( 4 * pi * (C_kg * D('10e6') / (D(4) * pi)) * ((Hz_kg * c**2) / (D(2) * pi )) * c)
     #alpha_calc   =  e**2 / (C_kg * D('10e6') * (Hz_kg * c**3) / (2 * pi))
     alpha_calc   =  e**2 / (D('10e6') * (Hz_kg * c) / (2 * pi))
+    alpha_calc   =  e**2 * 2 * pi/ (D('10e6') * Hz_kg * c )
 
     boltzmann_calc = K_Hz * Hz_kg * c**2
 

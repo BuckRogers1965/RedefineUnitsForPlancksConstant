@@ -84,7 +84,6 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     # K_Hz temperature (K)
     # C_kg charge (C)
     m_p =  d_p(s_grav, D('0.5'))
-    mass_calc_h =  d_p(s_grav, D('0.5'))
     
     h_calc       =  Hz_kg * c**2
     hc_calc      =  Hz_kg * c**3
@@ -99,7 +98,9 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     time_calc    = (Hz_kg / m_p)          / d_p(2 * pi, D('0.5')) 
     time_calc_h  = (Hz_kg / m_p)  
+
     mass_calc    =  m_p                / d_p(2 * pi, D('0.5'))
+    mass_calc_h  =  m_p
 
     # 
     #e0_calc     = C_kg**2 / (Hz_kg * c**2)
@@ -110,8 +111,8 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     #charge_calc  = d_p( 4* pi * e0_calc * h_bar_calc * c ,D('0.5'))
     #charge_calc  = d_p( 4* pi * e0_calc * ((Hz_kg * c**2) / (2 * pi )) * c ,D('0.5'))
     #charge_calc  = d_p( 4* pi * (C_kg * D('10e6') / (D(4) * pi)) * ((Hz_kg * c**2) / (2 * pi )) * c ,D('0.5'))
-    charge_calc  = d_p( C_kg * D('10e6')  * (Hz_kg * c**3) / (2 * pi) ,D('0.5'))
-    charge_calc_h  = d_p( C_kg * D('10e6')  * (Hz_kg * c**3)  ,D('0.5'))
+    charge_calc   = d_p( C_kg * D('10e6')  * (Hz_kg * c**3) / (2 * pi) ,D('0.5'))
+    charge_calc_h = d_p( C_kg * D('10e6')  * (Hz_kg * c**3)  ,D('0.5'))
 
     # alpha = e**2 / 4 * pi * e_0 * hbar*c
     #alpha_calc   =  e**2 / ( 4 * pi * (C_kg * D('10e6') / (D(4) * pi)) * ((Hz_kg * c**2) / (D(2) * pi )) * c)
@@ -141,27 +142,34 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     temp_calc_h   = m_p / (                         K_Hz * Hz_kg ) 
 
     angular_momentum_calc = h_calc / (D(2) * pi)
-    #momentun_calc = d_p(((h_bar_calc * c* c* c)       /G_calc), D(0.5))
+    #momentun_calc = d_p(((h_bar_calc * c* c* c) / G_calc), D(0.5))
     #momentun_calc = d_p((((((Hz_kg * c**2))) / (D(2) * pi * c) * c* c* c)/((m * c**3 / m_p) / m_p)), D(0.5))
-    momentun_calc  = m_p * c                        / d_p((D(2) * pi ), D(0.5))
+    momentun_calc  = m_p * c                  / d_p((D(2) * pi ), D(0.5))
     momentun_calc_h= m_p * c                        
-    energy_calc    = m_p * d_p(c, D(2))             / d_p((D(2) * pi), D(0.5))
+
+    energy_calc    = m_p * d_p(c, D(2))       / d_p((D(2) * pi), D(0.5))
     energy_calc_h  = m_p * d_p(c, D(2))             
-    force_calc     = m_p**2 * c                     / Hz_kg
-    power_calc     = m_p**2 * d_p(c, D(2))          / Hz_kg
+
+    force_calc     = m_p**2 * c               / Hz_kg
+    power_calc     = m_p**2 * d_p(c, D(2))    / Hz_kg
+
     density_calc   = m_p**4 * D(2) * pi / (d_p((Hz_kg), D(3)) * c**3)
     density_calc_h = m_p**4             / (d_p((Hz_kg), D(3)) * c**3)
+
     pressure_calc  = m_p**4 * D(2) * pi / (d_p((Hz_kg), D(3)) * c)
     pressure_calc_h= m_p**4             / (d_p((Hz_kg), D(3)) * c)
+
     area_calc      = d_p(length_calc,   D(2))
     area_calc_h    = d_p(length_calc_h, D(2))
+
     volume_calc    = d_p(length_calc,   D(3))
     volume_calc_h  = d_p(length_calc_h, D(3))
+
     acceleration_calc   = d_p(c, D(2)) / length_calc
     acceleration_calc_h = d_p(c, D(2)) / length_calc_h
 
     Phi_0_calc   =  (((Hz_kg * c**2)))     / (D(2) * e)
-    #Z_0_calc     =  1     / (c *  C_kg * D('10e6') / (D(4) * pi) )
+    #Z_0_calc     =  1  / (c *  C_kg * D('10e6') / (D(4) * pi) )
     Z_0_calc     =  c * 4 * pi / D('10e6') 
 
     qof_calc     =  (Hz_kg * c**2)     / (2 * m_e)
@@ -177,7 +185,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     r_gas_calc   =   N_A * K_Hz * Hz_kg * c**2 
 
-    #RK_calc      =   ((Hz_kg * c**2))       / (d_p(e, D(2)) * c)
+    #RK_calc     =   ((Hz_kg * c**2))       / (d_p(e, D(2)) * c)
     RK_calc      =    ((Hz_kg * c**2))       / (d_p(e, D(2)) )
 
     #R_inf_calc  = alpha_calc**2 * m_e * c / (2 * h_calc)
@@ -185,19 +193,19 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     #R_inf_calc  =  (e**2 * (2*pi)/ (D('10e6')) )**2 * m_e * c / (2 * Hz_kg * c**2  * (Hz_kg * c)**2 )
     #R_inf_calc  =  (e**4 * (4*pi**2)/ (D('10e13')) ) * m_e / (2 * Hz_kg**3 * c**3 )
     #R_inf_calc  =  e**4 * 4*pi**2 * m_e / (2 * Hz_kg**3 * c**3 * D('10e13') )
-    R_inf_calc  =  e**4 * 2 * pi**2 * m_e / (Hz_kg**3 * c**3 * D('10e13') )
+    R_inf_calc   =  e**4 * 2 * pi**2 * m_e / (Hz_kg**3 * c**3 * D('10e13') )
 
     #a_0_calc    =  h_bar_calc / (alpha_calc * m_e * c)
     #a_0_calc    =  (Hz_kg * c**2) / (2 * pi ) / ((e**2 / (D('10e6') * (Hz_kg * c) / (2 * pi))) * m_e * c)
     #a_0_calc    =  (Hz_kg * c**2) / ((e**2 * 4 * pi**2 / (D('10e6') * Hz_kg * c )) * m_e * c)
     #a_0_calc    =  (Hz_kg * c**2 * D('10e6') * Hz_kg * c ) / ((e**2 * 4 * pi**2 ) * m_e * c)
-    a_0_calc    =  (Hz_kg**2 * c**2 * D('10e6') ) / (e**2 * 4 * pi**2 * m_e )
+    a_0_calc     =  (Hz_kg**2 * c**2 * D('10e6') ) / (e**2 * 4 * pi**2 * m_e )
 
     #K_J_calc    = (D(2) * e*c)/(m_p*(Hz_kg * c**3 / m_p))     # 2e/h
-    K_J_calc    = (D(2) * e)/(Hz_kg * c**2)     # 2e/h
+    K_J_calc     = (D(2) * e)/(Hz_kg * c**2)     # 2e/h
 
     #c_1_calc    =  D(2) * pi * ((Hz_kg * c**2)) * c**2 # 2 pi h c*2
-    c_1_calc    =  D(2) * pi * Hz_kg * c**4 # 2 pi h c*2
+    c_1_calc     =  D(2) * pi * Hz_kg * c**4 # 2 pi h c*2
 
     #c_1L_calc   =  D(2) * ((Hz_kg * c**2)) * c**2
     c_1L_calc   =  D(2) * Hz_kg * c**4

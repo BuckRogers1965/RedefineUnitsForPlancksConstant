@@ -91,7 +91,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     h_bar_calc   = (Hz_kg * c**2) / (2 * pi )
     p_calc       =  Hz_kg * c
     m_calc       =  Hz_kg 
-    G_calc       = (Hz_kg * c**3) / s_grav
+    G_calc       = (Hz_kg * c**3) / m_p**2
 
     #length_calc =((Hz_kg * c**3) / m_p) / (d_p(2 * pi, D('0.5')) * c**2)
     length_calc  =((Hz_kg * c) / m_p)    / d_p(2 * pi, D('0.5')) 
@@ -164,18 +164,15 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     qof_calc     =  (Hz_kg * c**2)     / (2 * m_e)
 
-    mu_B_calc    =  (((Hz_kg * c**2))) * e / (D(4) * pi * c * m_e)
     mu_B_calc    =  (((Hz_kg * c**2))) * e / (D(4) * pi * m_e)
 
     mu_N_calc    =  (((Hz_kg * c**2))) * e / (D(4) * pi  * m_pro)
     r_e_calc     =  (((Hz_kg * c**2))) * alpha_calc / (m_e  * D(2) * pi * c)
-    #print (f"{(Hz_kg * c**3 / m_p)} * {m_p} * {N_A} / {K_Hz}")
     r_gas_calc   =   ((Hz_kg * c**2)) * N_A * K_Hz
 
     #RK_calc      =   ((Hz_kg * c**2))       / (d_p(e, D(2)) * c)
     RK_calc      =    ((Hz_kg * c**2))       / (d_p(e, D(2)) )
 
-    #R_inf_calc  = (d_p(e, D(4)) * d_p(c, D(2)) * m_e )/(D(8) * ((Hz_kg * c**2)) *  d_p(C_kg, D(4)) )
     #R_inf_calc  = alpha_calc**2 * m_e * c / (2 * h_calc)
     #R_inf_calc  =  (e**2 / (D('10e6') * (Hz_kg * c) / (2 * pi)))**2 * m_e * c / (2 * Hz_kg * c**2 )
     #R_inf_calc  =  (e**2 * (2*pi)/ (D('10e6')) )**2 * m_e * c / (2 * Hz_kg * c**2  * (Hz_kg * c)**2 )
@@ -190,6 +187,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     K_J_calc    = (D(2) * e*c)/(m_p*(Hz_kg * c**3 / m_p))     # 2e/h
     c_1_calc    =  D(2) * pi * ((Hz_kg * c**2)) * c**2 # 2 pi h c*2
     c_1L_calc   =  D(2) * ((Hz_kg * c**2)) * c**2
+
     #c_2_calc   =     (h_calc * c)  / (boltzmann_calc)
     #c_2_calc   = ((Hz_kg * c**2) *c) / (K_Hz * Hz_kg * c**2)
     c_2_calc   = c / K_Hz
@@ -205,14 +203,11 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     sigma_e_calc = (D(8) * pi/ D(3))* d_p(r_e_calc, D(2))
 
-    #E_h_calc      = d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(C_kg, D(4)))
-    # alpha_calc**2 * m_e * c**2
     #E_h_calc      = alpha_calc**2 * m_e * c**2
     #E_h_calc      = (e**2 * 2 * pi/ (D('10e6') * Hz_kg * c ))**2 * m_e * c**2
     E_h_calc      = e**4 * 4 * pi**2 * m_e/ (D('10e13') * Hz_kg**2  ) 
     
     # e^2/a_0E_h = 10_7/c^2 = 4πε_0	permittivity	1.112 650 056... × 10−10 F m−1
-    #  e^2 / ((((m * c**2)) * d_p(C_kg, D(2))) / ( pi *d_p(c * e, D(2)) * m_e)) *  d_p(e, D(4)) * m_e* d_p(c, D(2))/ (D(4) * d_p(C_kg, D(4)))
     #perm_calc =  D(4) * pi * C_kg * D('10e6') / (D(4) * pi)   
     perm_calc =   C_kg * D('10e6')    
 

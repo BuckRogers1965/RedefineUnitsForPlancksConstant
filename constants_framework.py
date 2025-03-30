@@ -243,16 +243,23 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     # k_e_calc = 1 / (4 pi e_0)
     #k_e_calc = 1 / (4 * pi * C_kg * D('1e7') / (D(4) * pi))
-    k_e_calc = 1 / (C_kg * D('1e7')) 
-    #k_e_calc = c**2 * D('1e-7')
+    #k_e_calc = 1 / (C_kg * D('1e7')) 
+    k_e_calc = c**2 * D('1e-7')
 
     # Gravitational Coupling Constant 
     # a_g = G * m_e**2 / (hbar c)
     a_g_calc = m_e**2 *2 *pi / (m_p**2)
 
     # This works, but seems to be arbitrary
-    cosmo_calc    = Hz_kg  /(pi *   D('21.54948378359159200000120543177671468720728830158131914780189327535345629714577419357614538629000563'))
-    #print (f"  D('{cosmo_calc/D('1.089e-52')}')")
+
+    m_p = D('1.67262192369e-27')
+    m_mu = D('1.883531627e-28')
+    mu_N_MHz_per_T = D('7.622593229')
+    ratio = (m_p / m_mu) * mu_N_MHz_per_T  # Exact Decimal calculation
+
+    #cosmo_calc    = Hz_kg  /D('67.69969994318372720770006537643662343702866096631202122886906444678266768354190691325562520461039036')
+    cosmo_calc    = Hz_kg  /ratio
+    #print (f"  D('{cosmo_calc/D('1.089E-52')}')")
 
     expected = {
         'Planck constant E at 1Hz':D('6.62607015e-34'),         # E at 1Hz': Joule-seconds (J⋅s)
@@ -261,7 +268,9 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         'mass at 1Hz':             D('7.3724973238127079e-51'), # kilogram-seconds (kg⋅s)
         'h_bar':                   D('1.054571817e-34'),        # Joule-seconds (J⋅s)
         'Gravitational constant':  D('6.67430e-11'),            # meters cubed per kilogram per second squared (m³⋅kg⁻¹⋅s⁻²)
-        'Planck Length':           D('1.616255e-35'),           # meters (m)
+        'Gravitational Coupling':  D('1.752e-45'),              # (m³ kg⁻¹ s⁻²)*(kg²)/(kg⋅m²⋅s⁻¹)*(m⋅s⁻¹)=1 dimensionless
+
+        '\nPlanck Length':           D('1.616255e-35'),           # meters (m)
         'Planck Length h':         D('4.05135054323e-35'),      # meters (m)
         'Planck Time':             D('5.391247e-44'),           # seconds (s)
         'Planck Time h':           D('1.3513850782846e-43'),    # seconds (s)
@@ -288,33 +297,34 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         'Planck acceleration h':   D('2.21840882231E+51'),             # meters per second squared (m/s²)
         'Planck pressure':         D('4.6332e+113'),            # Pascals (Pa) which is equivalent to N/m² or kg/(m ⋅s²)
         'Planck pressure h':       D('7.37356382375E+112'),            # Pascals (Pa) which is equivalent to N/m² or kg/(m ⋅s²)
-        'Boltzmann Temperature':   D('1.380649e-23'),           # J/K
-        'Epsilon_0 Charge':        D('8.854187817e-12'),        # C²⋅s²⋅kg⁻¹⋅m⁻³
-        'Fine Structure Constant': D('0.0072973525693'),        # dimensionaless
+
+        '\nBoltzmann Temperature':   D('1.380649e-23'),           # J/K
         'Gas Constant R':          D('8.31446261815324'),       # Joules per mole-Kelvin (J/(mol⋅K)) or (kg⋅m²)/(s²⋅mol⋅K)
         'Stefan-Boltzmann':        D('5.670374419e-8'),         # (W/(m²⋅K⁴)) or kg/(s ³⋅K⁴)
-        'von Klitzing RK':         D('25812.807'),              # Ohms (Ω)
-        'Josephson constant':      D('483597.8484e9'),          # Hertz per Volt (Hz/V) or s⁻¹/V
-        'conductance quantum':     D('7.748091729e-5'),         # S
-        'first radiation':         D('3.741771852e-16'),        # W⋅m
-        'first radiation sr':      D('1.191042972e-16'),        # W⋅m2⋅sr−1	
-        'second radiation':        D('1.438776877e-2'),         # m⋅K
-        'magnetic flux quantum':   D('2.067833848e-15'),        # Wb
         'Rydberg constant':        D('10973731.568157'),        # m^−1
-        'vacuum magnetic permeability':  D('1.25663706127e-6'), # N⋅A−2
-        'permittivity':             D('1.112650056e-10'),       # F m−1
-        'character impedance vacuum': D('376.730313412'),       # Ω
         'quantum of circulation':   D('3.6369475467e-4'),       # m2⋅s−1	
         'Bohr magneton':            D('9.2740100657e-24'),      # J⋅T−1
         'nuclear magneton':         D('5.0507837393e-27'),      # J⋅T−1
-        'classical electron radius':D('2.8179403205e-15'),      # m
-        'Thomson cross section':    D('6.6524587051e-29'),      # m^2
-        'Bohr radius':              D('5.29177210544e-11'),     # m
         'Hartree energy':           D('4.3597447222060e-18'),   # J
+        'classical electron radius':D('2.8179403205e-15'),      # m
+        'Bohr radius':              D('5.29177210544e-11'),     # m
+        'Thomson cross section':    D('6.6524587051e-29'),      # m^2
         'cosmological' :            D('1.089e-52'),             # m⁻²
         'Fermi coupling constant':  D('1.1663787e-5'),          # GeV−2	
-        'electrostatic constant':   D('8.9875517862e9'),        # N m^2 C^-2
-        'Gravitational Coupling':   D('1.752e-45'),             # (m³ kg⁻¹ s⁻²)*(kg²)/(kg⋅m²⋅s⁻¹)*(m⋅s⁻¹)=1 dimensionless
+
+        '\nconductance quantum':     D('7.748091729e-5'),         # S
+        'von Klitzing RK':         D('25812.807'),              # Ohms (Ω)
+        'character impedance vacuum': D('376.730313412'),       # Ω
+        'vacuum magnetic permeability':  D('1.25663706127e-6'), # N⋅A−2
+        'permittivity':            D('1.112650056e-10'),       # F m−1
+        'Josephson constant':      D('483597.8484e9'),          # Hertz per Volt (Hz/V) or s⁻¹/V
+        'Epsilon_0 Charge':        D('8.854187817e-12'),        # C²⋅s²⋅kg⁻¹⋅m⁻³
+        'magnetic flux quantum':   D('2.067833848e-15'),        # Wb
+        'first radiation':         D('3.741771852e-16'),        # W⋅m
+        'first radiation sr':      D('1.191042972e-16'),        # W⋅m2⋅sr−1	
+        'second radiation':        D('1.438776877e-2'),         # m⋅K
+        'Fine Structure Constant': D('0.0072973525693'),        # dimensionaless
+        'electrostatic constant':  D('8.9875517862e9'),        # N m^2 C^-2
     }
 
     calcs = {
@@ -324,7 +334,9 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         'mass at 1Hz':            m_calc,
         'h_bar':                  h_bar_calc,
         'Gravitational constant': G_calc,
-        'Planck Length':          length_calc,
+        'Gravitational Coupling': a_g_calc,
+
+        '\nPlanck Length':          length_calc,
         'Planck Length h':          length_calc_h,
         'Planck Time':            time_calc,
         'Planck Time h':          time_calc_h,
@@ -351,33 +363,34 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         "Planck acceleration h":    acceleration_calc_h,
         "Planck pressure":        pressure_calc,
         "Planck pressure h":        pressure_calc_h,
-        'Boltzmann Temperature':  boltzmann_calc,
-        'Epsilon_0 Charge':       e0_calc,      # C²⋅s²⋅kg⁻¹⋅m⁻³
-        'Fine Structure Constant':alpha_calc,
+
+        '\nBoltzmann Temperature':  boltzmann_calc,
         'Gas Constant R':         r_gas_calc,
         'Stefan-Boltzmann':       sKb_calc,
-        'von Klitzing RK':        RK_calc,
-        'Josephson constant':     K_J_calc,
-        'conductance quantum':    G_0_calc,
-        'first radiation':        c_1_calc,
-        'first radiation sr':     c_1L_calc,
-        'second radiation':       c_2_calc,
-        'magnetic flux quantum':  Phi_0_calc,
-        'Rydberg constant':       R_inf_calc,
-        'vacuum magnetic permeability': mu_0_calc,
-        'permittivity':            perm_calc,
-        'character impedance vacuum': Z_0_calc,
         'quantum of circulation': qof_calc,
         'Bohr magneton':          mu_B_calc,
         'nuclear magneton':       mu_N_calc,
         'classical electron radius': r_e_calc, 
-        'Thomson cross section':  sigma_e_calc,
         'Bohr radius':            a_0_calc,
+        'Thomson cross section':  sigma_e_calc,
         'Hartree energy':         E_h_calc,
         'cosmological' :          cosmo_calc,
         'Fermi coupling constant': fcc_calc,
+
+        '\nconductance quantum':    G_0_calc,
+        'von Klitzing RK':        RK_calc,
+        'character impedance vacuum': Z_0_calc,
+        'vacuum magnetic permeability': mu_0_calc,
+        'permittivity':            perm_calc,
+        'Josephson constant':     K_J_calc,
+        'Epsilon_0 Charge':       e0_calc,      # C²⋅s²⋅kg⁻¹⋅m⁻³
+        'Rydberg constant':       R_inf_calc,
+        'magnetic flux quantum':  Phi_0_calc,
+        'first radiation':        c_1_calc,
+        'first radiation sr':     c_1L_calc,
+        'second radiation':       c_2_calc,
+        'Fine Structure Constant':alpha_calc,
         'electrostatic constant': k_e_calc,
-        'Gravitational Coupling': a_g_calc,
     }
 
     results = {}

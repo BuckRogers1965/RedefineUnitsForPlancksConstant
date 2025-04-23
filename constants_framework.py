@@ -92,8 +92,8 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     m_calc       =  Hz_kg 
 
     G = D('6.6726230e-11')
-    G_n          = G * Hz_kg /c**3 
-    G_calc       = G_n * c**3 / Hz_kg
+    G_n          = G * Hz_kg / d_p(c, 3)
+    G_calc       = G_n * d_p(c, 3) / Hz_kg
 
     length_calc  =(G_n).sqrt() * c   / d_p(2 * pi, D('0.5')) 
     length_calc_h=(G_n).sqrt() * c    

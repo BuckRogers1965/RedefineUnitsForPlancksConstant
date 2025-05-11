@@ -146,6 +146,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     e0_calc      = 1 / (D(4) * pi * amp_force * c**2)
 
     alpha_calc   = 2 * pi * e**2 * amp_force / (Hz_kg * c)
+    α = D('0.0072973525693')
 
     Phi_0_calc   = Hz_kg * c**2 / (D(2) * e)
 
@@ -155,15 +156,23 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     r_e_calc     = e**2  * amp_force / m_e 
 
-    R_inf_calc   = e**4 * 2 * pi**2 * m_e  * amp_force**2/ (Hz_kg**3 * c**3  )
+    m_e_n = m_e / Hz_kg  # calcuate the comptom frequency of the m_e mass
 
-    a_0_calc     = Hz_kg**2 * c**2  / (e**2 * 4 * pi**2 * m_e  * amp_force)
+    #R_inf_calc   = e**4 * 2 * pi**2 * m_e  * amp_force**2/ (Hz_kg**3 * c**3  )
+    #R_inf_calc   = m_e *  α**2  / (Hz_kg * c * 2  )
+    R_inf_calc   = m_e_n *  α**2  / ( c * 2 )
+
+    #a_0_calc     = Hz_kg**2 * c**2  / (e**2 * 4 * pi**2 * m_e  * amp_force)
+    #a_0_calc     = Hz_kg * c / ( m_e * 2 * pi  * α )
+    #a_0_calc     = e**2 * amp_force / ( m_e * α**2 )
+    a_0_calc     = c / ( m_e_n * 2 * pi * α )
 
     mu_0_calc    = 4 * pi * amp_force
 
     sigma_e_calc = D(8) * pi * e**4 * amp_force**2 / (m_e**2 * D('3')) 
 
-    E_h_calc     = e**4 * 4 * pi**2 * m_e * amp_force**2/ Hz_kg**2 
+    #E_h_calc     = e**4 * 4 * pi**2 * m_e * amp_force**2/ Hz_kg**2 
+    E_h_calc     = m_e * α**2 * c**2
 
     perm_calc    = C_kg / amp_force   
 
@@ -179,7 +188,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     K_J_calc     = (D(2) * e)/(Hz_kg * c**2)     # 2e/h
 
-    c_1_calc     = D(2) * pi * Hz_kg * c**4 # 2 pi h c*2
+    c_1_calc     = D(2) * pi * Hz_kg * c**4 # 2 pi h c^2
 
     c_1L_calc    = D(2) * Hz_kg * c**4
 
@@ -195,7 +204,9 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     fcc_calc = G_F /( h_bar_calc * c)
 
     # Gravitational Coupling Constant 
-    a_g_calc = m_e**2 *2 *pi *G_n / Hz_kg**2
+    #a_g_calc = m_e**2 *2 *pi *G_n / Hz_kg**2
+    kg_Hz = 1 / Hz_kg
+    a_g_calc = (m_e * kg_Hz * t_P )**2 * 2 * pi
 
     # This works, but seems to be arbitrary
 

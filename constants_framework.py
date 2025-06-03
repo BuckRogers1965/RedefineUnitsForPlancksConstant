@@ -51,16 +51,18 @@ def calculate_unit_scaling():
     G = D('6.67430e-11')
 
     # solve for the unknowns
-    # Hz_kg    = G*(Hz_kg/(G_n).sqrt())/c^3 there are two ways to calcuate the same kg s value.
-    Hz_kg    = h/c**2                      # kg/Hz
-    K_Hz     =  k_B / (Hz_kg * c**2)       # Hz/K
-    C_kg     =  1/c**2                     # kg/C
-    s_grav   = (h*c/G)                     # kg^2
+    # Hz_kg = G*(Hz_kg/(G_n).sqrt())/c^3 there are two ways to calcuate the same kg s value.
+    Hz_kg   = h/c**2                      # kg/Hz
+    K_Hz    =  k_B / (Hz_kg * c**2)       # Hz/K
+    C_kg    =  1/c**2                     # kg/C
+
+    # isolate the planck time scale by removing the kg and versus unit scaling versus time. 
+    t_Ph    = (G * Hz_kg / c**3).sqrt()   # s
 
     # just exploring candela for now
     s_lum    = Hz_kg * D('540e12') * 683         # 683 lm/W @ 540e12 Hz
 
-    return Hz_kg, K_Hz, C_kg, s_grav, s_lum
+    return Hz_kg, K_Hz, C_kg, t_Ph, s_lum
 
 # Decimal_power
 def d_p(base: D, exponent: D) -> D:
@@ -73,7 +75,7 @@ def d_p(base: D, exponent: D) -> D:
         # Using `ln()` and `exp()` to perform precise power calculation
         return (base.ln() * exponent).exp()
 
-def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D, D, D]]:
+def validate_planck_units(Hz_kg, K_Hz, C_kg, t_Ph, s_lum) -> Dict[str, Tuple[D, D, D]]:
     e         = D('1.602176634e-19')
     m_e       = D('9.1093837139e-31')  # kg electron mass
     m_pro     = D('1.67262192595e-27') # kg proton mass
@@ -83,7 +85,6 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
 
     # K_Hz temperature (K)
     # C_kg charge (C)
-    m_p =  d_p(s_grav, D('0.5'))
     amp_force = D('1e-7')  # N/A^2
     
     hc_calc      = Hz_kg * c**3
@@ -95,15 +96,12 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     boltzmann_calc = K_Hz * Hz_kg * c**2
     sKb_calc       = 2 * pi**5 * K_Hz**4 * Hz_kg / 15 
 
-    G = D('6.67430e-11')
-    G_n          = G * Hz_kg / c**3
-    G_calc       = G_n * c**3 / Hz_kg
-
-    time_calc    = (G_n).sqrt() / d_p(2 * pi, D('0.5')) 
-    time_calc_h  = (G_n).sqrt()  
+    G_calc       = t_Ph**2 * c**3 / Hz_kg
 
     # the real unit scaling is non reduced planck time
-    t_P          = time_calc_h     # s
+    t_P          = t_Ph     # s
+    time_calc    = t_Ph / d_p(2 * pi, D('0.5')) 
+    time_calc_h  = t_Ph 
 
     length_calc  = t_P * c   / d_p(2 * pi, D('0.5')) 
     length_calc_h= t_P * c         # m
@@ -177,6 +175,11 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     perm_calc    = C_kg / amp_force   
 
     k_e_calc     = c**2 * amp_force
+
+    #edm_calc     =  1 / (D(2) * pi) ** 2 * Hz_kg * c / e * Hz_kg * c / amp_force * 1 / m_e
+    #edm_calc     =  (Hz_kg * c)**2 / ((D(2) * pi) ** 2 *  e *  amp_force * m_e)
+    #edm_calc     =  e * Hz_kg * c / (D(2) * pi * α * m_e)
+    edm_calc     =  e * c / (D(2) * pi * α * m_e_n)
 
     r_gas_calc   = N_A * K_Hz * Hz_kg * c**2 
 
@@ -281,7 +284,8 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         'first radiation sr':      D('1.191042972e-16'),        # W⋅m2⋅sr−1	
         'second radiation':        D('1.438776877e-2'),         # m⋅K
         'Fine Structure Constant': D('0.0072973525693'),        # dimensionaless
-        'electrostatic constant':  D('8.9875517862e9'),        # N m^2 C^-2
+        'electrostatic constant':  D('8.9875517862e9'),         # N m^2 C^-2
+        'electric dipole movement': D('8.4783536255e-30')       # C m
     }
 
     calcs = {
@@ -348,6 +352,7 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
         'second radiation':       c_2_calc,
         'Fine Structure Constant':alpha_calc,
         'electrostatic constant': k_e_calc,
+        'electric dipole movement': edm_calc,
     }
 
     results = {}
@@ -361,17 +366,17 @@ def validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum) -> Dict[str, Tuple[D
     return results
 
 if __name__ == "__main__":
-    Hz_kg, K_Hz, C_kg, s_grav, s_lum  = calculate_unit_scaling()
+    Hz_kg, K_Hz, C_kg, t_Ph, s_lum  = calculate_unit_scaling()
 
     # Print the result with high precision
     print(f"Hz_kg    : {Hz_kg:.50e}  kg/Hz   mass of photon @ 1Hz Quanum of relative gravity")
     print(f"K_Hz     : {K_Hz:.50e}  Hz/K temperature unit scaling")
     print(f"C_kg     : {C_kg:.50e}  kg/C   charge unit scaling")
-    print(f"s_grav   : {s_grav:.50e}  kg^2 unit of gravity scaling")
+    print(f"t_Ph     : {t_Ph:.50e}  s unit of gravity time scaling")
     print(f"s_lum    : {s_lum:.50e}  lm/W unit of candela scaling")
     
     # Validate Planck units
-    planck_results = validate_planck_units(Hz_kg, K_Hz, C_kg, s_grav, s_lum)
+    planck_results = validate_planck_units(Hz_kg, K_Hz, C_kg, t_Ph, s_lum)
     
     print("\nPlanck Units Validation:")
     print(f"{'Name':<28} | {'Expected':<20} | {'Calculated':<22} | {'Rel Error'}")
